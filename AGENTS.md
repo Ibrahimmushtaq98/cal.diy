@@ -242,3 +242,53 @@ For detailed information, see the `agents/` directory:
 - **[agents/rules/](agents/rules/)** - Modular engineering rules
 - **[agents/commands.md](agents/commands.md)** - Complete command reference
 - **[agents/knowledge-base.md](agents/knowledge-base.md)** - Domain knowledge and business rules
+
+## Labourly: run the local demo over ngrok
+
+Labourly is evaluating Cal.diy for interview scheduling. This clone is set up so the web app is served publicly through a fixed ngrok address: **https://locust-epic-stud.ngrok-free.app**. Keep this setup unless someone asks to switch it back.
+
+### What is already configured
+
+- **`.env`** (not committed): the public URLs point at the tunnel instead of `localhost:3000`.
+  ```
+  NEXT_PUBLIC_WEBAPP_URL='https://locust-epic-stud.ngrok-free.app'
+  NEXT_PUBLIC_WEBSITE_URL='https://locust-epic-stud.ngrok-free.app'
+  NEXT_PUBLIC_EMBED_LIB_URL='https://locust-epic-stud.ngrok-free.app/embed/embed.js'
+  ALLOWED_HOSTNAMES='"cal.local:3000","localhost:3000","locust-epic-stud.ngrok-free.app"'
+  NEXTAUTH_URL='https://locust-epic-stud.ngrok-free.app'
+  ```
+  The localhost copy of the file is `.env.localhost.bak`.
+- **`apps/web/next.config.ts`**: `allowedDevOrigins` lists the hostname from `NEXT_PUBLIC_WEBAPP_URL`. Next 16 rejects the dev HMR websocket (`/_next/hmr`) from any other origin. If it's rejected, booking pages load blank through the tunnel.
+
+### Start it
+
+1. Start Docker Desktop. Postgres (`prisma-postgres-1`, port 5450) and Mailhog (`emails-mailhog-1`: SMTP on 1025, inbox at http://localhost:8025) must be running. If they aren't:
+   ```bash
+   docker compose -f packages/prisma/docker-compose.yml up -d
+   docker compose -f packages/emails/docker-compose.yml up -d
+   ```
+2. Start the web app from the repo root (the first page load takes a while to compile):
+   ```bash
+   yarn dev
+   ```
+3. In a second terminal, open the tunnel to port 3000:
+   ```bash
+   ngrok http --url=locust-epic-stud.ngrok-free.app 3000
+   ```
+4. Open https://locust-epic-stud.ngrok-free.app. ngrok's free plan shows a "Visit Site" warning page on the first visit from each browser. Sign in with a seeded user from `scripts/seed.ts` (for example `pro`, or `admin` for Settings → Admin).
+
+Stop it with Ctrl-C in both terminals. The Docker containers can keep running.
+
+### Gotchas
+
+- `NEXT_PUBLIC_*` values are baked in when the app compiles. After changing the URL in `.env`, restart `yarn dev`.
+- Sign-in only works on the URL in `NEXTAUTH_URL`. If you visit `localhost:3000` while `.env` points at ngrok, you get redirected or the login fails.
+- Running `yarn dev` rewrites the `packages/app-store/*.generated.ts` files, so they show as modified in git. That's expected noise. Don't commit them.
+- Each OAuth app (Google Calendar, Outlook/Teams, Zoom) needs callback URLs on the tunnel host, for example `https://locust-epic-stud.ngrok-free.app/api/integrations/office365video/callback`. These apps stay disabled and hidden from the App Store until their keys are set. Set them in `.env.appStore` and then run `yarn workspace @calcom/prisma seed-app-store`, or set them under Settings → Admin → Apps. Microsoft's keys are `MS_GRAPH_CLIENT_ID` / `MS_GRAPH_CLIENT_SECRET`. Google's is `GOOGLE_API_CREDENTIALS`.
+
+### Switch back to localhost
+
+```bash
+cp .env.localhost.bak .env
+```
+Then restart `yarn dev` and leave ngrok off. The `allowedDevOrigins` line resolves to `localhost` by itself, so it can stay.
