@@ -2,7 +2,7 @@
 
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { cva, type VariantProps } from "class-variance-authority";
-import type { ForwardRefExoticComponent, ReactNode } from "react";
+import type { ForwardRefExoticComponent, ReactNode, JSX } from "react";
 import React from "react";
 
 import { useLocale } from "@calcom/lib/hooks/useLocale";

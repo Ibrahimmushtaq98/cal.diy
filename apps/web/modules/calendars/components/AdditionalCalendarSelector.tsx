@@ -1,4 +1,4 @@
-import type { FunctionComponent, SVGProps } from "react";
+import type { FunctionComponent, SVGProps, JSX } from "react";
 
 import { InstallAppButton } from "@calcom/app-store/InstallAppButton";
 import { useLocale } from "@calcom/lib/hooks/useLocale";

@@ -14,7 +14,7 @@ const CTAWithContext = ({
   userEventGroupsData,
 }: {
   userEventGroupsData: GetUserEventGroupsResponse;
-}): ReactElement => {
+}): ReactElement<any> => {
   return <EventTypesCTA userEventGroupsData={userEventGroupsData} />;
 };
 
@@ -27,7 +27,7 @@ export function EventTypesWrapper({
     id: number;
     completedOnboarding?: boolean;
   } | null;
-}): ReactElement {
+}): ReactElement<any> {
   const { t } = useLocale();
   const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearchTerm = useDebounce(searchTerm, 500);

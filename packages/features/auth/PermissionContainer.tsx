@@ -1,5 +1,5 @@
 import { useSession } from "next-auth/react";
-import type { FC } from "react";
+import type { FC, JSX } from "react";
 import { Fragment } from "react";
 
 import { UserPermissionRole } from "@calcom/prisma/enums";

@@ -42,7 +42,7 @@ const getCachedEventGroups: (
   { revalidate: 3600 } // seconds
 );
 
-const Page = async ({ searchParams }: PageProps): Promise<ReactElement> => {
+const Page = async ({ searchParams }: PageProps): Promise<ReactElement<any>> => {
   const _searchParams = await searchParams;
   const _headers = await headers();
   const _cookies = await cookies();

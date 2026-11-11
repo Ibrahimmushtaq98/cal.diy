@@ -12,6 +12,8 @@ import VerifyEmailBanner, {
   type VerifyEmailBannerProps,
 } from "@calcom/web/modules/users/components/VerifyEmailBanner";
 
+import type { JSX } from "react";
+
 type BannerTypeProps = {
   verifyEmailBanner: VerifyEmailBannerProps;
   adminPasswordBanner: AdminPasswordBannerProps;

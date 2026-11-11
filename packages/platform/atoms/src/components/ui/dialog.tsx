@@ -18,7 +18,7 @@ const DialogPortal = DialogPrimitives.Portal;
 
 const DialogClose = DialogPrimitives.Close;
 
-const Portal = ({ children }: { children: React.ReactElement | React.ReactElement[] }) => {
+const Portal = ({ children }: { children: React.ReactElement<any> | React.ReactElement<any>[] }) => {
   return (
     <DialogPrimitives.Portal className="calcom-atoms">
       <div className="calcom-atoms">{children}</div>

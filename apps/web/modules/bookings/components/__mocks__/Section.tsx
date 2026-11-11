@@ -10,7 +10,7 @@ vi.mock("@calcom/features/bookings/components/Section", () => {
     children: React.ReactNode;
     className?: string;
     area?: string | { default: string; month_view: string };
-  }): React.ReactElement => {
+  }): React.ReactElement<any> => {
     let areaValue: string | undefined;
     if (typeof area === "string") {
       areaValue = area;

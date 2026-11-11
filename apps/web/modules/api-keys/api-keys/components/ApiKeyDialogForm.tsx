@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
+import type { Resolver } from "react-hook-form";
 import { Controller, useForm } from "react-hook-form";
 
 import dayjs from "@calcom/dayjs";
@@ -17,6 +18,8 @@ import { Switch } from "@calcom/ui/components/form";
 import { showToast } from "@calcom/ui/components/toast";
 import { Tooltip } from "@calcom/ui/components/tooltip";
 import { revalidateApiKeysList } from "@calcom/web/app/(use-page-wrapper)/settings/(settings-layout)/developer/api-keys/actions";
+
+type ApiKeyFormValues = { note: string; neverExpires: boolean; expiresAt: Date };
 
 export default function ApiKeyDialogForm({
   defaultValues,
@@ -51,7 +54,7 @@ export default function ApiKeyDialogForm({
     neverExpires: false,
   });
 
-  const form = useForm({
+  const form = useForm<ApiKeyFormValues>({
     defaultValues: {
       note: defaultValues?.note || "",
       neverExpires: defaultValues?.neverExpires || false,
@@ -59,7 +62,7 @@ export default function ApiKeyDialogForm({
     },
     mode: "onChange",
     criteriaMode: "all",
-    resolver: (values) => {
+    resolver: ((values) => {
       const errors: { note?: { type: string; message: string } } = {};
       if (values.note && values.note.length > API_NAME_LENGTH_MAX_LIMIT) {
         errors.note = {
@@ -67,8 +70,10 @@ export default function ApiKeyDialogForm({
           message: t("api_key_name_too_long", { max: API_NAME_LENGTH_MAX_LIMIT }),
         };
       }
-      return { values, errors };
-    },
+      // react-hook-form expects empty values when the resolver reports errors
+      if (errors.note) return { values: {}, errors };
+      return { values, errors: {} };
+    }) as Resolver<ApiKeyFormValues>,
   });
   const watchNeverExpires = form.watch("neverExpires");
 

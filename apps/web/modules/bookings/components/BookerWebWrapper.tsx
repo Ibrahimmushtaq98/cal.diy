@@ -22,7 +22,7 @@ import { useNonEmptyScheduleDays } from "@calcom/web/modules/schedules/hooks/use
 import { useQuery } from "@tanstack/react-query";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { getProviders, signIn, useSession } from "next-auth/react";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, type JSX } from "react";
 import { shallow } from "zustand/shallow";
 import { useBookings } from "../hooks/useBookings";
 import { getLastVisibleDate, useCalendars } from "../hooks/useCalendars";

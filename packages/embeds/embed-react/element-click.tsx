@@ -3,7 +3,7 @@
  */
 import { useEffect } from "react";
 import * as React from "react";
-import ReactDom from "react-dom";
+import { createRoot } from "react-dom/client";
 
 import { getCalApi } from "./src/index";
 
@@ -32,4 +32,4 @@ function App() {
   );
 }
 
-ReactDom.render(<App />, document.getElementById("root"));
+createRoot(document.getElementById("root") as HTMLElement).render(<App />);

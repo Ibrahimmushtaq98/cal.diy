@@ -11,6 +11,8 @@ import classNames from "@calcom/ui/classNames";
 import { Tooltip } from "@calcom/ui/components/tooltip";
 import { LinkIcon, MapPinIcon } from "@coss/ui/icons";
 
+import type { JSX } from "react";
+
 const excludeNullValues = (value: unknown) => !!value;
 
 function RenderIcon({

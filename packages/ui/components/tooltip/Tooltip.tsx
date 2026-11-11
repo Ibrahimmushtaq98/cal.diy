@@ -21,7 +21,8 @@ export function Tooltip({
   defaultOpen?: boolean;
   side?: "top" | "right" | "bottom" | "left";
   onOpenChange?: (open: boolean) => void;
-} & TooltipPrimitive.TooltipContentProps) {
+  // React 19's HTML attribute types include `content?: string`; drop it so our ReactNode `content` wins.
+} & Omit<TooltipPrimitive.TooltipContentProps, "content">) {
   const Content = (
     <TooltipPrimitive.Content
       {...props}

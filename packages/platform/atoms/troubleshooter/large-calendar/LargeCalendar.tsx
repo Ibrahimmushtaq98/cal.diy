@@ -2,6 +2,8 @@ import { useTroubleshooterStore } from "@calcom/features/troubleshooter/store";
 
 import { CalendarViewPlatformWrapper } from "../../calendar-view/wrappers/CalendarViewPlatformWrapper";
 
+import type { JSX } from "react";
+
 export const LargeCalendar = (): JSX.Element | null => {
   const event = useTroubleshooterStore((state) => state.event);
 

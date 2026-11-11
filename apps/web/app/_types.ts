@@ -11,7 +11,7 @@ export type PageProps = {
   searchParams: Promise<SearchParams>;
 };
 
-export type LayoutProps = { params: Promise<Params>; children: React.ReactElement };
+export type LayoutProps = { params: Promise<Params>; children: React.ReactElement<any> };
 
 export type ReadonlyHeaders = Awaited<ReturnType<typeof import("next/headers").headers>>;
 export type ReadonlyRequestCookies = Awaited<ReturnType<typeof import("next/headers").cookies>>;

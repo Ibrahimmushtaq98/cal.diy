@@ -3,6 +3,8 @@ import type React from "react";
 import { TroubleshooterListItemHeader } from "./TroubleshooterListItemContainer";
 import { useLocale } from "@calcom/lib/hooks/useLocale";
 
+import type { JSX } from "react";
+
 interface ScheduleItem {
   id: number;
   name: string;

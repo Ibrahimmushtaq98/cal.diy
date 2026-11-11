@@ -39,7 +39,7 @@ vi.mock("@calcom/ui/components/icon", () => ({
 
 vi.mock("@coss/ui/components/menu", () => ({
   Menu: ({ children }: { children: React.ReactNode }) => <div data-testid="menu">{children}</div>,
-  MenuTrigger: ({ children, render }: { children: React.ReactNode; render?: React.ReactElement }) => {
+  MenuTrigger: ({ children, render }: { children: React.ReactNode; render?: React.ReactElement<any> }) => {
     if (render) {
       return React.cloneElement(render, {}, children);
     }

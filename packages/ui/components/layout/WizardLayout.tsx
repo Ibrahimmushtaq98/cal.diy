@@ -76,4 +76,4 @@ export function WizardLayout({
   );
 }
 
-export const getLayout = (page: React.ReactElement) => <WizardLayout>{page}</WizardLayout>;
+export const getLayout = (page: React.ReactElement<any>) => <WizardLayout>{page}</WizardLayout>;

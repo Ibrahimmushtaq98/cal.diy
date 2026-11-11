@@ -9,6 +9,8 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 
 import ToolbarPlugin from "./ToolbarPlugin";
 
+import type { JSX } from "react";
+
 // Mocks
 vi.mock("../../icon", () => ({
   Icon: ({ name }: { name: string }) => <span data-testid={`icon-${name}`}>{name}</span>,

@@ -24,7 +24,7 @@ import { appWithTranslation } from "next-i18next";
 import type { SSRConfig } from "next-i18next/dist/types/types";
 import { ThemeProvider } from "next-themes";
 import { NuqsAdapter } from "nuqs/adapters/next/pages";
-import type { PropsWithChildren, ReactNode } from "react";
+import type { PropsWithChildren, ReactNode, JSX } from "react";
 import { useEffect } from "react";
 
 const I18nextAdapter = appWithTranslation<
@@ -48,7 +48,7 @@ export type AppProps = Omit<
     requiresLicense?: boolean;
     isThemeSupported?: boolean;
     isBookingPage?: boolean | ((arg: { router: NextAppProps["router"] }) => boolean);
-    getLayout?: (page: React.ReactElement) => ReactNode;
+    getLayout?: (page: React.ReactElement<any>) => ReactNode;
     PageWrapper?: (props: AppProps) => JSX.Element;
   };
 

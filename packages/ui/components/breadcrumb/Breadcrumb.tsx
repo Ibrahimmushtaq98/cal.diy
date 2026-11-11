@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Children, Fragment, useEffect, useState } from "react";
+import { Children, Fragment, useEffect, useState, type JSX } from "react";
 
 type BreadcrumbProps = {
   children: React.ReactNode;

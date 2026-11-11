@@ -341,7 +341,10 @@ const HostLocationRow = ({
             menuPlacement="auto"
             menuPortalTarget={typeof document !== "undefined" ? document.body : null}
             styles={{
-              menuPortal: (base) => ({ ...base, zIndex: 9999 }) as CSSObjectWithLabel,
+              menuPortal: (base) => (({
+                ...base,
+                zIndex: 9999
+              }) as CSSObjectWithLabel),
             }}
             onChange={handleLocationSelect}
           />
@@ -582,7 +585,7 @@ const LocationInputField = ({ eventLocationType, inputValue, setInputValue }: Lo
 };
 
 const useFetchMoreOnScroll = (
-  containerRef: React.RefObject<HTMLDivElement>,
+  containerRef: React.RefObject<HTMLDivElement | null>,
   hasNextPage: boolean | undefined,
   isFetchingNextPage: boolean,
   fetchNextPage: () => void
@@ -656,7 +659,7 @@ type HostListProps = {
   locationOptions: TLocationOptions;
   eventTypeId: number;
   onLocationChange: (userId: number, location: HostLocation | null) => void;
-  containerRef: React.RefObject<HTMLDivElement>;
+  containerRef: React.RefObject<HTMLDivElement | null>;
   isLoading: boolean;
   isFetchingNextPage: boolean;
   onOpenMassApply: () => void;

@@ -2,6 +2,8 @@ import process from "node:process";
 
 import { notFound } from "next/navigation";
 
+import type { JSX } from "react";
+
 /**
  * E2E-only page for warming up the NextAuth session.
  * This triggers the jwt and session callbacks that populate the session

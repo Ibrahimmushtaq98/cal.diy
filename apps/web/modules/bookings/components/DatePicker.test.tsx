@@ -25,12 +25,10 @@ describe("Tests for DatePicker Component", () => {
   test("It passes the loading prop to the DatePicker component", async () => {
     render(<DatePicker event={{}} isLoading={true} />);
 
-    expect(DatePickerComponent).toHaveBeenCalledWith(
+    expect(vi.mocked(DatePickerComponent).mock.lastCall?.[0]).toEqual(
       expect.objectContaining({
         isLoading: true,
-      }),
-      expect.anything()
-    );
+      }));
   });
 
   test("happy path, slots in current month", async () => {
@@ -51,12 +49,10 @@ describe("Tests for DatePicker Component", () => {
     );
     // slot date is next month, so it'll have skipped the current month
     // by setting the browsingDate to the next month.
-    expect(DatePickerComponent).toHaveBeenCalledWith(
+    expect(vi.mocked(DatePickerComponent).mock.lastCall?.[0]).toEqual(
       expect.objectContaining({
         browsingDate: dayjs().startOf("month"),
-      }),
-      expect.anything()
-    );
+      }));
   });
 
   test("when there are only slots in the next month, skip the current month", async () => {
@@ -82,12 +78,10 @@ describe("Tests for DatePicker Component", () => {
     );
     // slot date is next month, so it'll have skipped the current month
     // by setting the browsingDate to the next month.
-    expect(DatePickerComponent).toHaveBeenCalledWith(
+    expect(vi.mocked(DatePickerComponent).mock.lastCall?.[0]).toEqual(
       expect.objectContaining({
         browsingDate: slotDate.startOf("month"),
-      }),
-      expect.anything()
-    );
+      }));
   });
 
   test("when there are no slots, check for infinite loop (skip only 1 month)", async () => {
@@ -109,11 +103,9 @@ describe("Tests for DatePicker Component", () => {
     );
     // slot date is next month, so it'll have skipped the current month
     // by setting the browsingDate to the next month.
-    expect(DatePickerComponent).toHaveBeenCalledWith(
+    expect(vi.mocked(DatePickerComponent).mock.lastCall?.[0]).toEqual(
       expect.objectContaining({
         browsingDate: dayjs().add(1, "month").startOf("month"),
-      }),
-      expect.anything()
-    );
+      }));
   });
 });

@@ -1,7 +1,7 @@
 import { ErrorMessage } from "@hookform/error-message";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { isValidPhoneNumber } from "libphonenumber-js/max";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type JSX } from "react";
 import { Controller, useForm, useWatch, useFormContext } from "react-hook-form";
 import { z } from "zod";
 

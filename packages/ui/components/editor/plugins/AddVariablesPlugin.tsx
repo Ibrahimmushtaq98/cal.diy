@@ -8,7 +8,7 @@ import {
 } from "@lexical/react/LexicalTypeaheadMenuPlugin";
 import type { LexicalEditor } from "lexical";
 import { TextNode } from "lexical";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState, type JSX } from "react";
 import { createPortal } from "react-dom";
 
 import { useLocale } from "@calcom/lib/hooks/useLocale";

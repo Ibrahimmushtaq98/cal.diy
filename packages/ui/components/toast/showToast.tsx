@@ -3,6 +3,8 @@ import classNames from "classnames";
 import type { ExternalToast } from "sonner";
 import { toast } from "sonner";
 
+import type { JSX } from "react";
+
 type IToast = {
   message: string;
   toastId: string | number;

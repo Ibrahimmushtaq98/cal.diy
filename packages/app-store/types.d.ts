@@ -5,6 +5,8 @@ import type { z } from "zod";
 import type { EventTypeFormMetadataSchema } from "@calcom/prisma/zod-utils";
 import type { ButtonProps } from "@calcom/ui/components/button";
 
+import type { JSX } from "react";
+
 export type IntegrationOAuthCallbackState = {
   returnTo?: string;
   onErrorReturnTo: string;

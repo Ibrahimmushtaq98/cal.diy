@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, type JSX } from "react";
 import { shallow } from "zustand/shallow";
 
 import { useIsPlatform } from "@calcom/atoms/hooks/useIsPlatform";

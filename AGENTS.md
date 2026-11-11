@@ -304,14 +304,22 @@ These were tried during the November 2026 update and broke something. Don't bump
 | `city-timezones` | 1.2.1 | 1.3.x adds `Europe/Kyiv`, which the bundled `react-timezone-select`/spacetime can't parse, so the timezone pickers crash. |
 | `@tanstack/react-query` | 5.17.19 | Newer types don't fit the `@trpc/*` 11 beta in use; move both together. |
 | `@trpc/*` | 11.0.0-next-beta.222 | Beta to stable 11.x is a migration, not a bump. |
-| `react-hook-form`, `@hookform/resolvers` | 7.43.3, 2.9.7 | Newer resolver typing breaks forms such as `ApiKeyDialogForm`. |
-| `react-select`, `react-timezone-select` | 5.8.0, 1.4.0 | Newer typings break the `styles`/`onChange` callbacks across the app. |
+| `react-timezone-select` | 1.4.0 | 1.5 changes its `isMulti` typing and breaks `TimezoneSelect.test.tsx`. |
 | `@base-ui/react` | 1.0.0 | 1.9 changes the `Input` props in `packages/coss-ui`. |
 | `@formkit/auto-animate` | 1.0.0-beta.5 | Update tools sort `1.0.0-pre-alpha.3` as newer; it's older and breaks the hook typing. |
-| `botid`, `tsdav`, `@evyweb/ioctopus`, `react-inlinesvg`, `@googleapis/calendar`, `google-auth-library`, `@types/lodash`, `@types/glidejs__glide` | as pinned | Each newer version breaks type-checking in code that uses it. |
+| `botid`, `tsdav`, `@evyweb/ioctopus`, `@googleapis/calendar`, `google-auth-library`, `@types/lodash`, `@types/glidejs__glide` | as pinned | Each newer version breaks type-checking in code that uses it. |
 | `@nestjs/throttler`, `@nest-lab/throttler-storage-redis` | 6.2.1, 1.0.0 | 6.7 changes `ThrottlerGuard`, breaking `apps/api/v2/src/lib/throttler-guard.ts`. |
 
-Major-version upgrades (React 19, Prisma 7, zod 4, tRPC stable and others) were not attempted.
+Other major-version upgrades (Prisma 7, zod 4, tRPC stable and others) were not attempted.
+
+### React 19
+
+The web app, UI packages and atoms run on React 19.3 with `@types/react` 19.3 (November 2026). Things to know:
+
+- `packages/types/react-global-jsx.d.ts` re-adds the global `JSX` namespace that React 19's types removed. react-select (and anything else still typed against global `JSX`) silently turns into `any` without it. Workspaces that type-check React code include it in their `tsconfig.json`.
+- `packages/app-store-cli` stays on React 18: it uses ink 3, whose renderer only supports React 17/18.
+- React 19 calls function components with props only. Tests that assert a mocked component was called with `(props, {})` or `(props, expect.anything())` need to check `mock.lastCall?.[0]` instead.
+- `@testing-library/react` 16 needs `@testing-library/dom` installed next to it; `renderHook` comes from `@testing-library/react` (the old `@testing-library/react-hooks` is gone).
 
 ### Switch back to localhost
 

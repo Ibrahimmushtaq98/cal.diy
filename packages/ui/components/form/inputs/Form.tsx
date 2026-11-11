@@ -1,4 +1,4 @@
-import type { ReactElement, Ref } from "react";
+import type { ReactElement, Ref, JSX } from "react";
 import React, { forwardRef } from "react";
 import type { FieldValues, SubmitHandler, UseFormReturn } from "react-hook-form";
 import { FormProvider } from "react-hook-form";
@@ -39,4 +39,4 @@ const PlainForm = <T extends FieldValues>(props: FormProps<T>, ref: Ref<HTMLForm
 
 export const Form = forwardRef(PlainForm) as <T extends FieldValues>(
   p: FormProps<T> & { ref?: Ref<HTMLFormElement> }
-) => ReactElement;
+) => ReactElement<any>;

@@ -24,10 +24,10 @@ export function EmptyScreen({
   limitWidth = true,
 }: {
   Icon?: IconName;
-  customIcon?: React.ReactElement;
-  avatar?: React.ReactElement;
-  headline: string | React.ReactElement;
-  description?: string | React.ReactElement;
+  customIcon?: React.ReactElement<any>;
+  avatar?: React.ReactElement<any>;
+  headline: string | React.ReactElement<any>;
+  description?: string | React.ReactElement<any>;
   buttonText?: string;
   buttonOnClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   buttonRaw?: ReactNode; // Used incase you want to provide your own button.

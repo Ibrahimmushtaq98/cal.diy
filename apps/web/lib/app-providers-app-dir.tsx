@@ -15,6 +15,8 @@ import { ThemeProvider } from "next-themes";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { getThemeProviderProps } from "./getThemeProviderProps";
 
+import type { JSX } from "react";
+
 // Workaround for https://github.com/vercel/next.js/issues/8592
 export type AppProps = Omit<
   NextAppProps<

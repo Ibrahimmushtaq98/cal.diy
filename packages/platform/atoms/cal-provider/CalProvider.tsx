@@ -3,7 +3,7 @@
 import { VERSION_2024_06_14 } from "@calcom/platform-constants";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
-import { useEffect } from "react";
+import { useEffect, type JSX } from "react";
 import http from "../lib/http";
 import type { BaseCalProviderProps } from "./BaseCalProvider";
 import { BaseCalProvider } from "./BaseCalProvider";

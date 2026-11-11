@@ -1,5 +1,5 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type JSX } from "react";
 import type { SubmitHandler, UseFormReturn } from "react-hook-form";
 import { Controller, useFieldArray, useForm, useFormContext } from "react-hook-form";
 import type { z } from "zod";

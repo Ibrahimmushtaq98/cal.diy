@@ -10,6 +10,8 @@ import type React from "react";
 import type { PageProps as LegacyPageProps } from "~/users/views/users-public-view";
 import LegacyPage from "~/users/views/users-public-view";
 
+import type { JSX } from "react";
+
 const getData: (ctx: ReturnType<typeof buildLegacyCtx>) => Promise<LegacyPageProps> =
   withAppDirSsr<LegacyPageProps>(getServerSideProps);
 

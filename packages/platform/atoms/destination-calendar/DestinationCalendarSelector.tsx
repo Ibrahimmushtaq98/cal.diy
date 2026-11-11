@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, type JSX } from "react";
 
 import {
   OptionComponent,
@@ -65,26 +65,24 @@ export const DestinationCalendarSelector = ({
   }, [connectedCalendars, value]);
 
   const options = useMemo(() => {
-    return (
-      connectedCalendars.map((selectedCalendar) => ({
-        key: selectedCalendar.credentialId,
-        label: `${selectedCalendar.integration.title?.replace(/calendar/i, "")} (${
-          selectedCalendar.primary?.integration === "office365_calendar"
-            ? selectedCalendar.primary?.email
-            : selectedCalendar.primary?.name
-        })`,
-        options: (selectedCalendar.calendars ?? [])
-          .filter((cal) => cal.readOnly === false)
-          .map((cal) => ({
-            label: ` ${cal.name} `,
-            subtitle: `(${selectedCalendar?.integration.title?.replace(/calendar/i, "")} - ${
-              selectedCalendar?.primary?.name
-            })`,
-            value: `${cal.integration}:${cal.externalId}`,
-            delegationCredentialId: cal.delegationCredentialId || undefined,
-          })),
-      })) ?? []
-    );
+    return (connectedCalendars.map((selectedCalendar) => ({
+      key: selectedCalendar.credentialId,
+      label: `${selectedCalendar.integration.title?.replace(/calendar/i, "")} (${
+        selectedCalendar.primary?.integration === "office365_calendar"
+          ? selectedCalendar.primary?.email
+          : selectedCalendar.primary?.name
+      })`,
+      options: (selectedCalendar.calendars ?? [])
+        .filter((cal) => cal.readOnly === false)
+        .map((cal) => ({
+          label: ` ${cal.name} `,
+          subtitle: `(${selectedCalendar?.integration.title?.replace(/calendar/i, "")} - ${
+            selectedCalendar?.primary?.name
+          })`,
+          value: `${cal.integration}:${cal.externalId}`,
+          delegationCredentialId: cal.delegationCredentialId || undefined,
+        })),
+    })) ?? []);
   }, [connectedCalendars]);
 
   return (

@@ -7,8 +7,7 @@
  * For App Router, use PageWrapperAppDir.tsx instead.
  */
 
-"use client";
-
+"use client";;
 import { DefaultSeo } from "next-seo";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
@@ -26,6 +25,8 @@ import AppProviders from "@lib/app-providers";
 import { seoConfig } from "@lib/config/next-seo.config";
 
 import { GoogleTagManagerComponent } from "@components/GTM";
+
+import type { JSX } from "react";
 
 export interface CalPageWrapper {
   (props?: AppProps): JSX.Element;

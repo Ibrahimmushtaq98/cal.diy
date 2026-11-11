@@ -6,6 +6,8 @@ import { TroubleshooterSidebar } from "../sidebar/TroubleshooterSidebar";
 import { LargeCalendar } from "../large-calendar/LargeCalendar";
 import { BookerStoreProvider } from "@calcom/features/bookings/Booker/BookerStoreProvider";
 
+import type { JSX } from "react";
+
 interface TroubleshooterComponentProps {
   month?: string | null;
   onManageCalendarsClick?: () => void;

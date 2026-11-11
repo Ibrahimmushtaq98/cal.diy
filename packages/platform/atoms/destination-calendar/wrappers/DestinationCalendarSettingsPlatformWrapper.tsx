@@ -4,6 +4,8 @@ import { AtomsWrapper } from "../../src/components/atoms-wrapper";
 import type { DestinationCalendarClassNames } from "../DestinationCalendar";
 import { DestinationCalendarSettings } from "../DestinationCalendar";
 
+import type { JSX } from "react";
+
 export const DestinationCalendarSettingsPlatformWrapper = ({
   statusLoader,
   classNames = "mx-5",

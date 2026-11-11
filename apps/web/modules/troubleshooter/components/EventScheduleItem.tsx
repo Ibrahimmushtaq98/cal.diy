@@ -5,6 +5,8 @@ import { trpc } from "@calcom/trpc/react";
 import { Badge } from "@calcom/ui/components/badge";
 import Link from "next/link";
 
+import type { JSX } from "react";
+
 export { EventScheduleItemComponent };
 
 export function EventScheduleItem(): JSX.Element {

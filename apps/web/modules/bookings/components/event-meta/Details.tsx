@@ -136,7 +136,8 @@ export const EventDetails = ({ event, blocks = defaultEventDetailsBlocks }: Even
     <>
       {blocks.map((block) => {
         if (typeof block === "function") {
-          return <Fragment key={block.name}>{block(event)}</Fragment>;
+          // React 19 types let a component return a Promise; these blocks are plain sync components.
+          return <Fragment key={block.name}>{block(event) as React.ReactNode}</Fragment>;
         }
 
         switch (block) {

@@ -116,6 +116,7 @@
             }
           },
           "correctness": {
+            "noComponentHookFactories": "warn",
             "useImportExtensions": "warn",
             "noProcessGlobal": "warn",
             "useExhaustiveDependencies": "warn",

@@ -4,7 +4,7 @@ import React, { isValidElement, Fragment, createElement, cloneElement } from "re
 
 type ServerTransProps = {
   i18nKey: string; // Translation key
-  components?: ReactElement[] | Record<string, ReactElement>; // Components to inject
+  components?: ReactElement<any>[] | Record<string, ReactElement<any>>; // Components to inject
   t: TFunction;
   values?: Record<string, string | number>; // Values for interpolation
   children?: ReactNode; // Children as fallback content
@@ -45,7 +45,7 @@ const ServerTrans: FC<ServerTransProps> = ({
   }
   // Process object-based components like <tag>content</tag> or {{tag}}
   else if (isObject(components) && Object.keys(components).length > 0) {
-    result = parseObjectComponents(content, components as Record<string, ReactElement>);
+    result = parseObjectComponents(content, components as Record<string, ReactElement<any>>);
   }
   // Process just HTML tags
   else {
@@ -66,7 +66,7 @@ const isObject = (obj: any): obj is Record<string, unknown> =>
   obj !== null && typeof obj === "object" && !Array.isArray(obj);
 
 // Parse array-based components like <0>content</0>
-const parseArrayComponents = (content: string, components: ReactElement[]): ReactNode[] => {
+const parseArrayComponents = (content: string, components: ReactElement<any>[]): ReactNode[] => {
   const parts: ReactNode[] = [];
   let currentText = "";
 
@@ -193,7 +193,7 @@ const parseArrayComponents = (content: string, components: ReactElement[]): Reac
 };
 
 // Parse object-based components like <tag>content</tag> or {{tag}}
-const parseObjectComponents = (content: string, components: Record<string, ReactElement>): ReactNode[] => {
+const parseObjectComponents = (content: string, components: Record<string, ReactElement<any>>): ReactNode[] => {
   let processedContent = content;
   const placeholders: Record<string, ReactNode> = {};
 

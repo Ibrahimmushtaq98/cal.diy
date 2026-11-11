@@ -158,7 +158,7 @@ export default function ImageUploader({
               data-testid={testId ? `open-upload-${testId}-filechooser` : "open-upload-image-filechooser"}
               className="bg-subtle hover:bg-cal-muted hover:text-emphasis border-subtle text-default mt-8 cursor-pointer rounded-sm border px-3 py-1 text-xs font-medium leading-4 transition focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-1">
               <input
-                onInput={onInputFile}
+                onChange={onInputFile}
                 type="file"
                 name={id}
                 placeholder={t("upload_image")}

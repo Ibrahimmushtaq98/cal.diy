@@ -9,6 +9,8 @@ import { ErrorBoundary } from "@calcom/ui/components/errorBoundary";
 import type { EventTypeAppCardComponentProps, AppCardApp } from "../types";
 import { DynamicComponent } from "./DynamicComponent";
 
+import type { JSX } from "react";
+
 export type EventTypeForAppCard = EventTypeAppCardComponentProps["eventType"];
 
 export const EventTypeAppCard = (props: {

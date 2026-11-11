@@ -17,4 +17,4 @@ export default function InstalledAppsLayout({
     </Shell>
   );
 }
-export const getLayout = (page: React.ReactElement) => <InstalledAppsLayout>{page}</InstalledAppsLayout>;
+export const getLayout = (page: React.ReactElement<any>) => <InstalledAppsLayout>{page}</InstalledAppsLayout>;

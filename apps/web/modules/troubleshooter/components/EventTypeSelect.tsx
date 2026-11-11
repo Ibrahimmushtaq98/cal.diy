@@ -1,6 +1,8 @@
 import { EventTypeSelectComponent } from "@calcom/features/troubleshooter/components/EventTypeSelectComponent";
 import { trpc } from "@calcom/trpc/react";
 
+import type { JSX } from "react";
+
 export { EventTypeSelectComponent };
 
 export function EventTypeSelect(): JSX.Element {

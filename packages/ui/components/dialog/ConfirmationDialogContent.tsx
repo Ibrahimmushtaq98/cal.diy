@@ -7,7 +7,7 @@ import { DialogClose, DialogContent } from "./Dialog";
 
 type ConfirmBtnType =
   | { confirmBtn?: never; confirmBtnText?: string }
-  | { confirmBtnText?: never; confirmBtn?: ReactElement };
+  | { confirmBtnText?: never; confirmBtn?: ReactElement<any> };
 
 export type ConfirmationDialogContentProps = {
   cancelBtnText?: string;

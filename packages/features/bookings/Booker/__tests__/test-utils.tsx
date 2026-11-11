@@ -93,12 +93,12 @@ const createMockStore = (initialState?: Partial<BookerStore>): StoreApi<BookerSt
 };
 
 export const renderWithBookerStore = (
-  ui: ReactElement,
+  ui: ReactElement<any>,
   options?: CustomRenderOptions
 ): ReturnType<typeof render> => {
   const mockStore = createMockStore(options?.mockStore);
 
-  const Wrapper = ({ children }: { children: ReactNode }): ReactElement => (
+  const Wrapper = ({ children }: { children: ReactNode }): ReactElement<any> => (
     <BookerStoreContext.Provider value={mockStore}>{children}</BookerStoreContext.Provider>
   );
 

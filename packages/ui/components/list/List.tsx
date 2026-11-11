@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { createElement } from "react";
+import { createElement, type JSX } from "react";
 
 import { useLocale } from "@calcom/lib/hooks/useLocale";
 import classNames from "@calcom/ui/classNames";

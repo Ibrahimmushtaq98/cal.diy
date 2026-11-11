@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, type JSX } from "react";
 import { shallow } from "zustand/shallow";
 
 import type { Dayjs } from "@calcom/dayjs";

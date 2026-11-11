@@ -4,6 +4,8 @@ import { CalendarToggleContainer } from "./CalendarToggleContainer";
 import { EventScheduleItem } from "./EventScheduleItem";
 import { EventTypeSelect } from "./EventTypeSelect";
 
+import type { JSX } from "react";
+
 const SidebarHeading = ({ name }: { name: string }): JSX.Element => {
   return (
     <Skeleton

@@ -6,6 +6,7 @@
   },
   "include": [
     "../types/window.d.ts",
+    "../types/react-global-jsx.d.ts",
     "../types/next.d.ts",
     "../types/tanstack-table.d.ts",
     "../types/business-days-plugin.d.ts",

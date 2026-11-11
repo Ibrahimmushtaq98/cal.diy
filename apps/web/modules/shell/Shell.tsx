@@ -2,7 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import type { Dispatch, ReactElement, ReactNode, SetStateAction } from "react";
+import type { Dispatch, ReactElement, ReactNode, SetStateAction, JSX } from "react";
 import type React from "react";
 import { cloneElement } from "react";
 import { Toaster } from "sonner";
@@ -72,7 +72,7 @@ export type LayoutProps = {
   CTA?: ReactNode;
   large?: boolean;
   MobileNavigationContainer?: ReactNode;
-  SidebarContainer?: ReactElement;
+  SidebarContainer?: ReactElement<any>;
   TopNavContainer?: ReactNode;
   drawerState?: DrawerState;
   HeadingLeftIcon?: ReactNode;

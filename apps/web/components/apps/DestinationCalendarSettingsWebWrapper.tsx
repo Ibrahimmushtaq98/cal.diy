@@ -8,6 +8,7 @@ import {
 import { showToast } from "@calcom/ui/components/toast";
 import { DestinationCalendarSettings } from "../../../../packages/platform/atoms/destination-calendar/DestinationCalendar";
 import { AtomsWrapper } from "../../../../packages/platform/atoms/src/components/atoms-wrapper";
+import type { JSX } from "react";
 export const DestinationCalendarSettingsWebWrapper = ({
   connectedCalendars,
 }: {

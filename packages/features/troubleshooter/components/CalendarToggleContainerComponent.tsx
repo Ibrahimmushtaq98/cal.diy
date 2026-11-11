@@ -4,6 +4,8 @@ import { Button } from "@calcom/ui/components/button";
 import { Switch } from "@calcom/ui/components/form";
 import { TroubleshooterListItemContainer } from "./TroubleshooterListItemContainer";
 
+import type { JSX } from "react";
+
 interface CalendarToggleItemProps {
   title: string;
   subtitle: string;
