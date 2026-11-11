@@ -4,7 +4,7 @@ import type { Timezones } from "@calcom/lib/timezone";
 import { addTimezonesToDropdown, filterBySearchText, handleOptionLabel } from "@calcom/lib/timezone";
 import classNames from "@calcom/ui/classNames";
 import { getReactSelectProps, inputStyles } from "@calcom/ui/components/form";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useId, useMemo, useState } from "react";
 import type { ITimezone, ITimezoneOption, Props as SelectProps } from "react-timezone-select";
 import BaseSelect from "react-timezone-select";
 
@@ -60,6 +60,9 @@ export function TimezoneSelectComponent({
     [data, isWebTimezoneSelect, additionalTimezones]
   );
 
+  // Stable id so the server and browser render the same react-select element ids.
+  const generatedInstanceId = useId();
+
   const handleChange = useCallback(
     (selectedOption: ITimezoneOption | null) => {
       if (!props.onChange) return;
@@ -99,6 +102,7 @@ export function TimezoneSelectComponent({
       isLoading={isPending}
       data-testid="timezone-select"
       isDisabled={isPending}
+      instanceId={generatedInstanceId}
       {...reactSelectProps}
       timezones={timezones}
       styles={{

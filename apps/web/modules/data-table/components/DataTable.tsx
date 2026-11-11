@@ -282,15 +282,16 @@ type RowToRender<TData> = {
 };
 
 function SeparatorRowRenderer({ separator, className }: { separator: SeparatorRow; className?: string }) {
+  // A <tr> may only contain cells, so the separator label lives in a full-width <td>.
   return (
-    <div
+    <td
       className={classNames(
-        "bg-cal-muted text-emphasis w-full px-3 py-2 font-semibold",
+        "bg-cal-muted text-emphasis block w-full px-3 py-2 font-semibold",
         separator.className,
         className
       )}>
       {separator.label}
-    </div>
+    </td>
   );
 }
 
