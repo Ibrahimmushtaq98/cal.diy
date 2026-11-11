@@ -20,9 +20,9 @@
     "@calcom/prisma": "workspace:*"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.3.10",
+    "@biomejs/biome": "2.6.5",
     "@calcom/tsconfig": "workspace:*",
-    "prismock": "1.35.3",
-    "vitest": "4.1.8"
+    "prismock": "1.35.4",
+    "vitest": "4.1.12"
   }
 }

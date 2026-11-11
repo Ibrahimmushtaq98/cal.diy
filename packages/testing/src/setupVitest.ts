@@ -7,6 +7,11 @@ import createFetchMock from "vitest-fetch-mock";
 
 global.ResizeObserver = ResizeObserver;
 
+// jsdom has no scrollIntoView; cmdk 1.x calls it when it highlights an item.
+if (typeof Element !== "undefined" && !Element.prototype.scrollIntoView) {
+  Element.prototype.scrollIntoView = vi.fn();
+}
+
 if (typeof window !== "undefined") {
   Object.defineProperty(window, "matchMedia", {
     writable: true,

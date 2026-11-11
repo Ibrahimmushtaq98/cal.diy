@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.10/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.6.5/schema.json",
   "root": true,
   "assist": {
     "actions": {
@@ -27,10 +27,7 @@
     }
   },
   "formatter": {
-    "includes": [
-      "**/*",
-      "!packages/ui/components/icon/dynamicIconImports.tsx"
-    ],
+    "includes": ["**/*", "!packages/ui/components/icon/dynamicIconImports.tsx"],
     "lineWidth": 110,
     "indentStyle": "space",
     "indentWidth": 2,
@@ -87,7 +84,7 @@
       "react": "recommended"
     },
     "rules": {
-      "recommended": true,
+      "preset": "recommended",
       "a11y": "off"
     }
   },
@@ -113,17 +110,9 @@
       "linter": {
         "rules": {
           "nursery": {
-            "useQwikValidLexicalScope": "off",
             "useExplicitType": "info",
-            "noReactForwardRef": "warn",
-            "noTernary": "info",
-            "noUnresolvedImports": "warn",
-            "useSortedClasses": {
-              "level": "warn",
-              "options": {
-                "attributes": ["className", "classList"],
-                "functions": ["clsx", "cva", "cn", "tw"]
-              }
+            "useTailwindSortedClasses": {
+              "level": "warn"
             }
           },
           "correctness": {
@@ -136,13 +125,16 @@
             "noSwitchDeclarations": "warn",
             "useHookAtTopLevel": "warn",
             "useJsxKeyInIterable": "warn",
-            "noUnsafeOptionalChaining": "warn"
+            "noUnsafeOptionalChaining": "warn",
+            "useQwikValidLexicalScope": "off",
+            "noUnresolvedImports": "warn"
           },
           "style": {
             "useExportsLast": "warn",
             "noProcessEnv": "warn",
             "useNodejsImportProtocol": "error",
-            "noNestedTernary": "warn"
+            "noNestedTernary": "warn",
+            "noTernary": "info"
           },
           "complexity": {
             "noExcessiveLinesPerFunction": {
@@ -166,7 +158,8 @@
             "noControlCharactersInRegex": "warn",
             "noArrayIndexKey": "warn",
             "noShadowRestrictedNames": "warn",
-            "noAsyncPromiseExecutor": "warn"
+            "noAsyncPromiseExecutor": "warn",
+            "noReactForwardRef": "warn"
           },
           "security": {
             "noBlankTarget": "warn",
@@ -220,7 +213,13 @@
       }
     },
     {
-      "includes": ["**/*.test.ts", "**/*.test.tsx", "**/*.spec.ts", "**/*.e2e-spec.ts", "**/*.integration-test.ts"],
+      "includes": [
+        "**/*.test.ts",
+        "**/*.test.tsx",
+        "**/*.spec.ts",
+        "**/*.e2e-spec.ts",
+        "**/*.integration-test.ts"
+      ],
       "linter": {
         "rules": {
           "complexity": {
@@ -449,5 +448,10 @@
         }
       }
     }
-  ]
+  ],
+  "tailwind": {
+    "attributes": ["class", "className", "classList"],
+    "mergeFunctions": ["clsx", "cn", "tw"],
+    "variantFunctions": ["cva"]
+  }
 }

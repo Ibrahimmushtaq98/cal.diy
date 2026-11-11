@@ -7,10 +7,10 @@
   "description": "Workflow automation for everyone. Use the Cal.diy Zapier app to trigger your workflows when a booking is created, rescheduled, or cancelled, or after a meeting ends.",
   "dependencies": {
     "@calcom/lib": "workspace:*",
-    "node-schedule": "2.1.0"
+    "node-schedule": "2.1.2"
   },
   "devDependencies": {
     "@calcom/types": "workspace:*",
-    "@types/node-schedule": "2.1.0"
+    "@types/node-schedule": "2.1.8"
   }
 }

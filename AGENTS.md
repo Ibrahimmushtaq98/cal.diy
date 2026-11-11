@@ -285,6 +285,33 @@ Stop it with Ctrl-C in both terminals. The Docker containers can keep running.
 - Sign-in only works on the URL in `NEXTAUTH_URL`. If you visit `localhost:3000` while `.env` points at ngrok, you get redirected or the login fails.
 - Running `yarn dev` rewrites the `packages/app-store/*.generated.ts` files, so they show as modified in git. That's expected noise. Don't commit them.
 - Each OAuth app (Google Calendar, Outlook/Teams, Zoom) needs callback URLs on the tunnel host, for example `https://locust-epic-stud.ngrok-free.app/api/integrations/office365video/callback`. These apps stay disabled and hidden from the App Store until their keys are set. Set them in `.env.appStore` and then run `yarn workspace @calcom/prisma seed-app-store`, or set them under Settings → Admin → Apps. Microsoft's keys are `MS_GRAPH_CLIENT_ID` / `MS_GRAPH_CLIENT_SECRET`. Google's is `GOOGLE_API_CREDENTIALS`.
+- To test on `localhost:3000` without touching `.env`, start the web app directly with the URLs overridden (env vars you set win over `.env`):
+  ```bash
+  cd apps/web
+  NEXT_PUBLIC_WEBAPP_URL=http://localhost:3000 NEXT_PUBLIC_WEBSITE_URL=http://localhost:3000 NEXTAUTH_URL=http://localhost:3000 yarn next dev --turbopack
+  ```
+- Next.js writes an `apps/web/AGENTS.md` on dev start. It's generated, so don't commit it.
+- The browser console always shows "Service Worker registration failed" inside embedded browsers (for example the Claude Code browser pane). A normal browser registers it fine.
+
+### Package versions held back on purpose
+
+These were tried during the November 2026 update and broke something. Don't bump them without fixing what's listed.
+
+| Package | Held at | Why |
+|---|---|---|
+| `next` | 16.4.3 | 16.4.5 puts dev pages into a full-reload loop (event types never load). |
+| `jest-date-mock` | 1.0.10 | 1.0.11+ (published 19 May 2026) depends on a GitHub commit that doesn't exist; treat it as a bad publish. |
+| `city-timezones` | 1.2.1 | 1.3.x adds `Europe/Kyiv`, which the bundled `react-timezone-select`/spacetime can't parse, so the timezone pickers crash. |
+| `@tanstack/react-query` | 5.17.19 | Newer types don't fit the `@trpc/*` 11 beta in use; move both together. |
+| `@trpc/*` | 11.0.0-next-beta.222 | Beta to stable 11.x is a migration, not a bump. |
+| `react-hook-form`, `@hookform/resolvers` | 7.43.3, 2.9.7 | Newer resolver typing breaks forms such as `ApiKeyDialogForm`. |
+| `react-select`, `react-timezone-select` | 5.8.0, 1.4.0 | Newer typings break the `styles`/`onChange` callbacks across the app. |
+| `@base-ui/react` | 1.0.0 | 1.9 changes the `Input` props in `packages/coss-ui`. |
+| `@formkit/auto-animate` | 1.0.0-beta.5 | Update tools sort `1.0.0-pre-alpha.3` as newer; it's older and breaks the hook typing. |
+| `botid`, `tsdav`, `@evyweb/ioctopus`, `react-inlinesvg`, `@googleapis/calendar`, `google-auth-library`, `@types/lodash`, `@types/glidejs__glide` | as pinned | Each newer version breaks type-checking in code that uses it. |
+| `@nestjs/throttler`, `@nest-lab/throttler-storage-redis` | 6.2.1, 1.0.0 | 6.7 changes `ThrottlerGuard`, breaking `apps/api/v2/src/lib/throttler-guard.ts`. |
+
+Major-version upgrades (React 19, Prisma 7, zod 4, tRPC stable and others) were not attempted.
 
 ### Switch back to localhost
 

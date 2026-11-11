@@ -12,7 +12,7 @@
     "./locales/*": "./locales/*"
   },
   "dependencies": {
-    "i18next": "23.2.3"
+    "i18next": "23.16.8"
   },
   "devDependencies": {
     "@calcom/tsconfig": "workspace:*",
