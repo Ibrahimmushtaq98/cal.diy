@@ -171,7 +171,7 @@ describe("Test TimezoneSelect", () => {
         fireEvent.keyDown(element, { key: "ArrowDown", code: "ArrowDown" });
       });
 
-      expect(onChangeMock).toBeCalled();
+      expect(onChangeMock).toHaveBeenCalled();
     });
   });
 

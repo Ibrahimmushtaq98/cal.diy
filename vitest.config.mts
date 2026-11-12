@@ -54,6 +54,9 @@ function getTestExclude() {
 
 export default defineConfig({
   plugins: [react()],
+  // Vite 8 compiles TypeScript with Oxc, which only lowers our legacy (experimentalDecorators) decorators
+  // when asked; esbuild used to pick that up from tsconfig.
+  oxc: { decorator: { legacy: true, emitDecoratorMetadata: true } },
   resolve: {
     alias: [
       // Mock generated files that may not exist in CI (must come before general aliases)

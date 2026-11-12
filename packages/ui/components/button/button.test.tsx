@@ -202,7 +202,7 @@ describe.skip("(Skipped) Test for button as a link", () => {
     const tooltip = screen.getByTestId("tooltip");
     expect(tooltip.getAttribute("data-state")).toEqual("closed");
     expect(tooltip.getAttribute("data-state")).toEqual("instant-open");
-    expect(observeMock).toBeCalledWith(tooltip);
+    expect(observeMock).toHaveBeenCalledWith(tooltip);
   });
   test("Should not render Tooltip if no exists", () => {
     render(<Button>Test Button</Button>);
