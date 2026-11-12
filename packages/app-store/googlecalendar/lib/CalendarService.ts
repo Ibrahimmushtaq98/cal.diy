@@ -67,7 +67,9 @@ export interface GoogleCalendar extends Calendar {
 }
 
 interface GoogleCalError extends Error {
-  code?: number;
+  code?: number | string;
+  /** gaxios 7+ puts the HTTP status here; `code` only comes from a lower-level cause now. */
+  status?: number;
 }
 
 const isGaxiosResponse = (error: unknown): error is GaxiosResponse<calendar_v3.Schema$Event> =>
@@ -480,13 +482,14 @@ class GoogleCalendarService implements Calendar {
         safeStringify({ error, event, externalCalendarId })
       );
       const err = error as GoogleCalError;
+      const status = err.status ?? Number(err.code);
       /**
        *  410 is when an event is already deleted on the Google cal before on cal.com
        *  404 is when the event is on a different calendar
        */
-      if (err.code === 410) return;
+      if (status === 410) return;
       console.error("There was an error contacting google calendar service: ", err);
-      if (err.code === 404) return;
+      if (status === 404) return;
       throw err;
     }
   }
@@ -855,13 +858,15 @@ class GoogleCalendarService implements Calendar {
         throw new Error("No calendars found - delegation credential may not have proper access");
       }
     } catch (error) {
-      const googleError = error as { code?: number; message?: string };
-      if (googleError.code === 401) {
+      const googleError = error as { code?: number | string; status?: number; message?: string };
+      // gaxios 7+ reports the HTTP status on `status`; older versions used `code`.
+      const status = googleError.status ?? Number(googleError.code);
+      if (status === 401) {
         throw new Error(
           `Google API authentication failed: ${googleError.message || "Invalid credentials or insufficient permissions"}`
         );
       }
-      if (googleError.code === 403) {
+      if (status === 403) {
         throw new Error(
           `Google API access denied: ${googleError.message || "The service account may not have domain-wide delegation enabled or the required scopes"}`
         );

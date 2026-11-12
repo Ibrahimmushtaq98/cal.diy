@@ -392,13 +392,14 @@ export const createEvent = async (
         // Ideally we should pass externalId always, but let's start with DelegationCredential case first as in that case, CalendarService need to handle a special case for DelegationCredential to determine the selectedCalendar.
         // Such logic shouldn't exist in CalendarService as it would be same for all calendar apps.
         .createEvent(calEvent, credential.id, externalCalendarIdWhenDelegationCredentialIsChosen)
-        .catch(async (error: { code: number; calError: string }) => {
+        .catch(async (error: { code?: number | string; status?: number; calError?: string }) => {
           success = false;
           /**
            * There is a time when selectedCalendar externalId doesn't match witch certain credential
            * so google returns 404.
            * */
-          if (error?.code === 404) {
+          // gaxios 7+ (Google) reports the HTTP status on `status`; other calendar apps still use `code`.
+          if ((error?.status ?? Number(error?.code)) === 404) {
             return undefined;
           }
           if (error?.calError) {

@@ -1404,3 +1404,34 @@ describe("listCalendars", () => {
     expect(calendars[0].externalId).toBe("user@example.com");
   });
 });
+
+describe("deleteEvent", () => {
+  // gaxios 7+ (google-auth-library 10+) reports the HTTP status on `status`; `code` is no longer set for it.
+  test.each([
+    ["status", { status: 410 }],
+    ["status", { status: 404 }],
+    ["legacy code", { code: 410 }],
+  ])("ignores an already-gone event reported via %s", async (_label, errorShape) => {
+    const calendarService = BuildCalendarService(mockCredential);
+    setFullMockOAuthManagerRequest();
+    calendarMock.calendar_v3.Calendar().events.delete = vi
+      .fn()
+      .mockRejectedValue(Object.assign(new Error("Resource has been deleted"), errorShape));
+
+    await expect(
+      calendarService.deleteEvent("event-uid", {} as Parameters<typeof calendarService.deleteEvent>[1])
+    ).resolves.toBeUndefined();
+  });
+
+  test("still throws other Google errors", async () => {
+    const calendarService = BuildCalendarService(mockCredential);
+    setFullMockOAuthManagerRequest();
+    calendarMock.calendar_v3.Calendar().events.delete = vi
+      .fn()
+      .mockRejectedValue(Object.assign(new Error("Forbidden"), { status: 403 }));
+
+    await expect(
+      calendarService.deleteEvent("event-uid", {} as Parameters<typeof calendarService.deleteEvent>[1])
+    ).rejects.toThrow("Forbidden");
+  });
+});
