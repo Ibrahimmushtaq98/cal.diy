@@ -1,0 +1,69 @@
+diff --git a/build/main/lib/client.d.ts b/build/main/lib/client.d.ts
+index 5e2ad749d6c5d56a985bb61edb4504b0a6f59045..a0ff1bf2a1c87e70fd4aea444904b37bb9de9cc4 100644
+--- a/build/main/lib/client.d.ts
++++ b/build/main/lib/client.d.ts
+@@ -1,5 +1,5 @@
+ import { type PrismaClient } from '@prisma/client';
+-import * as runtime from '@prisma/client/runtime/library';
++import * as runtime from '@prisma/client/runtime/client';
+ import { Delegate } from './delegate';
+ import { Data } from './prismock';
+ type GetData = () => Data;
+diff --git a/build/main/lib/delegate.js b/build/main/lib/delegate.js
+index 12f537d7d93aac697476925e003c66c8eb528a44..3dcfe9b1850c0d5bfae0451175389b203dde2c9b 100644
+--- a/build/main/lib/delegate.js
++++ b/build/main/lib/delegate.js
+@@ -13,7 +13,7 @@ var __rest = (this && this.__rest) || function (s, e) {
+ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.generateDelegate = generateDelegate;
+ const package_json_1 = require("@prisma/client/package.json");
+-const library_1 = require("@prisma/client/runtime/library");
++const library_1 = require("@prisma/client/runtime/client");
+ const operations_1 = require("./operations");
+ function generateDelegate(model, data, name, properties, delegates, onChange) {
+     const delegate = {};
+diff --git a/build/main/lib/operations/create.js b/build/main/lib/operations/create.js
+index a6eb50dc530fb21b6240e3f217facb33b954c78e..5b6e377d512899b5b81c02dd41251dce4cfb77fe 100644
+--- a/build/main/lib/operations/create.js
++++ b/build/main/lib/operations/create.js
+@@ -6,7 +6,7 @@ exports.createDefaultValues = createDefaultValues;
+ exports.connectOrCreate = connectOrCreate;
+ exports.nestedCreate = nestedCreate;
+ exports.create = create;
+-const library_1 = require("@prisma/client/runtime/library");
++const library_1 = require("@prisma/client/runtime/client");
+ const bson_1 = require("bson");
+ const cuid2_1 = require("@paralleldrive/cuid2");
+ const helpers_1 = require("../helpers");
+diff --git a/build/module/lib/client.d.ts b/build/module/lib/client.d.ts
+index 5e2ad749d6c5d56a985bb61edb4504b0a6f59045..a0ff1bf2a1c87e70fd4aea444904b37bb9de9cc4 100644
+--- a/build/module/lib/client.d.ts
++++ b/build/module/lib/client.d.ts
+@@ -1,5 +1,5 @@
+ import { type PrismaClient } from '@prisma/client';
+-import * as runtime from '@prisma/client/runtime/library';
++import * as runtime from '@prisma/client/runtime/client';
+ import { Delegate } from './delegate';
+ import { Data } from './prismock';
+ type GetData = () => Data;
+diff --git a/build/module/lib/delegate.js b/build/module/lib/delegate.js
+index 56f34943a0cfd34f2fe61936269be50137c8bb49..717b531730df0b910cb0277446ba505de4c36e13 100644
+--- a/build/module/lib/delegate.js
++++ b/build/module/lib/delegate.js
+@@ -1,5 +1,5 @@
+ import { version as clientVersion } from '@prisma/client/package.json';
+-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
++import { PrismaClientKnownRequestError } from '@prisma/client/runtime/client';
+ import { create, findOne, findMany, deleteMany, updateMany, aggregate, groupBy } from './operations';
+ export function generateDelegate(model, data, name, properties, delegates, onChange) {
+     const delegate = {};
+diff --git a/build/module/lib/operations/create.js b/build/module/lib/operations/create.js
+index dd68f7022d953c9cf55cd9c8ad7473b565dda1cf..c2f6eb89b8fb9c66346ebc118854b5b2aa78d333 100644
+--- a/build/module/lib/operations/create.js
++++ b/build/module/lib/operations/create.js
+@@ -1,4 +1,4 @@
+-import { Decimal } from '@prisma/client/runtime/library';
++import { Decimal } from '@prisma/client/runtime/client';
+ import { ObjectId } from 'bson';
+ import { createId as createCuid } from '@paralleldrive/cuid2';
+ import { pipe, removeUndefined, uuid } from '../helpers';

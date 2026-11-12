@@ -1,10 +1,9 @@
 // This is your Prisma Schema file
 // Learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// Connection URLs live in prisma.config.ts (CLI) and packages/prisma/index.ts (driver adapter) since Prisma 7.
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DATABASE_DIRECT_URL")
+  provider = "postgresql"
 }
 
 generator client {
@@ -24,7 +23,7 @@ generator zod {
   addIncludeType           = false
   addSelectType            = false
   validateWhereUniqueInput = false
-  prismaClientPath         = "../../generated/prisma/client"
+  prismaClientPath         = "../../generated/prisma"
   moduleFormat             = "cjs"
   /// createRelationValuesTypes = true
 }

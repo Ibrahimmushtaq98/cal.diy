@@ -47,22 +47,19 @@ if (!isNaN(loggerLevel)) {
 }
 const baseClient = globalForPrisma.baseClient || new PrismaClient(prismaOptions);
 
-export const customPrisma = (options?: Prisma.PrismaClientOptions) => {
-  let finalOptions = { ...prismaOptions };
+// Prisma 7 removed the `datasources` client option; a different database means a different driver adapter.
+type CustomPrismaOptions = Pick<Prisma.PrismaClientOptions, "log" | "errorFormat" | "transactionOptions"> & {
+  datasources?: { db?: { url?: string } };
+};
 
-  if (options?.datasources?.db?.url) {
-    const customConnectionString = options.datasources.db.url;
-    const customAdapter = new PrismaPg({ connectionString: customConnectionString });
-
-    const { datasources: _datasources, ...restOptions } = options;
-    finalOptions = {
-      ...prismaOptions,
-      ...restOptions,
-      adapter: customAdapter,
-    };
-  } else if (options) {
-    finalOptions = { ...prismaOptions, ...options };
-  }
+export const customPrisma = (options?: CustomPrismaOptions) => {
+  const { datasources, ...restOptions } = options ?? {};
+  const customConnectionString = datasources?.db?.url;
+  const finalOptions: Prisma.PrismaClientOptions = {
+    ...prismaOptions,
+    ...restOptions,
+    adapter: customConnectionString ? new PrismaPg({ connectionString: customConnectionString }) : adapter,
+  };
 
   return new PrismaClient(finalOptions)
     .$extends(excludeLockedUsersExtension())

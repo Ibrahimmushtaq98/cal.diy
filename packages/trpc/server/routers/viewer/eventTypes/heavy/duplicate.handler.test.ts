@@ -1,6 +1,6 @@
 import prismaMock from "@calcom/testing/lib/__mocks__/prismaMock";
 
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
 import { TRPCError } from "@trpc/server";
@@ -30,7 +30,9 @@ describe("duplicateHandler", () => {
     prismaMock.eventType.findUnique.mockResolvedValue(eventType);
   });
 
-  it("should throw INTERNAL_SERVER_ERROR in case of unique constraint violation", async () => {
+  // Before Prisma 7 this error came from a separate copy of the runtime, so the handler's instanceof check
+  // missed it and fell through to INTERNAL_SERVER_ERROR. With one runtime it hits the intended CONFLICT branch.
+  it("should throw CONFLICT in case of unique constraint violation", async () => {
     const { EventTypeRepository } = await import(
       "@calcom/features/eventtypes/repositories/eventTypeRepository"
     );
@@ -48,8 +50,8 @@ describe("duplicateHandler", () => {
 
     await expect(duplicateHandler({ ctx, input })).rejects.toThrow(
       new TRPCError({
-        code: "INTERNAL_SERVER_ERROR",
-        message: "Error duplicating event type PrismaClientKnownRequestError: Unique constraint failed",
+        code: "CONFLICT",
+        message: "Unique constraint violation while creating a duplicate event.",
       })
     );
   });
