@@ -72,8 +72,10 @@ const generateIcsString = ({
     .filter((domain) => domain.trim() !== "")
     .some((domain) => event.organizer.email.toLowerCase().endsWith(domain.toLowerCase()));
 
+  const uid = event.iCalUID || event.uid;
   const icsEvent = createEvent({
-    uid: event.iCalUID || event.uid!,
+    // ics 3 no longer fills in a uid when it's passed as undefined, so only pass a real one.
+    ...(uid ? { uid } : {}),
     sequence: event.iCalSequence || 0,
     start: toICalDateArray(event.startTime),
     end: toICalDateArray(event.endTime),
@@ -120,7 +122,7 @@ const generateIcsString = ({
     }
     throw icsEvent.error;
   }
-  return icsEvent.value;
+  return icsEvent.value ?? undefined;
 };
 
 export default generateIcsString;

@@ -16,7 +16,7 @@
     "bcryptjs": "3.0.3",
     "dub": "0.59.1",
     "handlebars": "4.7.10",
-    "jose": "4.15.9",
+    "jose": "6.2.15",
     "lru-cache": "11.5.3",
     "next-auth": "4.24.15",
     "nodemailer": "10.3.1",

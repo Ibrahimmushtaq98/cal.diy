@@ -1,4 +1,4 @@
-import jimp from "jimp";
+import { Jimp } from "jimp";
 
 export function isBase64Image(value: string): boolean {
   return /^data:image\/(png|jpe?g);base64,/i.test(value);
@@ -25,12 +25,13 @@ export async function resizeBase64Image(
     // 96px is the height of the image on https://cal.com/peer
     maxSize = 96 * 4,
   } = opts ?? {};
-  const image = await jimp.read(buffer);
-  const currentSize = Math.max(image.getWidth(), image.getHeight());
+  const image = await Jimp.read(buffer);
+  const currentSize = Math.max(image.width, image.height);
   if (currentSize > maxSize) {
-    image.resize(jimp.AUTO, maxSize);
+    // Giving only the height keeps the aspect ratio (jimp 0.x needed Jimp.AUTO for the width).
+    image.resize({ h: maxSize });
   }
-  const newBuffer = await image.getBufferAsync(mimetype);
+  const newBuffer = await image.getBuffer(mimetype as Parameters<typeof image.getBuffer>[0]);
 
   return `data:${mimetype};base64,${newBuffer.toString("base64")}`;
 }

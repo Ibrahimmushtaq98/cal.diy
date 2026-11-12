@@ -37,11 +37,14 @@ const testIcsStringContains = ({
   // expect(icsString).toEqual(expect.stringContaining(`SUMMARY:${event.title}`));
   expect(icsString).toEqual(expect.stringContaining(`DTSTART:${DTSTART}`));
   if (event.hideOrganizerEmail && !isOrganizerExempt) {
-    expect(icsString).toEqual(expect.stringContaining(`ORGANIZER;CN=${event.organizer.name}`));
-    expect(icsString).not.toEqual(expect.stringContaining(`mailto:${event.organizer.email}`));
+    expect(icsString).toEqual(expect.stringContaining(`ORGANIZER;CN="${event.organizer.name}"`));
+    expect(icsString.toLowerCase()).not.toEqual(
+      expect.stringContaining(`mailto:${event.organizer.email.toLowerCase()}`)
+    );
   } else {
+    // ics 3 quotes the CN value and upper-cases MAILTO; both are valid iCalendar.
     expect(icsString).toEqual(
-      expect.stringContaining(`ORGANIZER;CN=${event.organizer.name}:mailto:${event.organizer.email}`)
+      expect.stringContaining(`ORGANIZER;CN="${event.organizer.name}":MAILTO:${event.organizer.email}`)
     );
   }
   expect(icsString).toEqual(expect.stringContaining(`DTEND:${DTEND}`));
