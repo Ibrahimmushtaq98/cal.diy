@@ -42,7 +42,8 @@ export function useListNavigationCapabilities({
   // Build query params for next page by reusing parent's query input
   const nextPageParams = useMemo(
     () => ({
-      ...queryInput,
+      // tRPC 11 allows skipToken as the query input; this hook is only called with a real input.
+      ...(queryInput as Exclude<typeof queryInput, symbol>),
       offset: (currentPageIndex + 1) * limit,
     }),
     [queryInput, currentPageIndex, limit]

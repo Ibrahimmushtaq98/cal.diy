@@ -1,12 +1,13 @@
-import type { ZodObject, ZodTypeAny } from "zod";
+import type { ZodObject } from "zod";
 import { z } from "zod";
 
+// Exact field types: zod 4 reads a ZodTypeAny field as unknown (zod 3 read it as any).
 export const UserFeaturesDtoSchema: ZodObject<{
-  userId: ZodTypeAny;
-  featureId: ZodTypeAny;
-  enabled: ZodTypeAny;
-  assignedBy: ZodTypeAny;
-  updatedAt: ZodTypeAny;
+  userId: z.ZodNumber;
+  featureId: z.ZodString;
+  enabled: z.ZodBoolean;
+  assignedBy: z.ZodString;
+  updatedAt: z.ZodCoercedDate;
 }> = z.object({
   userId: z.number(),
   featureId: z.string(),

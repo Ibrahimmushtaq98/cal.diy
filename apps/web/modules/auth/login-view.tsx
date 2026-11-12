@@ -17,7 +17,7 @@ import { Field, FieldLabel } from "@coss/ui/components/field";
 import { Input } from "@coss/ui/components/input";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@coss/ui/components/input-group";
 import { Separator } from "@coss/ui/components/separator";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { zodResolver } from "@calcom/lib/zodResolver";
 import type { inferSSRProps } from "@lib/types/inferSSRProps";
 import type { getServerSideProps } from "@server/lib/auth/login/getServerSideProps";
 import { Eye, EyeOff } from "lucide-react";

@@ -1,16 +1,25 @@
-import type { ZodArray, ZodObject, ZodTypeAny } from "zod";
+import type { ZodArray, ZodObject } from "zod";
 import { z } from "zod";
 
+// Exact field types: zod 4 reads a ZodTypeAny field as unknown (zod 3 read it as any).
 export const FeatureDtoSchema: ZodObject<{
-  slug: ZodTypeAny;
-  enabled: ZodTypeAny;
-  description: ZodTypeAny;
-  type: ZodTypeAny;
-  stale: ZodTypeAny;
-  lastUsedAt: ZodTypeAny;
-  createdAt: ZodTypeAny;
-  updatedAt: ZodTypeAny;
-  updatedBy: ZodTypeAny;
+  slug: z.ZodString;
+  enabled: z.ZodBoolean;
+  description: z.ZodNullable<z.ZodString>;
+  type: z.ZodNullable<
+    z.ZodEnum<{
+      RELEASE: "RELEASE";
+      EXPERIMENT: "EXPERIMENT";
+      OPERATIONAL: "OPERATIONAL";
+      PERMISSION: "PERMISSION";
+      KILL_SWITCH: "KILL_SWITCH";
+    }>
+  >;
+  stale: z.ZodNullable<z.ZodBoolean>;
+  lastUsedAt: z.ZodNullable<z.ZodCoercedDate>;
+  createdAt: z.ZodNullable<z.ZodCoercedDate>;
+  updatedAt: z.ZodNullable<z.ZodCoercedDate>;
+  updatedBy: z.ZodNullable<z.ZodNumber>;
 }> = z.object({
   slug: z.string(),
   enabled: z.boolean(),

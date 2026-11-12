@@ -1,5 +1,5 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { zodResolver } from "@calcom/lib/zodResolver";
 import type { Dispatch, SetStateAction } from "react";
 import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";

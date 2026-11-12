@@ -66,7 +66,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       state: JSON.stringify(state),
     };
 
-    const params = z.record(z.any()).parse(stripeConnectParams);
+    const params = z.record(z.string(), z.any()).parse(stripeConnectParams);
     const query = stringify(params);
 
     const url = `https://connect.stripe.com/oauth/authorize?${query}`;

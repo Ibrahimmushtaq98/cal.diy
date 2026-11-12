@@ -2,7 +2,7 @@ import { captureException } from "@sentry/nextjs";
 import type { NextApiRequest } from "next";
 import { describe, expect, it, vi, beforeEach, afterEach } from "vitest";
 import type { ZodIssue } from "zod";
-import { ZodError } from "zod";
+import { ZodRealError } from "zod";
 
 import { TRPCError } from "@trpc/server";
 import type { AnyRouter } from "@trpc/server";
@@ -49,7 +49,7 @@ describe("createNextApiHandler", () => {
 
   describe("error formatting", () => {
     it("should format ZodError as BAD_REQUEST", () => {
-      const zodError = new ZodError([
+      const zodError = new ZodRealError([
         {
           path: ["name"],
           message: "Required",

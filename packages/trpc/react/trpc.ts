@@ -47,7 +47,7 @@ const resolveEndpoint = (links: any) => {
  * A set of strongly-typed React hooks from your `AppRouter` type signature with `createTRPCReact`.
  * @link https://trpc.io/docs/v10/react#2-create-trpc-hooks
  */
-export const trpc: CreateTRPCNext<AppRouter, NextPageContext, null> = createTRPCNext<
+export const trpc: CreateTRPCNext<AppRouter, NextPageContext> = createTRPCNext<
   AppRouter,
   NextPageContext
 >({
@@ -81,14 +81,14 @@ export const trpc: CreateTRPCNext<AppRouter, NextPageContext, null> = createTRPC
           // when condition is true, use normal request
           true: (runtime) => {
             const links = Object.fromEntries(
-              ENDPOINTS.map((endpoint) => [endpoint, httpLink({ url: `${url}/${endpoint}` })(runtime)])
+              ENDPOINTS.map((endpoint) => [endpoint, httpLink({ url: `${url}/${endpoint}`, transformer: superjson })(runtime)])
             );
             return resolveEndpoint(links);
           },
           // when condition is false, use batch request
           false: (runtime) => {
             const links = Object.fromEntries(
-              ENDPOINTS.map((endpoint) => [endpoint, httpBatchLink({ url: `${url}/${endpoint}` })(runtime)])
+              ENDPOINTS.map((endpoint) => [endpoint, httpBatchLink({ url: `${url}/${endpoint}`, transformer: superjson })(runtime)])
             );
             return resolveEndpoint(links);
           },
@@ -121,12 +121,10 @@ export const trpc: CreateTRPCNext<AppRouter, NextPageContext, null> = createTRPC
           },
         },
       },
-      /**
-       * @link https://trpc.io/docs/data-transformers
-       */
-      transformer: superjson,
     };
   },
+  // tRPC 11 moved the client transformer onto the links above; createTRPCNext still wants it here for SSR.
+  transformer: superjson,
   /**
    * @link https://trpc.io/docs/ssr
    */

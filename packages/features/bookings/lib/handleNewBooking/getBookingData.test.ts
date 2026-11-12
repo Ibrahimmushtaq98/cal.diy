@@ -40,7 +40,7 @@ const createMockSchema = () => {
     end: z.string().optional(),
     timeZone: z.string(),
     language: z.string(),
-    metadata: z.record(z.string()),
+    metadata: z.record(z.string(), z.string()),
     responses: z.object({
       name: z.string(),
       email: z.string(),

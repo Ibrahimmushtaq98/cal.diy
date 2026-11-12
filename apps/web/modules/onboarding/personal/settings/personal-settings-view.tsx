@@ -9,7 +9,7 @@ import { Label, TextArea, TextField } from "@calcom/ui/components/form";
 import { ImageUploader } from "@calcom/ui/components/image-uploader";
 import { showToast } from "@calcom/ui/components/toast";
 import { UsernameAvailabilityField } from "@components/ui/UsernameAvailability";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { zodResolver } from "@calcom/lib/zodResolver";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";

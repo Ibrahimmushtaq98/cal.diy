@@ -24,7 +24,9 @@ export const getScheduleSchemaObject = z.object({
   duration: z
     .string()
     .optional()
-    .transform((val) => val && parseInt(val)),
+    .transform((val) => val && parseInt(val))
+    // zod 4 makes a transformed optional key required in the output type; keep it optional.
+    .optional(),
   rescheduleUid: z.string().nullish(),
   // whether to do team event or user event
   isTeamEvent: z.boolean().optional().default(false),

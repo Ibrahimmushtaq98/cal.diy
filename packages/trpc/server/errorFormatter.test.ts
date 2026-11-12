@@ -5,6 +5,7 @@ import { TRPCError } from "@trpc/server";
 
 import { errorFormatter } from "./errorFormatter";
 
+// zod 4: a plain `new z.ZodError()` isn't an Error, so tRPC would wrap it. Real parse failures throw ZodRealError.
 describe("errorFormatter", () => {
   const baseShape = {
     message: "Internal Server Error",
@@ -17,7 +18,7 @@ describe("errorFormatter", () => {
   };
 
   it("should format ZodError as BAD_REQUEST", () => {
-    const zodError = new z.ZodError([
+    const zodError = new z.ZodRealError([
       {
         path: ["name"],
         message: "Required",
@@ -67,7 +68,7 @@ describe("errorFormatter", () => {
       }),
     });
 
-    const zodError = new z.ZodError([
+    const zodError = new z.ZodRealError([
       {
         path: ["user", "age"],
         message: "Number must be greater than or equal to 18",
@@ -111,7 +112,7 @@ describe("errorFormatter", () => {
   });
 
   it("should handle multiple ZodError issues", () => {
-    const zodError = new z.ZodError([
+    const zodError = new z.ZodRealError([
       {
         path: ["name"],
         message: "Required",
@@ -201,7 +202,7 @@ describe("errorFormatter", () => {
   });
 
   it("should handle empty ZodError", () => {
-    const zodError = new z.ZodError([]);
+    const zodError = new z.ZodRealError([]);
     const error = new TRPCError({
       code: "INTERNAL_SERVER_ERROR",
       message: "Internal Server Error",

@@ -17,6 +17,7 @@ export const getTRPCContext = async (_headers?: ReadonlyHeaders, _cookies?: Read
 
 export async function createRouterCaller<TRouter extends AnyRouter>(router: TRouter, context?: TRPCContext) {
   const trpcContext = context ? context : await getTRPCContext();
-  const createCaller = createCallerFactory<TRouter>(router);
+  // tRPC 11 infers the caller from the router's procedure record, so pass that explicitly.
+  const createCaller = createCallerFactory<TRouter["_def"]["record"]>(router);
   return createCaller(trpcContext);
 }

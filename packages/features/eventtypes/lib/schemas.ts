@@ -18,7 +18,7 @@ type CalVideoSettings =
   | null
   | undefined;
 
-const calVideoSettingsSchema: z.ZodType<CalVideoSettings> = z
+const calVideoSettingsSchema: z.ZodType<CalVideoSettings, CalVideoSettings> = z
   .object({
     disableRecordingForGuests: z.boolean().nullish(),
     disableRecordingForOrganizer: z.boolean().nullish(),
@@ -54,7 +54,7 @@ export type TEventTypeDuplicateInput = {
   teamId?: number | null;
 };
 
-export const EventTypeDuplicateInput: z.ZodType<TEventTypeDuplicateInput> = z
+export const EventTypeDuplicateInput: z.ZodType<TEventTypeDuplicateInput, TEventTypeDuplicateInput> = z
   .object({
     id: z.number(),
     slug: z.string(),
@@ -84,7 +84,7 @@ export type TCreateEventTypeInput = {
   calVideoSettings?: CalVideoSettings;
 };
 
-export const createEventTypeInput: z.ZodType<TCreateEventTypeInput> = z
+export const createEventTypeInput: z.ZodType<TCreateEventTypeInput, TCreateEventTypeInput> = z
   .object({
     title: z.string().trim().min(1),
     slug: eventTypeSlug,

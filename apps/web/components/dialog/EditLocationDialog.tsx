@@ -1,5 +1,5 @@
 import { ErrorMessage } from "@hookform/error-message";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { zodResolver } from "@calcom/lib/zodResolver";
 import { isValidPhoneNumber } from "libphonenumber-js/max";
 import { useEffect, useState, type JSX } from "react";
 import { Controller, useForm, useWatch, useFormContext } from "react-hook-form";

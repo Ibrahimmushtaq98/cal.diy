@@ -31,7 +31,9 @@ type GetAppDataGeneric<TAppData extends ZodType> = <TKey extends keyof z.infer<T
   key: TKey
 ) => z.infer<TAppData>[TKey];
 
-export const useAppContextWithSchema = <TAppData extends ZodType>() => {
+// Without a schema, keys are loose: zod 4 infers a bare ZodType as unknown (zod 3 gave any).
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const useAppContextWithSchema = <TAppData extends ZodType = ZodType<Record<string, any>>>() => {
   type GetAppData = GetAppDataGeneric<TAppData>;
   type SetAppData = SetAppDataGeneric<TAppData>;
   // TODO: Not able to do it without type assertion here

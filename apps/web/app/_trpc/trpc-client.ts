@@ -57,6 +57,7 @@ export const trpcClient = trpc.createClient({
             endpoint,
             httpLink({
               url: `${url}/${endpoint}`,
+              transformer: superjson,
             })(runtime),
           ])
         );
@@ -69,6 +70,7 @@ export const trpcClient = trpc.createClient({
             endpoint,
             httpBatchLink({
               url: `${url}/${endpoint}`,
+              transformer: superjson,
             })(runtime),
           ])
         );
@@ -76,5 +78,4 @@ export const trpcClient = trpc.createClient({
       },
     }),
   ],
-  transformer: superjson,
 });

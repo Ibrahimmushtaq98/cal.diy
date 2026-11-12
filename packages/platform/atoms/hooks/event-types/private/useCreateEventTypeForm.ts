@@ -1,4 +1,4 @@
-import { zodResolver } from "@hookform/resolvers/zod";
+import { zodResolver } from "@calcom/lib/zodResolver";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import type { z } from "zod";

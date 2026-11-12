@@ -13,7 +13,7 @@ type TranslationFunction = (key: string, options?: Record<string, unknown>) => s
 type CommonParams = { bookingFields: BookingFields; view: View; translateFn?: TranslationFunction };
 
 export const bookingResponse = dbReadResponseSchema;
-export const bookingResponsesDbSchema = z.record(dbReadResponseSchema);
+export const bookingResponsesDbSchema = z.record(z.string(), dbReadResponseSchema);
 
 const catchAllSchema = bookingResponsesDbSchema;
 
@@ -320,7 +320,7 @@ export const getBookingResponsesPartialSchema = ({ bookingFields, view, translat
 // - Can happen when we are parsing the prefill query string
 // - Can happen when we are parsing a booking's responses (which was created before we added a new required field)
 export default function getBookingResponsesSchema({ bookingFields, view, translateFn }: CommonParams) {
-  const schema = bookingResponses.and(z.record(z.any()));
+  const schema = bookingResponses.and(z.record(z.string(), z.any()));
   return preprocess({ schema, bookingFields, isPartialSchema: false, view, translateFn });
 }
 
@@ -330,7 +330,7 @@ export function getBookingResponsesSchemaWithOptionalChecks({
   view,
   translateFn,
 }: CommonParams) {
-  const schema = bookingResponses.and(z.record(z.any()));
+  const schema = bookingResponses.and(z.record(z.string(), z.any()));
   return preprocess({
     schema,
     bookingFields,
@@ -342,7 +342,7 @@ export function getBookingResponsesSchemaWithOptionalChecks({
 }
 
 type FieldZodCtxState = {
-  issues: z.IssueData[];
+  issues: z.core.$ZodSuperRefineIssue[];
 } | null;
 
 const buildFieldZodCtx = ({
@@ -361,7 +361,7 @@ const buildFieldZodCtx = ({
     };
     return {
       fieldZodCtx: {
-        addIssue: (issue: z.IssueData) => {
+        addIssue: (issue: z.core.$ZodSuperRefineIssue) => {
           state.issues.push(issue);
         },
       },
@@ -390,11 +390,11 @@ function preprocess<T extends z.ZodType>({
   // - Even a field response itself can be partial so the content isn't validated e.g. a field with type="phone" can be given a partial phone number(e.g. Specifying the country code like +91)
   isPartialSchema: boolean;
   checkOptional?: boolean;
-}): z.ZodType<z.infer<T>, z.infer<T>, z.infer<T>> {
+}): z.ZodType<z.infer<T>> {
   const log = logger.getSubLogger({ prefix: ["getBookingResponsesSchema"] });
   const preprocessed = z.preprocess(
     (responses) => {
-      const parsedResponses = z.record(z.any()).nullable().parse(responses) || {};
+      const parsedResponses = z.record(z.string(), z.any()).nullable().parse(responses) || {};
       const newResponses = {} as typeof parsedResponses;
       // if eventType has been deleted, we won't have bookingFields and thus we can't preprocess or validate them.
       if (!bookingFields) return parsedResponses;
@@ -431,7 +431,9 @@ function preprocess<T extends z.ZodType>({
         ...newResponses,
       };
     },
-    schema.superRefine(async (responses, ctx) => {
+    schema.superRefine(async (parsedResponses, ctx) => {
+      // zod 4 types a generic schema's output as unknown; the booking responses are always a record.
+      const responses = parsedResponses as Record<string, unknown>;
       if (!bookingFields) {
         // if eventType has been deleted, we won't have bookingFields and thus we can't validate the responses.
         return;
@@ -506,9 +508,9 @@ function preprocess<T extends z.ZodType>({
   );
   if (isPartialSchema) {
     // Query Params can be completely invalid, try to preprocess as much of it in correct format but in worst case simply don't prefill instead of crashing
-    return preprocessed.catch((res?: { error?: unknown[] }) => {
-      console.error("Failed to validate query params, prefilling will be skipped entirely", res?.error);
-      return {};
+    return preprocessed.catch((res) => {
+      console.error("Failed to validate query params, prefilling will be skipped entirely", res.error);
+      return {} as z.infer<T>;
     });
   }
   return preprocessed;

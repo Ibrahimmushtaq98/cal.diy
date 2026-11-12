@@ -18,7 +18,7 @@ import { ImageUploader } from "@calcom/ui/components/image-uploader";
 import { SheetBody, SheetFooter, SheetHeader, SheetTitle } from "@calcom/ui/components/sheet";
 import { showToast } from "@calcom/ui/components/toast";
 import { TimezoneSelect } from "@calcom/web/modules/timezone/components/TimezoneSelect";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { zodResolver } from "@calcom/lib/zodResolver";
 import { useSession } from "next-auth/react";
 import type { Dispatch } from "react";
 import { useMemo, useState } from "react";

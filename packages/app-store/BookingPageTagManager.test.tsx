@@ -84,9 +84,10 @@ describe("BookingPageTagManager", () => {
         eventType={{
           metadata: {
             apps: {
+              // zoomvideo's app schema is an empty object, which zod 4 types as Record<string, never>.
               zoomvideo: {
                 enabled: true,
-              },
+              } as unknown as Record<string, never>,
             },
           },
           price: 0,

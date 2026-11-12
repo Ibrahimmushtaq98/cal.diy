@@ -26,7 +26,7 @@ export type TUpdateInputSchema = EventTypeUpdateInput;
 // ZOD SCHEMAS
 // ============================================================================
 
-const hashedLinkInputSchema: z.ZodType<HashedLinkInput> = z
+const hashedLinkInputSchema: z.ZodType<HashedLinkInput, HashedLinkInput> = z
   .object({
     link: z.string(),
     expiresAt: z.date().nullish(),
@@ -35,7 +35,7 @@ const hashedLinkInputSchema: z.ZodType<HashedLinkInput> = z
   })
   .strict();
 
-const calVideoSettingsSchema: z.ZodType<CalVideoSettings | undefined> = z
+const calVideoSettingsSchema: z.ZodType<CalVideoSettings | undefined, CalVideoSettings | undefined> = z
   .object({
     disableRecordingForGuests: z.boolean().nullish(),
     disableRecordingForOrganizer: z.boolean().nullish(),
@@ -60,7 +60,7 @@ const hostLocationSchema = z.object({
   phoneNumber: z.string().optional().nullable(),
 });
 
-const hostSchema: z.ZodType<HostInput> = z.object({
+const hostSchema: z.ZodType<HostInput, HostInput> = z.object({
   userId: z.number(),
   profileId: z.number().or(z.null()).optional(),
   isFixed: z.boolean().optional(),
@@ -71,12 +71,12 @@ const hostSchema: z.ZodType<HostInput> = z.object({
   location: hostLocationSchema.optional().nullable(),
 });
 
-const hostGroupSchema: z.ZodType<HostGroupInput> = z.object({
+const hostGroupSchema: z.ZodType<HostGroupInput, HostGroupInput> = z.object({
   id: z.string().uuid(),
   name: z.string(),
 });
 
-const childSchema: z.ZodType<ChildInput> = z.object({
+const childSchema: z.ZodType<ChildInput, ChildInput> = z.object({
   owner: z.object({
     id: z.number(),
     name: z.string(),
@@ -86,7 +86,7 @@ const childSchema: z.ZodType<ChildInput> = z.object({
   hidden: z.boolean(),
 });
 
-const destinationCalendarInputSchema: z.ZodType<DestinationCalendarInput> = z
+const destinationCalendarInputSchema: z.ZodType<DestinationCalendarInput, DestinationCalendarInput> = z
   .object({
     integration: z.string(),
     externalId: z.string(),
@@ -100,7 +100,8 @@ const destinationCalendarInputSchema: z.ZodType<DestinationCalendarInput> = z
  * inferring the complex type through the schema chain. This is a key
  * optimization that reduces type-checking time significantly.
  */
-const BaseEventTypeUpdateInput: z.ZodType<TUpdateInputSchema> = z
+// zod 4 types coerce.date()'s input as unknown, so the input type is asserted below rather than annotated.
+const BaseEventTypeUpdateInput = z
   .object({
     // Required field
     id: z.number().int(),
@@ -206,6 +207,6 @@ const BaseEventTypeUpdateInput: z.ZodType<TUpdateInputSchema> = z
     hostGroups: z.array(hostGroupSchema).optional(),
     enablePerHostLocations: z.boolean().optional(),
   })
-  .strict();
+  .strict() as unknown as z.ZodType<TUpdateInputSchema, TUpdateInputSchema>;
 
 export const ZUpdateInputSchema = BaseEventTypeUpdateInput;

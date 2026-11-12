@@ -22,7 +22,8 @@ const _getBookingData = async <T extends z.ZodType>({
   eventType: getEventTypeResponse;
   schema: T;
 }) => {
-  const parsedBody = await schema.parseAsync(reqBody);
+  // zod 4 types a generic schema's output as unknown; every schema passed here parses a booking body.
+  const parsedBody = (await schema.parseAsync(reqBody)) as TgetBookingDataSchema & z.infer<T>;
   const parsedBodyWithEnd = (body: TgetBookingDataSchema): body is ReqBodyWithEnd => {
     // Use the event length to auto-set the event end time.
     if (!Object.prototype.hasOwnProperty.call(body, "end")) {

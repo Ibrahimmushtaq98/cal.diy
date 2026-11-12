@@ -1,4 +1,4 @@
-import { zodResolver } from "@hookform/resolvers/zod";
+import { zodResolver } from "@calcom/lib/zodResolver";
 import classNames from "classnames";
 import { signIn } from "next-auth/react";
 import React from "react";

@@ -62,7 +62,8 @@ export function QueryCell<TData, TError extends ErrorLike>(
 
   if (query.status === "success") {
     if ("empty" in opts && (query.data == null || (Array.isArray(query.data) && query.data.length === 0))) {
-      return opts.empty(query);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return opts.empty(query as any);
     }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return opts.success(query as any);

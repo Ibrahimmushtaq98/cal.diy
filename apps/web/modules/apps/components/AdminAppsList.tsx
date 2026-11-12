@@ -23,7 +23,7 @@ import { SkeletonButton, SkeletonContainer, SkeletonText } from "@calcom/ui/comp
 import { showToast } from "@calcom/ui/components/toast";
 import AppListCardWebWrapper from "@calcom/web/modules/apps/components/AppListCardWebWrapper";
 import { PencilIcon } from "@coss/ui/icons";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { zodResolver } from "@calcom/lib/zodResolver";
 // eslint-disable-next-line no-restricted-imports
 import { noop } from "lodash";
 import type { FC, JSX } from "react";

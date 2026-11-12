@@ -1,4 +1,4 @@
-import { zodResolver } from "@hookform/resolvers/zod";
+import { zodResolver } from "@calcom/lib/zodResolver";
 import type { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
 import React, { forwardRef, useEffect, useRef, useState } from "react";
