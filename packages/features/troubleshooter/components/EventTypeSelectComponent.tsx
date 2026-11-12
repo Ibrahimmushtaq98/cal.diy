@@ -3,7 +3,7 @@ import { useTroubleshooterStore } from "@calcom/features/troubleshooter/store";
 import { useLocale } from "@calcom/lib/hooks/useLocale";
 import { SelectField } from "@calcom/ui/components/form";
 import { startTransition, useEffect, useMemo, type JSX } from "react";
-import { shallow } from "zustand/shallow";
+import { useShallow } from "zustand/react/shallow";
 
 interface EventTypeItem {
   id: number;
@@ -28,11 +28,10 @@ export function EventTypeSelectComponent({
 }: EventTypeSelectComponentProps): JSX.Element {
   const { t } = useLocale();
   const { event: selectedEventType, setEvent: setSelectedEventType } = useTroubleshooterStore(
-    (state) => ({
+    useShallow((state) => ({
       event: state.event,
       setEvent: state.setEvent,
-    }),
-    shallow
+    }))
   );
 
   const options = useMemo(() => {

@@ -77,7 +77,7 @@ export function DatePickerWithRange({
 
   const calendar = (
     <Calendar
-      initialFocus
+      autoFocus
       fromDate={fromDate}
       toDate={maxDate}
       mode="range"

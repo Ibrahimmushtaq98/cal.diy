@@ -65,7 +65,7 @@ export const SlotSelectionModalHeader = ({
   selectedDate,
 }: SlotSelectionModalHeaderProps): JSX.Element => {
   const { i18n } = useLocale();
-  const [setTimezone] = useTimePreferences((state) => [state.setTimezone]);
+  const setTimezone = useTimePreferences((state) => state.setTimezone);
   const [timezone, setBookerStoreTimezone] = useBookerStoreContext(
     (state) => [state.timezone, state.setTimezone],
     shallow

@@ -1,7 +1,7 @@
 import React from "react";
 import "react-calendar/dist/Calendar.css";
 import "react-date-picker/dist/DatePicker.css";
-import PrimitiveDatePicker from "react-date-picker/dist/entry.nostyle";
+import PrimitiveDatePicker from "react-date-picker";
 
 import classNames from "@calcom/ui/classNames";
 import { CalendarIcon } from "@coss/ui/icons";
@@ -26,7 +26,9 @@ export const DatePicker = ({ minDate, disabled, date, onDatesChange, className }
       value={date}
       minDate={minDate}
       disabled={disabled}
-      onChange={onDatesChange}
+      onChange={(value) => {
+        if (value instanceof Date) onDatesChange?.(value);
+      }}
     />
   );
 };

@@ -99,7 +99,7 @@ export const EventMeta = ({
   hideEventTypeDetails?: boolean;
 }) => {
   const { timeFormat, timezone } = useBookerTime();
-  const [setTimezone] = useTimePreferences((state) => [state.setTimezone]);
+  const setTimezone = useTimePreferences((state) => state.setTimezone);
   const [setBookerStoreTimezone] = useBookerStoreContext((state) => [state.setTimezone], shallow);
   const selectedDuration = useBookerStoreContext((state) => state.selectedDuration);
   const bookerState = useBookerStoreContext((state) => state.state);

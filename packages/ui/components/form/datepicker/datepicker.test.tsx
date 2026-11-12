@@ -30,13 +30,12 @@ describe("Tests for DatePicker Component", () => {
 
     const dateButton = getByTestId("pick-date");
     fireEvent.click(dateButton);
+    // react-day-picker 9+ puts the gridcell role on the cell and the focusable button inside it.
     const gridCells = getAllByRole("gridcell");
-    const selectedDate = gridCells.find((cell) => {
-      return cell.getAttribute("tabindex") === "0";
-    });
+    const selectedDate = gridCells.find((cell) => cell.querySelector("button")?.getAttribute("tabindex") === "0");
 
     expect(selectedDate).toBeTruthy();
-    await expect(selectedDate).not.toHaveClass("opacity-50");
+    expect(selectedDate).not.toHaveAttribute("data-disabled");
   });
   test("Should respect minDate prop", async () => {
     const testDate = new Date("2024-02-20");
@@ -48,9 +47,12 @@ describe("Tests for DatePicker Component", () => {
     const dateButton = getByTestId("pick-date");
     fireEvent.click(dateButton);
 
-    const disabledDates = getAllByRole("gridcell").filter((cell) => cell.classList.contains("opacity-50"));
+    const disabledDates = getAllByRole("gridcell").filter(
+      // Outside days before the first navigable month are hidden (no button), so skip them.
+      (cell) => cell.hasAttribute("data-disabled") && !cell.hasAttribute("data-hidden")
+    );
     expect(disabledDates.length).toBeGreaterThan(0);
-    await expect(disabledDates[0]).toHaveAttribute("disabled");
+    expect(disabledDates[0].querySelector("button")).toHaveAttribute("disabled");
   });
 
   test("Should respect disabled prop", () => {

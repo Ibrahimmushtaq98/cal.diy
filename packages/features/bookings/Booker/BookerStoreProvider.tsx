@@ -3,6 +3,7 @@
 import { createContext, type ReactNode, useContext, useEffect, useRef } from "react";
 import type { StoreApi } from "zustand";
 import { useStore } from "zustand";
+import { useStoreWithEqualityFn } from "zustand/traditional";
 import { type BookerStore, createBookerStore, type StoreInitializeType } from "./store";
 
 export const BookerStoreContext = createContext<StoreApi<BookerStore> | null>(null);
@@ -30,7 +31,7 @@ export const useBookerStoreContext = <T,>(
     throw new Error("useBookerStoreContext must be used within BookerStoreProvider");
   }
 
-  return useStore(bookerStoreContext, selector, equalityFn);
+  return useStoreWithEqualityFn(bookerStoreContext, selector, equalityFn);
 };
 
 export const useInitializeBookerStoreContext = ({

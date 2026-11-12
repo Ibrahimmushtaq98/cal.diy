@@ -5,7 +5,7 @@ import { Avatar } from "@calcom/ui/components/avatar";
 import { Sheet, SheetBody, SheetContent, SheetFooter, SheetHeader } from "@calcom/ui/components/sheet";
 import { Loader } from "@calcom/ui/components/skeleton";
 import type { Dispatch } from "react";
-import { shallow } from "zustand/shallow";
+import { useShallow } from "zustand/react/shallow";
 import type { UserTableAction, UserTableState } from "../types";
 import { DisplayInfo } from "./DisplayInfo";
 import { EditForm } from "./EditUserForm";
@@ -32,7 +32,9 @@ export function EditUserSheet({
 }) {
   const { t } = useLocale();
   const { user: selectedUser } = state.editSheet;
-  const [editMode, setEditMode] = useEditMode((state) => [state.editMode, state.setEditMode], shallow);
+  const [editMode, setEditMode] = useEditMode(
+    useShallow((state) => [state.editMode, state.setEditMode])
+  );
   const loadedUser = selectedUser as
     | (typeof selectedUser & {
         schedules?: { name: string }[];

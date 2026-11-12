@@ -22,7 +22,7 @@ const DatePicker = ({ minDate, disabled, date, onDatesChange, className, label }
   const fromDate = minDate ?? new Date();
   const calendar = (
     <Calendar
-      initialFocus
+      autoFocus
       fromDate={minDate === null ? undefined : fromDate}
       // toDate={maxDate}
       mode="single"

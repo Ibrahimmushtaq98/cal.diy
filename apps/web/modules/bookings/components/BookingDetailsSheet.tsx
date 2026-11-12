@@ -36,6 +36,7 @@ import assignmentReasonBadgeTitleMap from "@lib/booking/assignmentReasonBadgeTit
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import type { z } from "zod";
+import { useShallow } from "zustand/react/shallow";
 import { AcceptBookingButton } from "../../../components/booking/AcceptBookingButton";
 import { BookingActionsDropdown } from "../../../components/booking/actions/BookingActionsDropdown";
 import { BookingActionsStoreProvider } from "../../../components/booking/actions/BookingActionsStoreProvider";
@@ -108,7 +109,7 @@ interface BookingDetailsSheetInnerProps {
 
 function useActiveSegment(bookingAuditEnabled: boolean) {
   const [activeSegment, setActiveSegmentInStore] = useBookingDetailsSheetStore(
-    (state) => [state.activeSegment, state.setActiveSegment]
+    useShallow((state) => [state.activeSegment, state.setActiveSegment] as const)
   );
 
   const getDerivedActiveSegment = ({
@@ -161,7 +162,8 @@ function BookingDetailsSheetInner({
     );
 
   // Get navigation state from the store in a single selector
-  const navigation = useBookingDetailsSheetStore((state) => {
+  const navigation = useBookingDetailsSheetStore(
+    useShallow((state) => {
     const hasNextInArray = state.hasNextInArray();
     const hasPreviousInArray = state.hasPreviousInArray();
     const isLastInArray = state.isLastInArray();
@@ -180,7 +182,7 @@ function BookingDetailsSheetInner({
         hasPreviousInArray ||
         (isFirstInArray && state.capabilities?.canNavigateToPreviousPeriod()),
     };
-  });
+  }));
 
   const handleClose = useCallback(() => {
     navigation.setSelectedBookingUid(null);
