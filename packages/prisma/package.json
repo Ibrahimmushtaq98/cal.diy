@@ -17,14 +17,16 @@
     "db-studio": "yarn prisma studio",
     "db-up": "docker compose up -d || docker-compose up -d",
     "dx": "yarn db-setup",
-    "generate-schemas": "prisma generate && prisma format",
+    "generate-schemas": "prisma generate && prisma generate --schema sqlserver/schema.prisma && node sqlserver/select-provider.mjs && prisma format",
     "post-install": "yarn generate-schemas",
     "seed-app-store": "ts-node --transpile-only ../../scripts/seed-app-store.ts",
     "delete-app": "ts-node --transpile-only ./delete-app.ts",
     "seed-basic": "ts-node --transpile-only ../../scripts/seed.ts",
+    "sqlserver:schema": "node sqlserver/generate-schema.mjs",
     "seed-pbac": "ts-node --transpile-only ../../scripts/seed-pbac-organization.ts"
   },
   "dependencies": {
+    "@prisma/adapter-mssql": "7.10.1",
     "@prisma/adapter-pg": "7.10.1",
     "@prisma/client": "7.10.1",
     "@prisma/extension-accelerate": "3.0.1",

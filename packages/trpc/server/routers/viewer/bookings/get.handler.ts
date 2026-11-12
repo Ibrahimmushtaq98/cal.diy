@@ -14,7 +14,7 @@ import { BookingStatus, MembershipRole, SchedulingType } from "@calcom/prisma/en
 import { EventTypeMetaDataSchema } from "@calcom/prisma/zod-utils";
 import { TRPCError } from "@trpc/server";
 import type { Kysely, SelectQueryBuilder } from "kysely";
-import { jsonArrayFrom, jsonObjectFrom } from "kysely/helpers/postgres";
+import { jsonArrayFrom, jsonObjectFrom } from "@calcom/kysely/helpers";
 import type { TrpcSessionUser } from "../../../types";
 import type { TGetInputSchema } from "./get.schema";
 

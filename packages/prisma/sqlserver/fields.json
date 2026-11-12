@@ -1,0 +1,4177 @@
+{
+  "enums": {
+    "SchedulingType": [
+      "ROUND_ROBIN",
+      "COLLECTIVE",
+      "MANAGED"
+    ],
+    "PeriodType": [
+      "UNLIMITED",
+      "ROLLING",
+      "ROLLING_WINDOW",
+      "RANGE"
+    ],
+    "CreationSource": [
+      "API_V1",
+      "API_V2",
+      "WEBAPP"
+    ],
+    "CancellationReasonRequirement": [
+      "MANDATORY_BOTH",
+      "MANDATORY_HOST_ONLY",
+      "MANDATORY_ATTENDEE_ONLY",
+      "OPTIONAL_BOTH"
+    ],
+    "IdentityProvider": [
+      "CAL",
+      "GOOGLE",
+      "SAML",
+      "AZUREAD"
+    ],
+    "UserPermissionRole": [
+      "USER",
+      "ADMIN"
+    ],
+    "CreditUsageType": [
+      "SMS",
+      "CAL_AI_PHONE_CALL"
+    ],
+    "CreditType": [
+      "MONTHLY",
+      "ADDITIONAL"
+    ],
+    "MembershipRole": [
+      "MEMBER",
+      "ADMIN",
+      "OWNER"
+    ],
+    "BookingStatus": [
+      "CANCELLED",
+      "ACCEPTED",
+      "REJECTED",
+      "PENDING",
+      "AWAITING_HOST"
+    ],
+    "EventTypeCustomInputType": [
+      "TEXT",
+      "TEXTLONG",
+      "NUMBER",
+      "BOOL",
+      "RADIO",
+      "PHONE"
+    ],
+    "ReminderType": [
+      "PENDING_BOOKING_CONFIRMATION"
+    ],
+    "PaymentOption": [
+      "ON_BOOKING",
+      "HOLD"
+    ],
+    "WebhookTriggerEvents": [
+      "BOOKING_CREATED",
+      "BOOKING_PAYMENT_INITIATED",
+      "BOOKING_PAID",
+      "BOOKING_RESCHEDULED",
+      "BOOKING_REQUESTED",
+      "BOOKING_CANCELLED",
+      "BOOKING_REJECTED",
+      "BOOKING_NO_SHOW_UPDATED",
+      "FORM_SUBMITTED",
+      "MEETING_ENDED",
+      "MEETING_STARTED",
+      "RECORDING_READY",
+      "RECORDING_TRANSCRIPTION_GENERATED",
+      "OOO_CREATED",
+      "AFTER_HOSTS_CAL_VIDEO_NO_SHOW",
+      "AFTER_GUESTS_CAL_VIDEO_NO_SHOW",
+      "FORM_SUBMITTED_NO_EVENT",
+      "DELEGATION_CREDENTIAL_ERROR",
+      "WRONG_ASSIGNMENT_REPORT"
+    ],
+    "AppCategories": [
+      "calendar",
+      "messaging",
+      "other",
+      "payment",
+      "video",
+      "web3",
+      "automation",
+      "analytics",
+      "conferencing",
+      "crm"
+    ],
+    "TimeUnit": [
+      "DAY",
+      "HOUR",
+      "MINUTE"
+    ],
+    "FeatureType": [
+      "RELEASE",
+      "EXPERIMENT",
+      "OPERATIONAL",
+      "KILL_SWITCH",
+      "PERMISSION"
+    ],
+    "RRResetInterval": [
+      "MONTH",
+      "DAY"
+    ],
+    "RRTimestampBasis": [
+      "CREATED_AT",
+      "START_TIME"
+    ],
+    "OAuthClientType": [
+      "CONFIDENTIAL",
+      "PUBLIC"
+    ],
+    "OAuthClientStatus": [
+      "PENDING",
+      "APPROVED",
+      "REJECTED"
+    ],
+    "AccessScope": [
+      "READ_BOOKING",
+      "READ_PROFILE"
+    ],
+    "RedirectType": [
+      "UserEventType",
+      "TeamEventType",
+      "User",
+      "Team"
+    ],
+    "SMSLockState": [
+      "LOCKED",
+      "UNLOCKED",
+      "REVIEW_NEEDED"
+    ],
+    "AttributeType": [
+      "TEXT",
+      "NUMBER",
+      "SINGLE_SELECT",
+      "MULTI_SELECT"
+    ],
+    "AssignmentReasonEnum": [
+      "REASSIGNED",
+      "RR_REASSIGNED",
+      "REROUTED",
+      "SALESFORCE_ASSIGNMENT"
+    ],
+    "EventTypeAutoTranslatedField": [
+      "DESCRIPTION",
+      "TITLE"
+    ],
+    "WatchlistType": [
+      "EMAIL",
+      "DOMAIN",
+      "USERNAME"
+    ],
+    "WatchlistAction": [
+      "REPORT",
+      "BLOCK",
+      "ALERT"
+    ],
+    "WatchlistSource": [
+      "MANUAL",
+      "FREE_DOMAIN_POLICY",
+      "SIGNUP"
+    ],
+    "BookingReportReason": [
+      "SPAM",
+      "DONT_KNOW_PERSON",
+      "OTHER"
+    ],
+    "BookingReportStatus": [
+      "PENDING",
+      "DISMISSED",
+      "BLOCKED"
+    ],
+    "SystemReportStatus": [
+      "PENDING",
+      "BLOCKED",
+      "DISMISSED"
+    ],
+    "WrongAssignmentReportStatus": [
+      "PENDING",
+      "REVIEWED",
+      "RESOLVED",
+      "DISMISSED"
+    ],
+    "BillingPeriod": [
+      "MONTHLY",
+      "ANNUALLY"
+    ],
+    "BillingMode": [
+      "SEATS",
+      "ACTIVE_USERS"
+    ],
+    "FilterSegmentScope": [
+      "USER",
+      "TEAM"
+    ],
+    "RoleType": [
+      "SYSTEM",
+      "CUSTOM"
+    ],
+    "BookingAuditType": [
+      "RECORD_CREATED",
+      "RECORD_UPDATED",
+      "RECORD_DELETED"
+    ],
+    "BookingAuditAction": [
+      "CREATED",
+      "CANCELLED",
+      "ACCEPTED",
+      "REJECTED",
+      "PENDING",
+      "AWAITING_HOST",
+      "RESCHEDULED",
+      "ATTENDEE_ADDED",
+      "ATTENDEE_REMOVED",
+      "REASSIGNMENT",
+      "LOCATION_CHANGED",
+      "NO_SHOW_UPDATED",
+      "RESCHEDULE_REQUESTED",
+      "SEAT_BOOKED",
+      "SEAT_RESCHEDULED"
+    ],
+    "BookingAuditSource": [
+      "API_V1",
+      "API_V2",
+      "WEBAPP",
+      "WEBHOOK",
+      "SYSTEM",
+      "MAGIC_LINK",
+      "UNKNOWN"
+    ],
+    "AuditActorType": [
+      "USER",
+      "GUEST",
+      "ATTENDEE",
+      "SYSTEM",
+      "APP"
+    ],
+    "PhoneNumberSubscriptionStatus": [
+      "ACTIVE",
+      "PAST_DUE",
+      "CANCELLED",
+      "INCOMPLETE",
+      "INCOMPLETE_EXPIRED",
+      "TRIALING",
+      "UNPAID"
+    ],
+    "SeatChangeType": [
+      "ADDITION",
+      "REMOVAL"
+    ],
+    "ProrationStatus": [
+      "PENDING",
+      "INVOICE_CREATED",
+      "CHARGED",
+      "FAILED",
+      "CANCELLED"
+    ],
+    "CalendarCacheEventStatus": [
+      "confirmed",
+      "tentative",
+      "cancelled"
+    ]
+  },
+  "models": {
+    "Host": {
+      "table": "Host",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "userId": "userId",
+        "eventTypeId": "eventTypeId",
+        "isFixed": "isFixed",
+        "priority": "priority",
+        "weight": "weight",
+        "weightAdjustment": "weightAdjustment",
+        "scheduleId": "scheduleId",
+        "createdAt": "createdAt",
+        "groupId": "groupId",
+        "memberId": "memberId"
+      },
+      "nullable": [
+        "priority",
+        "weight",
+        "weightAdjustment",
+        "scheduleId",
+        "groupId",
+        "memberId"
+      ],
+      "relations": {
+        "user": "User",
+        "eventType": "EventType",
+        "schedule": "Schedule",
+        "group": "HostGroup",
+        "member": "Membership",
+        "location": "HostLocation"
+      }
+    },
+    "HostGroup": {
+      "table": "HostGroup",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "name": "name",
+        "eventTypeId": "eventTypeId",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt"
+      },
+      "nullable": [
+        "eventTypeId"
+      ],
+      "relations": {
+        "hosts": "Host",
+        "eventType": "EventType"
+      }
+    },
+    "HostLocation": {
+      "table": "HostLocation",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "userId": "userId",
+        "eventTypeId": "eventTypeId",
+        "type": "type",
+        "credentialId": "credentialId",
+        "link": "link",
+        "address": "address",
+        "phoneNumber": "phoneNumber",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt"
+      },
+      "nullable": [
+        "credentialId",
+        "link",
+        "address",
+        "phoneNumber"
+      ],
+      "relations": {
+        "host": "Host",
+        "credential": "Credential"
+      }
+    },
+    "CalVideoSettings": {
+      "table": "CalVideoSettings",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "eventTypeId": "eventTypeId",
+        "disableRecordingForOrganizer": "disableRecordingForOrganizer",
+        "disableRecordingForGuests": "disableRecordingForGuests",
+        "enableAutomaticTranscription": "enableAutomaticTranscription",
+        "enableAutomaticRecordingForOrganizer": "enableAutomaticRecordingForOrganizer",
+        "redirectUrlOnExit": "redirectUrlOnExit",
+        "disableTranscriptionForGuests": "disableTranscriptionForGuests",
+        "disableTranscriptionForOrganizer": "disableTranscriptionForOrganizer",
+        "requireEmailForGuests": "requireEmailForGuests",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt"
+      },
+      "nullable": [
+        "redirectUrlOnExit"
+      ],
+      "relations": {
+        "eventType": "EventType"
+      }
+    },
+    "VideoCallGuest": {
+      "table": "VideoCallGuest",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "bookingUid": "bookingUid",
+        "email": "email",
+        "name": "name",
+        "joinedAt": "joinedAt",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt"
+      },
+      "nullable": [
+        "joinedAt"
+      ],
+      "relations": {}
+    },
+    "EventType": {
+      "table": "EventType",
+      "json": [
+        "locations",
+        "bookingFields",
+        "recurringEvent",
+        "metadata",
+        "bookingLimits",
+        "durationLimits",
+        "rrSegmentQueryValue",
+        "eventTypeColor"
+      ],
+      "list": {
+        "instantMeetingParameters": "String"
+      },
+      "enum": {
+        "periodType": "PeriodType",
+        "schedulingType": "SchedulingType",
+        "requiresCancellationReason": "CancellationReasonRequirement"
+      },
+      "columns": {
+        "id": "id",
+        "title": "title",
+        "slug": "slug",
+        "description": "description",
+        "interfaceLanguage": "interfaceLanguage",
+        "position": "position",
+        "locations": "locations",
+        "length": "length",
+        "offsetStart": "offsetStart",
+        "hidden": "hidden",
+        "userId": "userId",
+        "profileId": "profileId",
+        "teamId": "teamId",
+        "useEventLevelSelectedCalendars": "useEventLevelSelectedCalendars",
+        "eventName": "eventName",
+        "parentId": "parentId",
+        "bookingFields": "bookingFields",
+        "timeZone": "timeZone",
+        "periodType": "periodType",
+        "periodStartDate": "periodStartDate",
+        "periodEndDate": "periodEndDate",
+        "periodDays": "periodDays",
+        "periodCountCalendarDays": "periodCountCalendarDays",
+        "lockTimeZoneToggleOnBookingPage": "lockTimeZoneToggleOnBookingPage",
+        "lockedTimeZone": "lockedTimeZone",
+        "requiresConfirmation": "requiresConfirmation",
+        "requiresConfirmationWillBlockSlot": "requiresConfirmationWillBlockSlot",
+        "requiresConfirmationForFreeEmail": "requiresConfirmationForFreeEmail",
+        "requiresBookerEmailVerification": "requiresBookerEmailVerification",
+        "canSendCalVideoTranscriptionEmails": "canSendCalVideoTranscriptionEmails",
+        "autoTranslateDescriptionEnabled": "autoTranslateDescriptionEnabled",
+        "autoTranslateInstantMeetingTitleEnabled": "autoTranslateInstantMeetingTitleEnabled",
+        "recurringEvent": "recurringEvent",
+        "disableGuests": "disableGuests",
+        "hideCalendarNotes": "hideCalendarNotes",
+        "hideCalendarEventDetails": "hideCalendarEventDetails",
+        "minimumBookingNotice": "minimumBookingNotice",
+        "beforeEventBuffer": "beforeEventBuffer",
+        "afterEventBuffer": "afterEventBuffer",
+        "seatsPerTimeSlot": "seatsPerTimeSlot",
+        "onlyShowFirstAvailableSlot": "onlyShowFirstAvailableSlot",
+        "showOptimizedSlots": "showOptimizedSlots",
+        "disableCancelling": "disableCancelling",
+        "disableRescheduling": "disableRescheduling",
+        "minimumRescheduleNotice": "minimumRescheduleNotice",
+        "seatsShowAttendees": "seatsShowAttendees",
+        "seatsShowAvailabilityCount": "seatsShowAvailabilityCount",
+        "schedulingType": "schedulingType",
+        "scheduleId": "scheduleId",
+        "allowReschedulingCancelledBookings": "allowReschedulingCancelledBookings",
+        "price": "price",
+        "currency": "currency",
+        "slotInterval": "slotInterval",
+        "metadata": "metadata",
+        "successRedirectUrl": "successRedirectUrl",
+        "forwardParamsSuccessRedirect": "forwardParamsSuccessRedirect",
+        "bookingLimits": "bookingLimits",
+        "durationLimits": "durationLimits",
+        "isInstantEvent": "isInstantEvent",
+        "instantMeetingExpiryTimeOffsetInSeconds": "instantMeetingExpiryTimeOffsetInSeconds",
+        "instantMeetingScheduleId": "instantMeetingScheduleId",
+        "instantMeetingParameters": "instantMeetingParameters",
+        "assignAllTeamMembers": "assignAllTeamMembers",
+        "assignRRMembersUsingSegment": "assignRRMembersUsingSegment",
+        "rrSegmentQueryValue": "rrSegmentQueryValue",
+        "useEventTypeDestinationCalendarEmail": "useEventTypeDestinationCalendarEmail",
+        "isRRWeightsEnabled": "isRRWeightsEnabled",
+        "maxLeadThreshold": "maxLeadThreshold",
+        "includeNoShowInRRCalculation": "includeNoShowInRRCalculation",
+        "allowReschedulingPastBookings": "allowReschedulingPastBookings",
+        "hideOrganizerEmail": "hideOrganizerEmail",
+        "maxActiveBookingsPerBooker": "maxActiveBookingsPerBooker",
+        "maxActiveBookingPerBookerOfferReschedule": "maxActiveBookingPerBookerOfferReschedule",
+        "customReplyToEmail": "customReplyToEmail",
+        "eventTypeColor": "eventTypeColor",
+        "rescheduleWithSameRoundRobinHost": "rescheduleWithSameRoundRobinHost",
+        "secondaryEmailId": "secondaryEmailId",
+        "useBookerTimezone": "useBookerTimezone",
+        "restrictionScheduleId": "restrictionScheduleId",
+        "bookingRequiresAuthentication": "bookingRequiresAuthentication",
+        "rrHostSubsetEnabled": "rrHostSubsetEnabled",
+        "requiresCancellationReason": "requiresCancellationReason",
+        "enablePerHostLocations": "enablePerHostLocations",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt"
+      },
+      "nullable": [
+        "description",
+        "interfaceLanguage",
+        "locations",
+        "userId",
+        "profileId",
+        "teamId",
+        "eventName",
+        "parentId",
+        "bookingFields",
+        "timeZone",
+        "periodStartDate",
+        "periodEndDate",
+        "periodDays",
+        "periodCountCalendarDays",
+        "lockedTimeZone",
+        "recurringEvent",
+        "seatsPerTimeSlot",
+        "showOptimizedSlots",
+        "disableCancelling",
+        "disableRescheduling",
+        "minimumRescheduleNotice",
+        "seatsShowAttendees",
+        "seatsShowAvailabilityCount",
+        "schedulingType",
+        "scheduleId",
+        "allowReschedulingCancelledBookings",
+        "slotInterval",
+        "metadata",
+        "successRedirectUrl",
+        "forwardParamsSuccessRedirect",
+        "bookingLimits",
+        "durationLimits",
+        "instantMeetingScheduleId",
+        "rrSegmentQueryValue",
+        "maxLeadThreshold",
+        "maxActiveBookingsPerBooker",
+        "customReplyToEmail",
+        "eventTypeColor",
+        "secondaryEmailId",
+        "restrictionScheduleId",
+        "requiresCancellationReason",
+        "createdAt",
+        "updatedAt"
+      ],
+      "relations": {
+        "hosts": "Host",
+        "users": "User",
+        "owner": "User",
+        "profile": "Profile",
+        "team": "Team",
+        "hashedLink": "HashedLink",
+        "bookings": "Booking",
+        "availability": "Availability",
+        "webhooks": "Webhook",
+        "destinationCalendar": "DestinationCalendar",
+        "customInputs": "EventTypeCustomInput",
+        "parent": "EventType",
+        "children": "EventType",
+        "schedule": "Schedule",
+        "instantMeetingSchedule": "Schedule",
+        "fieldTranslations": "EventTypeTranslation",
+        "selectedCalendars": "SelectedCalendar",
+        "calVideoSettings": "CalVideoSettings",
+        "secondaryEmail": "SecondaryEmail",
+        "restrictionSchedule": "Schedule",
+        "hostGroups": "HostGroup"
+      }
+    },
+    "Credential": {
+      "table": "Credential",
+      "json": [
+        "key"
+      ],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "type": "type",
+        "key": "key",
+        "encryptedKey": "encryptedKey",
+        "userId": "userId",
+        "teamId": "teamId",
+        "appId": "appId",
+        "subscriptionId": "subscriptionId",
+        "paymentStatus": "paymentStatus",
+        "billingCycleStart": "billingCycleStart",
+        "invalid": "invalid",
+        "delegationCredentialId": "delegationCredentialId"
+      },
+      "nullable": [
+        "encryptedKey",
+        "userId",
+        "teamId",
+        "appId",
+        "subscriptionId",
+        "paymentStatus",
+        "billingCycleStart",
+        "invalid",
+        "delegationCredentialId"
+      ],
+      "relations": {
+        "user": "User",
+        "team": "Team",
+        "app": "App",
+        "destinationCalendars": "DestinationCalendar",
+        "selectedCalendars": "SelectedCalendar",
+        "CalendarCache": "CalendarCache",
+        "references": "BookingReference",
+        "delegationCredential": "DelegationCredential",
+        "integrationAttributeSyncs": "IntegrationAttributeSync",
+        "hostLocations": "HostLocation"
+      }
+    },
+    "DestinationCalendar": {
+      "table": "DestinationCalendar",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "integration": "integration",
+        "externalId": "externalId",
+        "primaryEmail": "primaryEmail",
+        "userId": "userId",
+        "eventTypeId": "eventTypeId",
+        "credentialId": "credentialId",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt",
+        "delegationCredentialId": "delegationCredentialId",
+        "customCalendarReminder": "customCalendarReminder"
+      },
+      "nullable": [
+        "primaryEmail",
+        "userId",
+        "eventTypeId",
+        "credentialId",
+        "createdAt",
+        "updatedAt",
+        "delegationCredentialId",
+        "customCalendarReminder"
+      ],
+      "relations": {
+        "user": "User",
+        "booking": "Booking",
+        "eventType": "EventType",
+        "credential": "Credential",
+        "delegationCredential": "DelegationCredential"
+      }
+    },
+    "UserPassword": {
+      "table": "UserPassword",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "hash": "hash",
+        "userId": "userId"
+      },
+      "nullable": [],
+      "relations": {
+        "user": "User"
+      }
+    },
+    "TravelSchedule": {
+      "table": "TravelSchedule",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "userId": "userId",
+        "timeZone": "timeZone",
+        "startDate": "startDate",
+        "endDate": "endDate",
+        "prevTimeZone": "prevTimeZone"
+      },
+      "nullable": [
+        "endDate",
+        "prevTimeZone"
+      ],
+      "relations": {
+        "user": "User"
+      }
+    },
+    "User": {
+      "table": "users",
+      "json": [
+        "metadata"
+      ],
+      "list": {},
+      "enum": {
+        "identityProvider": "IdentityProvider",
+        "role": "UserPermissionRole",
+        "smsLockState": "SMSLockState",
+        "creationSource": "CreationSource"
+      },
+      "columns": {
+        "id": "id",
+        "uuid": "uuid",
+        "username": "username",
+        "name": "name",
+        "email": "email",
+        "emailVerified": "emailVerified",
+        "bio": "bio",
+        "avatarUrl": "avatarUrl",
+        "timeZone": "timeZone",
+        "weekStart": "weekStart",
+        "bufferTime": "bufferTime",
+        "hideBranding": "hideBranding",
+        "theme": "theme",
+        "appTheme": "appTheme",
+        "createdDate": "created",
+        "trialEndsAt": "trialEndsAt",
+        "lastActiveAt": "lastActiveAt",
+        "defaultScheduleId": "defaultScheduleId",
+        "completedOnboarding": "completedOnboarding",
+        "locale": "locale",
+        "timeFormat": "timeFormat",
+        "twoFactorSecret": "twoFactorSecret",
+        "twoFactorEnabled": "twoFactorEnabled",
+        "backupCodes": "backupCodes",
+        "identityProvider": "identityProvider",
+        "identityProviderId": "identityProviderId",
+        "invitedTo": "invitedTo",
+        "brandColor": "brandColor",
+        "darkBrandColor": "darkBrandColor",
+        "allowDynamicBooking": "allowDynamicBooking",
+        "allowSEOIndexing": "allowSEOIndexing",
+        "receiveMonthlyDigestEmail": "receiveMonthlyDigestEmail",
+        "requiresBookerEmailVerification": "requiresBookerEmailVerification",
+        "metadata": "metadata",
+        "verified": "verified",
+        "role": "role",
+        "organizationId": "organizationId",
+        "locked": "locked",
+        "movedToProfileId": "movedToProfileId",
+        "isPlatformManaged": "isPlatformManaged",
+        "smsLockState": "smsLockState",
+        "smsLockReviewedByAdmin": "smsLockReviewedByAdmin",
+        "referralLinkId": "referralLinkId",
+        "creationSource": "creationSource",
+        "autoOptInFeatures": "autoOptInFeatures"
+      },
+      "nullable": [
+        "username",
+        "name",
+        "emailVerified",
+        "bio",
+        "avatarUrl",
+        "theme",
+        "appTheme",
+        "trialEndsAt",
+        "lastActiveAt",
+        "defaultScheduleId",
+        "locale",
+        "timeFormat",
+        "twoFactorSecret",
+        "backupCodes",
+        "identityProviderId",
+        "invitedTo",
+        "brandColor",
+        "darkBrandColor",
+        "allowDynamicBooking",
+        "allowSEOIndexing",
+        "receiveMonthlyDigestEmail",
+        "requiresBookerEmailVerification",
+        "metadata",
+        "verified",
+        "organizationId",
+        "movedToProfileId",
+        "referralLinkId",
+        "creationSource"
+      ],
+      "relations": {
+        "password": "UserPassword",
+        "travelSchedules": "TravelSchedule",
+        "eventTypes": "EventType",
+        "credentials": "Credential",
+        "teams": "Membership",
+        "bookings": "Booking",
+        "schedules": "Schedule",
+        "selectedCalendars": "SelectedCalendar",
+        "availability": "Availability",
+        "webhooks": "Webhook",
+        "destinationCalendar": "DestinationCalendar",
+        "apiKeys": "ApiKey",
+        "accounts": "Account",
+        "sessions": "Session",
+        "Feedback": "Feedback",
+        "ownedEventTypes": "EventType",
+        "verifiedNumbers": "VerifiedNumber",
+        "verifiedEmails": "VerifiedEmail",
+        "hosts": "Host",
+        "organization": "Team",
+        "accessCodes": "AccessCode",
+        "bookingRedirects": "OutOfOfficeEntry",
+        "bookingRedirectsTo": "OutOfOfficeEntry",
+        "platformOAuthClients": "PlatformOAuthClient",
+        "AccessToken": "AccessToken",
+        "RefreshToken": "RefreshToken",
+        "PlatformAuthorizationToken": "PlatformAuthorizationToken",
+        "profiles": "Profile",
+        "movedToProfile": "Profile",
+        "secondaryEmails": "SecondaryEmail",
+        "OutOfOfficeReasons": "OutOfOfficeReason",
+        "NotificationsSubscriptions": "NotificationsSubscriptions",
+        "features": "UserFeatures",
+        "reassignedBookings": "Booking",
+        "createdAttributeToUsers": "AttributeToUser",
+        "updatedAttributeToUsers": "AttributeToUser",
+        "createdTranslations": "EventTypeTranslation",
+        "updatedTranslations": "EventTypeTranslation",
+        "reportedBookings": "BookingReport",
+        "wrongAssignmentReports": "WrongAssignmentReport",
+        "reviewedWrongAssignmentReports": "WrongAssignmentReport",
+        "BookingInternalNote": "BookingInternalNote",
+        "createdOrganizationOnboardings": "OrganizationOnboarding",
+        "filterSegments": "FilterSegment",
+        "filterSegmentPreferences": "UserFilterSegmentPreference",
+        "creditBalance": "CreditBalance",
+        "calAiPhoneNumbers": "CalAiPhoneNumber",
+        "agents": "Agent",
+        "oAuthClients": "OAuthClient",
+        "holidaySettings": "UserHolidaySettings"
+      }
+    },
+    "NotificationsSubscriptions": {
+      "table": "NotificationsSubscriptions",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "userId": "userId",
+        "subscription": "subscription"
+      },
+      "nullable": [],
+      "relations": {
+        "user": "User"
+      }
+    },
+    "Profile": {
+      "table": "Profile",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "uid": "uid",
+        "userId": "userId",
+        "organizationId": "organizationId",
+        "username": "username",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt"
+      },
+      "nullable": [],
+      "relations": {
+        "user": "User",
+        "organization": "Team",
+        "eventTypes": "EventType",
+        "movedFromUser": "User"
+      }
+    },
+    "Team": {
+      "table": "Team",
+      "json": [
+        "metadata",
+        "bookingLimits"
+      ],
+      "list": {},
+      "enum": {
+        "rrResetInterval": "RRResetInterval",
+        "rrTimestampBasis": "RRTimestampBasis",
+        "smsLockState": "SMSLockState"
+      },
+      "columns": {
+        "id": "id",
+        "name": "name",
+        "slug": "slug",
+        "logoUrl": "logoUrl",
+        "calVideoLogo": "calVideoLogo",
+        "appLogo": "appLogo",
+        "appIconLogo": "appIconLogo",
+        "bio": "bio",
+        "hideBranding": "hideBranding",
+        "hideTeamProfileLink": "hideTeamProfileLink",
+        "isPrivate": "isPrivate",
+        "hideBookATeamMember": "hideBookATeamMember",
+        "createdAt": "createdAt",
+        "metadata": "metadata",
+        "theme": "theme",
+        "rrResetInterval": "rrResetInterval",
+        "rrTimestampBasis": "rrTimestampBasis",
+        "brandColor": "brandColor",
+        "darkBrandColor": "darkBrandColor",
+        "bannerUrl": "bannerUrl",
+        "parentId": "parentId",
+        "timeFormat": "timeFormat",
+        "timeZone": "timeZone",
+        "weekStart": "weekStart",
+        "isOrganization": "isOrganization",
+        "pendingPayment": "pendingPayment",
+        "isPlatform": "isPlatform",
+        "createdByOAuthClientId": "createdByOAuthClientId",
+        "smsLockState": "smsLockState",
+        "smsLockReviewedByAdmin": "smsLockReviewedByAdmin",
+        "bookingLimits": "bookingLimits",
+        "includeManagedEventsInLimits": "includeManagedEventsInLimits",
+        "autoOptInFeatures": "autoOptInFeatures"
+      },
+      "nullable": [
+        "slug",
+        "logoUrl",
+        "calVideoLogo",
+        "appLogo",
+        "appIconLogo",
+        "bio",
+        "metadata",
+        "theme",
+        "rrResetInterval",
+        "brandColor",
+        "darkBrandColor",
+        "bannerUrl",
+        "parentId",
+        "timeFormat",
+        "createdByOAuthClientId",
+        "bookingLimits"
+      ],
+      "relations": {
+        "members": "Membership",
+        "eventTypes": "EventType",
+        "verifiedNumbers": "VerifiedNumber",
+        "verifiedEmails": "VerifiedEmail",
+        "parent": "Team",
+        "children": "Team",
+        "orgUsers": "User",
+        "inviteTokens": "VerificationToken",
+        "webhooks": "Webhook",
+        "apiKeys": "ApiKey",
+        "credentials": "Credential",
+        "accessCodes": "AccessCode",
+        "organizationSettings": "OrganizationSettings",
+        "instantMeetingTokens": "InstantMeetingToken",
+        "orgProfiles": "Profile",
+        "dsyncTeamGroupMapping": "DSyncTeamGroupMapping",
+        "platformOAuthClient": "PlatformOAuthClient",
+        "createdByOAuthClient": "PlatformOAuthClient",
+        "platformBilling": "PlatformBilling",
+        "attributes": "Attribute",
+        "delegationCredentials": "DelegationCredential",
+        "roles": "Role",
+        "calAiPhoneNumbers": "CalAiPhoneNumber",
+        "agents": "Agent",
+        "bookingReports": "BookingReport",
+        "wrongAssignmentReports": "WrongAssignmentReport",
+        "features": "TeamFeatures",
+        "internalNotePresets": "InternalNotePreset",
+        "creditBalance": "CreditBalance",
+        "organizationOnboarding": "OrganizationOnboarding",
+        "managedOrganization": "ManagedOrganization",
+        "managedOrganizations": "ManagedOrganization",
+        "filterSegments": "FilterSegment",
+        "teamBilling": "TeamBilling",
+        "organizationBilling": "OrganizationBilling",
+        "integrationAttributeSyncs": "IntegrationAttributeSync",
+        "seatChangeLogs": "SeatChangeLog",
+        "monthlyProrations": "MonthlyProration"
+      }
+    },
+    "CreditBalance": {
+      "table": "CreditBalance",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "teamId": "teamId",
+        "userId": "userId",
+        "additionalCredits": "additionalCredits",
+        "limitReachedAt": "limitReachedAt",
+        "warningSentAt": "warningSentAt"
+      },
+      "nullable": [
+        "teamId",
+        "userId",
+        "limitReachedAt",
+        "warningSentAt"
+      ],
+      "relations": {
+        "team": "Team",
+        "user": "User",
+        "expenseLogs": "CreditExpenseLog",
+        "purchaseLogs": "CreditPurchaseLog"
+      }
+    },
+    "CreditPurchaseLog": {
+      "table": "CreditPurchaseLog",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "creditBalanceId": "creditBalanceId",
+        "credits": "credits",
+        "createdAt": "createdAt"
+      },
+      "nullable": [],
+      "relations": {
+        "creditBalance": "CreditBalance"
+      }
+    },
+    "CreditExpenseLog": {
+      "table": "CreditExpenseLog",
+      "json": [],
+      "list": {},
+      "enum": {
+        "creditType": "CreditType",
+        "creditFor": "CreditUsageType"
+      },
+      "columns": {
+        "id": "id",
+        "creditBalanceId": "creditBalanceId",
+        "bookingUid": "bookingUid",
+        "credits": "credits",
+        "creditType": "creditType",
+        "date": "date",
+        "smsSid": "smsSid",
+        "smsSegments": "smsSegments",
+        "phoneNumber": "phoneNumber",
+        "email": "email",
+        "callDuration": "callDuration",
+        "creditFor": "creditFor",
+        "externalRef": "externalRef"
+      },
+      "nullable": [
+        "bookingUid",
+        "credits",
+        "smsSid",
+        "smsSegments",
+        "phoneNumber",
+        "email",
+        "callDuration",
+        "creditFor",
+        "externalRef"
+      ],
+      "relations": {
+        "creditBalance": "CreditBalance",
+        "booking": "Booking"
+      }
+    },
+    "OrganizationSettings": {
+      "table": "OrganizationSettings",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "organizationId": "organizationId",
+        "isOrganizationConfigured": "isOrganizationConfigured",
+        "isOrganizationVerified": "isOrganizationVerified",
+        "orgAutoAcceptEmail": "orgAutoAcceptEmail",
+        "lockEventTypeCreationForUsers": "lockEventTypeCreationForUsers",
+        "adminGetsNoSlotsNotification": "adminGetsNoSlotsNotification",
+        "isAdminReviewed": "isAdminReviewed",
+        "isAdminAPIEnabled": "isAdminAPIEnabled",
+        "allowSEOIndexing": "allowSEOIndexing",
+        "orgProfileRedirectsToVerifiedDomain": "orgProfileRedirectsToVerifiedDomain",
+        "disablePhoneOnlySMSNotifications": "disablePhoneOnlySMSNotifications",
+        "disableAutofillOnBookingPage": "disableAutofillOnBookingPage",
+        "orgAutoJoinOnSignup": "orgAutoJoinOnSignup",
+        "disableAttendeeConfirmationEmail": "disableAttendeeConfirmationEmail",
+        "disableAttendeeCancellationEmail": "disableAttendeeCancellationEmail",
+        "disableAttendeeRescheduledEmail": "disableAttendeeRescheduledEmail",
+        "disableAttendeeRequestEmail": "disableAttendeeRequestEmail",
+        "disableAttendeeReassignedEmail": "disableAttendeeReassignedEmail",
+        "disableAttendeeAwaitingPaymentEmail": "disableAttendeeAwaitingPaymentEmail",
+        "disableAttendeeRescheduleRequestEmail": "disableAttendeeRescheduleRequestEmail",
+        "disableAttendeeLocationChangeEmail": "disableAttendeeLocationChangeEmail",
+        "disableAttendeeNewEventEmail": "disableAttendeeNewEventEmail"
+      },
+      "nullable": [],
+      "relations": {
+        "organization": "Team",
+        "dSyncData": "DSyncData"
+      }
+    },
+    "Membership": {
+      "table": "Membership",
+      "json": [],
+      "list": {},
+      "enum": {
+        "role": "MembershipRole"
+      },
+      "columns": {
+        "id": "id",
+        "teamId": "teamId",
+        "userId": "userId",
+        "accepted": "accepted",
+        "role": "role",
+        "customRoleId": "customRoleId",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt"
+      },
+      "nullable": [
+        "customRoleId",
+        "createdAt",
+        "updatedAt"
+      ],
+      "relations": {
+        "customRole": "Role",
+        "team": "Team",
+        "user": "User",
+        "AttributeToUser": "AttributeToUser",
+        "Host": "Host"
+      }
+    },
+    "VerificationToken": {
+      "table": "VerificationToken",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "identifier": "identifier",
+        "token": "token",
+        "expires": "expires",
+        "expiresInDays": "expiresInDays",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt",
+        "teamId": "teamId",
+        "secondaryEmailId": "secondaryEmailId"
+      },
+      "nullable": [
+        "expiresInDays",
+        "teamId",
+        "secondaryEmailId"
+      ],
+      "relations": {
+        "team": "Team",
+        "secondaryEmail": "SecondaryEmail"
+      }
+    },
+    "InstantMeetingToken": {
+      "table": "InstantMeetingToken",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "token": "token",
+        "expires": "expires",
+        "teamId": "teamId",
+        "bookingId": "bookingId",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt"
+      },
+      "nullable": [
+        "bookingId"
+      ],
+      "relations": {
+        "team": "Team",
+        "booking": "Booking"
+      }
+    },
+    "BookingReference": {
+      "table": "BookingReference",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "type": "type",
+        "uid": "uid",
+        "meetingId": "meetingId",
+        "thirdPartyRecurringEventId": "thirdPartyRecurringEventId",
+        "meetingPassword": "meetingPassword",
+        "meetingUrl": "meetingUrl",
+        "bookingId": "bookingId",
+        "externalCalendarId": "externalCalendarId",
+        "deleted": "deleted",
+        "credentialId": "credentialId",
+        "delegationCredentialId": "delegationCredentialId"
+      },
+      "nullable": [
+        "meetingId",
+        "thirdPartyRecurringEventId",
+        "meetingPassword",
+        "meetingUrl",
+        "bookingId",
+        "externalCalendarId",
+        "deleted",
+        "credentialId",
+        "delegationCredentialId"
+      ],
+      "relations": {
+        "booking": "Booking",
+        "credential": "Credential",
+        "delegationCredential": "DelegationCredential"
+      }
+    },
+    "Attendee": {
+      "table": "Attendee",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "email": "email",
+        "name": "name",
+        "timeZone": "timeZone",
+        "phoneNumber": "phoneNumber",
+        "locale": "locale",
+        "bookingId": "bookingId",
+        "noShow": "noShow"
+      },
+      "nullable": [
+        "phoneNumber",
+        "locale",
+        "bookingId",
+        "noShow"
+      ],
+      "relations": {
+        "booking": "Booking",
+        "bookingSeat": "BookingSeat"
+      }
+    },
+    "Booking": {
+      "table": "Booking",
+      "json": [
+        "customInputs",
+        "responses",
+        "metadata"
+      ],
+      "list": {
+        "scheduledJobs": "String"
+      },
+      "enum": {
+        "status": "BookingStatus",
+        "creationSource": "CreationSource"
+      },
+      "columns": {
+        "id": "id",
+        "uid": "uid",
+        "idempotencyKey": "idempotencyKey",
+        "userId": "userId",
+        "userPrimaryEmail": "userPrimaryEmail",
+        "eventTypeId": "eventTypeId",
+        "title": "title",
+        "description": "description",
+        "customInputs": "customInputs",
+        "responses": "responses",
+        "startTime": "startTime",
+        "endTime": "endTime",
+        "location": "location",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt",
+        "status": "status",
+        "paid": "paid",
+        "destinationCalendarId": "destinationCalendarId",
+        "cancellationReason": "cancellationReason",
+        "rejectionReason": "rejectionReason",
+        "reassignReason": "reassignReason",
+        "reassignById": "reassignById",
+        "dynamicEventSlugRef": "dynamicEventSlugRef",
+        "dynamicGroupSlugRef": "dynamicGroupSlugRef",
+        "rescheduled": "rescheduled",
+        "fromReschedule": "fromReschedule",
+        "recurringEventId": "recurringEventId",
+        "smsReminderNumber": "smsReminderNumber",
+        "scheduledJobs": "scheduledJobs",
+        "metadata": "metadata",
+        "isRecorded": "isRecorded",
+        "iCalUID": "iCalUID",
+        "iCalSequence": "iCalSequence",
+        "rating": "rating",
+        "ratingFeedback": "ratingFeedback",
+        "noShowHost": "noShowHost",
+        "oneTimePassword": "oneTimePassword",
+        "cancelledBy": "cancelledBy",
+        "rescheduledBy": "rescheduledBy",
+        "creationSource": "creationSource"
+      },
+      "nullable": [
+        "idempotencyKey",
+        "userId",
+        "userPrimaryEmail",
+        "eventTypeId",
+        "description",
+        "customInputs",
+        "responses",
+        "location",
+        "updatedAt",
+        "destinationCalendarId",
+        "cancellationReason",
+        "rejectionReason",
+        "reassignReason",
+        "reassignById",
+        "dynamicEventSlugRef",
+        "dynamicGroupSlugRef",
+        "rescheduled",
+        "fromReschedule",
+        "recurringEventId",
+        "smsReminderNumber",
+        "metadata",
+        "iCalUID",
+        "rating",
+        "ratingFeedback",
+        "noShowHost",
+        "oneTimePassword",
+        "cancelledBy",
+        "rescheduledBy",
+        "creationSource"
+      ],
+      "relations": {
+        "user": "User",
+        "references": "BookingReference",
+        "eventType": "EventType",
+        "attendees": "Attendee",
+        "payment": "Payment",
+        "destinationCalendar": "DestinationCalendar",
+        "reassignBy": "User",
+        "seatsReferences": "BookingSeat",
+        "instantMeetingToken": "InstantMeetingToken",
+        "scheduledTriggers": "WebhookScheduledTriggers",
+        "assignmentReason": "AssignmentReason",
+        "internalNote": "BookingInternalNote",
+        "tracking": "Tracking",
+        "expenseLogs": "CreditExpenseLog",
+        "report": "BookingReport",
+        "wrongAssignmentReports": "WrongAssignmentReport"
+      }
+    },
+    "Tracking": {
+      "table": "Tracking",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "bookingId": "bookingId",
+        "utm_source": "utm_source",
+        "utm_medium": "utm_medium",
+        "utm_campaign": "utm_campaign",
+        "utm_term": "utm_term",
+        "utm_content": "utm_content"
+      },
+      "nullable": [
+        "utm_source",
+        "utm_medium",
+        "utm_campaign",
+        "utm_term",
+        "utm_content"
+      ],
+      "relations": {
+        "booking": "Booking"
+      }
+    },
+    "Schedule": {
+      "table": "Schedule",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "userId": "userId",
+        "name": "name",
+        "timeZone": "timeZone"
+      },
+      "nullable": [
+        "timeZone"
+      ],
+      "relations": {
+        "user": "User",
+        "eventType": "EventType",
+        "instantMeetingEvents": "EventType",
+        "restrictionSchedule": "EventType",
+        "availability": "Availability",
+        "Host": "Host"
+      }
+    },
+    "Availability": {
+      "table": "Availability",
+      "json": [],
+      "list": {
+        "days": "Int"
+      },
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "userId": "userId",
+        "eventTypeId": "eventTypeId",
+        "days": "days",
+        "startTime": "startTime",
+        "endTime": "endTime",
+        "date": "date",
+        "scheduleId": "scheduleId"
+      },
+      "nullable": [
+        "userId",
+        "eventTypeId",
+        "date",
+        "scheduleId"
+      ],
+      "relations": {
+        "user": "User",
+        "eventType": "EventType",
+        "Schedule": "Schedule"
+      }
+    },
+    "SelectedCalendar": {
+      "table": "SelectedCalendar",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "userId": "userId",
+        "integration": "integration",
+        "externalId": "externalId",
+        "credentialId": "credentialId",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt",
+        "googleChannelId": "googleChannelId",
+        "googleChannelKind": "googleChannelKind",
+        "googleChannelResourceId": "googleChannelResourceId",
+        "googleChannelResourceUri": "googleChannelResourceUri",
+        "googleChannelExpiration": "googleChannelExpiration",
+        "channelId": "channelId",
+        "channelKind": "channelKind",
+        "channelResourceId": "channelResourceId",
+        "channelResourceUri": "channelResourceUri",
+        "channelExpiration": "channelExpiration",
+        "syncSubscribedAt": "syncSubscribedAt",
+        "syncSubscribedErrorAt": "syncSubscribedErrorAt",
+        "syncSubscribedErrorCount": "syncSubscribedErrorCount",
+        "syncToken": "syncToken",
+        "syncedAt": "syncedAt",
+        "syncErrorAt": "syncErrorAt",
+        "syncErrorCount": "syncErrorCount",
+        "delegationCredentialId": "delegationCredentialId",
+        "error": "error",
+        "lastErrorAt": "lastErrorAt",
+        "watchAttempts": "watchAttempts",
+        "unwatchAttempts": "unwatchAttempts",
+        "maxAttempts": "maxAttempts",
+        "eventTypeId": "eventTypeId"
+      },
+      "nullable": [
+        "credentialId",
+        "createdAt",
+        "updatedAt",
+        "googleChannelId",
+        "googleChannelKind",
+        "googleChannelResourceId",
+        "googleChannelResourceUri",
+        "googleChannelExpiration",
+        "channelId",
+        "channelKind",
+        "channelResourceId",
+        "channelResourceUri",
+        "channelExpiration",
+        "syncSubscribedAt",
+        "syncSubscribedErrorAt",
+        "syncToken",
+        "syncedAt",
+        "syncErrorAt",
+        "syncErrorCount",
+        "delegationCredentialId",
+        "error",
+        "lastErrorAt",
+        "eventTypeId"
+      ],
+      "relations": {
+        "user": "User",
+        "credential": "Credential",
+        "delegationCredential": "DelegationCredential",
+        "eventType": "EventType",
+        "calendarCacheEvents": "CalendarCacheEvent"
+      }
+    },
+    "EventTypeCustomInput": {
+      "table": "EventTypeCustomInput",
+      "json": [
+        "options"
+      ],
+      "list": {},
+      "enum": {
+        "type": "EventTypeCustomInputType"
+      },
+      "columns": {
+        "id": "id",
+        "eventTypeId": "eventTypeId",
+        "label": "label",
+        "type": "type",
+        "options": "options",
+        "required": "required",
+        "placeholder": "placeholder"
+      },
+      "nullable": [
+        "options"
+      ],
+      "relations": {
+        "eventType": "EventType"
+      }
+    },
+    "ResetPasswordRequest": {
+      "table": "ResetPasswordRequest",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt",
+        "email": "email",
+        "expires": "expires"
+      },
+      "nullable": [],
+      "relations": {}
+    },
+    "ReminderMail": {
+      "table": "ReminderMail",
+      "json": [],
+      "list": {},
+      "enum": {
+        "reminderType": "ReminderType"
+      },
+      "columns": {
+        "id": "id",
+        "referenceId": "referenceId",
+        "reminderType": "reminderType",
+        "elapsedMinutes": "elapsedMinutes",
+        "createdAt": "createdAt"
+      },
+      "nullable": [],
+      "relations": {}
+    },
+    "Payment": {
+      "table": "Payment",
+      "json": [
+        "data"
+      ],
+      "list": {},
+      "enum": {
+        "paymentOption": "PaymentOption"
+      },
+      "columns": {
+        "id": "id",
+        "uid": "uid",
+        "appId": "appId",
+        "bookingId": "bookingId",
+        "amount": "amount",
+        "fee": "fee",
+        "currency": "currency",
+        "success": "success",
+        "refunded": "refunded",
+        "data": "data",
+        "externalId": "externalId",
+        "paymentOption": "paymentOption"
+      },
+      "nullable": [
+        "appId",
+        "paymentOption"
+      ],
+      "relations": {
+        "app": "App",
+        "booking": "Booking"
+      }
+    },
+    "Webhook": {
+      "table": "Webhook",
+      "json": [],
+      "list": {
+        "eventTriggers": "WebhookTriggerEvents"
+      },
+      "enum": {
+        "timeUnit": "TimeUnit"
+      },
+      "columns": {
+        "id": "id",
+        "userId": "userId",
+        "teamId": "teamId",
+        "eventTypeId": "eventTypeId",
+        "platformOAuthClientId": "platformOAuthClientId",
+        "subscriberUrl": "subscriberUrl",
+        "payloadTemplate": "payloadTemplate",
+        "createdAt": "createdAt",
+        "active": "active",
+        "eventTriggers": "eventTriggers",
+        "appId": "appId",
+        "secret": "secret",
+        "platform": "platform",
+        "time": "time",
+        "timeUnit": "timeUnit",
+        "version": "version"
+      },
+      "nullable": [
+        "userId",
+        "teamId",
+        "eventTypeId",
+        "platformOAuthClientId",
+        "payloadTemplate",
+        "appId",
+        "secret",
+        "time",
+        "timeUnit"
+      ],
+      "relations": {
+        "user": "User",
+        "team": "Team",
+        "eventType": "EventType",
+        "platformOAuthClient": "PlatformOAuthClient",
+        "app": "App",
+        "scheduledTriggers": "WebhookScheduledTriggers"
+      }
+    },
+    "ApiKey": {
+      "table": "ApiKey",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "userId": "userId",
+        "teamId": "teamId",
+        "note": "note",
+        "createdAt": "createdAt",
+        "expiresAt": "expiresAt",
+        "lastUsedAt": "lastUsedAt",
+        "hashedKey": "hashedKey",
+        "appId": "appId"
+      },
+      "nullable": [
+        "teamId",
+        "note",
+        "expiresAt",
+        "lastUsedAt",
+        "appId"
+      ],
+      "relations": {
+        "user": "User",
+        "team": "Team",
+        "app": "App",
+        "rateLimits": "RateLimit"
+      }
+    },
+    "RateLimit": {
+      "table": "RateLimit",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "name": "name",
+        "apiKeyId": "apiKeyId",
+        "ttl": "ttl",
+        "limit": "limit",
+        "blockDuration": "blockDuration",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt"
+      },
+      "nullable": [],
+      "relations": {
+        "apiKey": "ApiKey"
+      }
+    },
+    "HashedLink": {
+      "table": "HashedLink",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "link": "link",
+        "eventTypeId": "eventTypeId",
+        "expiresAt": "expiresAt",
+        "maxUsageCount": "maxUsageCount",
+        "usageCount": "usageCount"
+      },
+      "nullable": [
+        "expiresAt"
+      ],
+      "relations": {
+        "eventType": "EventType"
+      }
+    },
+    "Account": {
+      "table": "Account",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "userId": "userId",
+        "type": "type",
+        "provider": "provider",
+        "providerAccountId": "providerAccountId",
+        "providerEmail": "providerEmail",
+        "refresh_token": "refresh_token",
+        "access_token": "access_token",
+        "expires_at": "expires_at",
+        "token_type": "token_type",
+        "scope": "scope",
+        "id_token": "id_token",
+        "session_state": "session_state"
+      },
+      "nullable": [
+        "providerEmail",
+        "refresh_token",
+        "access_token",
+        "expires_at",
+        "token_type",
+        "scope",
+        "id_token",
+        "session_state"
+      ],
+      "relations": {
+        "user": "User"
+      }
+    },
+    "Session": {
+      "table": "Session",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "sessionToken": "sessionToken",
+        "userId": "userId",
+        "expires": "expires"
+      },
+      "nullable": [],
+      "relations": {
+        "user": "User"
+      }
+    },
+    "App": {
+      "table": "App",
+      "json": [
+        "keys"
+      ],
+      "list": {
+        "categories": "AppCategories"
+      },
+      "enum": {},
+      "columns": {
+        "slug": "slug",
+        "dirName": "dirName",
+        "keys": "keys",
+        "categories": "categories",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt",
+        "enabled": "enabled"
+      },
+      "nullable": [
+        "keys"
+      ],
+      "relations": {
+        "credentials": "Credential",
+        "payments": "Payment",
+        "Webhook": "Webhook",
+        "ApiKey": "ApiKey"
+      }
+    },
+    "Feedback": {
+      "table": "Feedback",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "date": "date",
+        "userId": "userId",
+        "rating": "rating",
+        "comment": "comment"
+      },
+      "nullable": [
+        "comment"
+      ],
+      "relations": {
+        "user": "User"
+      }
+    },
+    "Deployment": {
+      "table": "Deployment",
+      "json": [
+        "theme"
+      ],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "logo": "logo",
+        "theme": "theme",
+        "licenseKey": "licenseKey",
+        "signatureTokenEncrypted": "signatureTokenEncrypted",
+        "agreedLicenseAt": "agreedLicenseAt"
+      },
+      "nullable": [
+        "logo",
+        "theme",
+        "licenseKey",
+        "signatureTokenEncrypted",
+        "agreedLicenseAt"
+      ],
+      "relations": {}
+    },
+    "WebhookScheduledTriggers": {
+      "table": "WebhookScheduledTriggers",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "jobName": "jobName",
+        "subscriberUrl": "subscriberUrl",
+        "payload": "payload",
+        "startAfter": "startAfter",
+        "retryCount": "retryCount",
+        "createdAt": "createdAt",
+        "appId": "appId",
+        "webhookId": "webhookId",
+        "bookingId": "bookingId"
+      },
+      "nullable": [
+        "jobName",
+        "createdAt",
+        "appId",
+        "webhookId",
+        "bookingId"
+      ],
+      "relations": {
+        "webhook": "Webhook",
+        "booking": "Booking"
+      }
+    },
+    "BookingSeat": {
+      "table": "BookingSeat",
+      "json": [
+        "data",
+        "metadata"
+      ],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "referenceUid": "referenceUid",
+        "bookingId": "bookingId",
+        "attendeeId": "attendeeId",
+        "data": "data",
+        "metadata": "metadata"
+      },
+      "nullable": [
+        "data",
+        "metadata"
+      ],
+      "relations": {
+        "booking": "Booking",
+        "attendee": "Attendee"
+      }
+    },
+    "VerifiedNumber": {
+      "table": "VerifiedNumber",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "userId": "userId",
+        "teamId": "teamId",
+        "phoneNumber": "phoneNumber"
+      },
+      "nullable": [
+        "userId",
+        "teamId"
+      ],
+      "relations": {
+        "user": "User",
+        "team": "Team"
+      }
+    },
+    "VerifiedEmail": {
+      "table": "VerifiedEmail",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "userId": "userId",
+        "teamId": "teamId",
+        "email": "email"
+      },
+      "nullable": [
+        "userId",
+        "teamId"
+      ],
+      "relations": {
+        "user": "User",
+        "team": "Team"
+      }
+    },
+    "Feature": {
+      "table": "Feature",
+      "json": [],
+      "list": {},
+      "enum": {
+        "type": "FeatureType"
+      },
+      "columns": {
+        "slug": "slug",
+        "enabled": "enabled",
+        "description": "description",
+        "type": "type",
+        "stale": "stale",
+        "lastUsedAt": "lastUsedAt",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt",
+        "updatedBy": "updatedBy"
+      },
+      "nullable": [
+        "description",
+        "type",
+        "stale",
+        "lastUsedAt",
+        "createdAt",
+        "updatedAt",
+        "updatedBy"
+      ],
+      "relations": {
+        "users": "UserFeatures",
+        "teams": "TeamFeatures"
+      }
+    },
+    "UserFeatures": {
+      "table": "UserFeatures",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "userId": "userId",
+        "featureId": "featureId",
+        "enabled": "enabled",
+        "assignedAt": "assignedAt",
+        "assignedBy": "assignedBy",
+        "updatedAt": "updatedAt"
+      },
+      "nullable": [],
+      "relations": {
+        "user": "User",
+        "feature": "Feature"
+      }
+    },
+    "TeamFeatures": {
+      "table": "TeamFeatures",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "teamId": "teamId",
+        "featureId": "featureId",
+        "enabled": "enabled",
+        "assignedAt": "assignedAt",
+        "assignedBy": "assignedBy",
+        "updatedAt": "updatedAt"
+      },
+      "nullable": [],
+      "relations": {
+        "team": "Team",
+        "feature": "Feature"
+      }
+    },
+    "SelectedSlots": {
+      "table": "SelectedSlots",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "eventTypeId": "eventTypeId",
+        "userId": "userId",
+        "slotUtcStartDate": "slotUtcStartDate",
+        "slotUtcEndDate": "slotUtcEndDate",
+        "uid": "uid",
+        "releaseAt": "releaseAt",
+        "isSeat": "isSeat"
+      },
+      "nullable": [],
+      "relations": {}
+    },
+    "OAuthClient": {
+      "table": "OAuthClient",
+      "json": [],
+      "list": {},
+      "enum": {
+        "clientType": "OAuthClientType",
+        "status": "OAuthClientStatus"
+      },
+      "columns": {
+        "clientId": "clientId",
+        "redirectUri": "redirectUri",
+        "clientSecret": "clientSecret",
+        "clientType": "clientType",
+        "name": "name",
+        "purpose": "purpose",
+        "logo": "logo",
+        "websiteUrl": "websiteUrl",
+        "rejectionReason": "rejectionReason",
+        "isTrusted": "isTrusted",
+        "status": "status",
+        "userId": "userId",
+        "createdAt": "createdAt"
+      },
+      "nullable": [
+        "clientSecret",
+        "purpose",
+        "logo",
+        "websiteUrl",
+        "rejectionReason",
+        "userId"
+      ],
+      "relations": {
+        "accessCodes": "AccessCode",
+        "user": "User"
+      }
+    },
+    "AccessCode": {
+      "table": "AccessCode",
+      "json": [],
+      "list": {
+        "scopes": "AccessScope"
+      },
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "code": "code",
+        "clientId": "clientId",
+        "expiresAt": "expiresAt",
+        "scopes": "scopes",
+        "userId": "userId",
+        "teamId": "teamId",
+        "codeChallenge": "codeChallenge",
+        "codeChallengeMethod": "codeChallengeMethod"
+      },
+      "nullable": [
+        "clientId",
+        "userId",
+        "teamId",
+        "codeChallenge",
+        "codeChallengeMethod"
+      ],
+      "relations": {
+        "client": "OAuthClient",
+        "user": "User",
+        "team": "Team"
+      }
+    },
+    "BookingTimeStatus": {
+      "table": "BookingTimeStatus",
+      "json": [],
+      "list": {},
+      "enum": {
+        "status": "BookingStatus"
+      },
+      "columns": {
+        "id": "id",
+        "uid": "uid",
+        "eventTypeId": "eventTypeId",
+        "title": "title",
+        "description": "description",
+        "startTime": "startTime",
+        "endTime": "endTime",
+        "createdAt": "createdAt",
+        "location": "location",
+        "paid": "paid",
+        "status": "status",
+        "rescheduled": "rescheduled",
+        "userId": "userId",
+        "teamId": "teamId",
+        "eventLength": "eventLength",
+        "timeStatus": "timeStatus",
+        "eventParentId": "eventParentId",
+        "userEmail": "userEmail",
+        "username": "username",
+        "ratingFeedback": "ratingFeedback",
+        "rating": "rating",
+        "noShowHost": "noShowHost",
+        "isTeamBooking": "isTeamBooking"
+      },
+      "nullable": [
+        "uid",
+        "eventTypeId",
+        "title",
+        "description",
+        "startTime",
+        "endTime",
+        "createdAt",
+        "location",
+        "paid",
+        "status",
+        "rescheduled",
+        "userId",
+        "teamId",
+        "eventLength",
+        "timeStatus",
+        "eventParentId",
+        "userEmail",
+        "username",
+        "ratingFeedback",
+        "rating",
+        "noShowHost"
+      ],
+      "relations": {}
+    },
+    "BookingDenormalized": {
+      "table": "BookingDenormalized",
+      "json": [],
+      "list": {},
+      "enum": {
+        "status": "BookingStatus"
+      },
+      "columns": {
+        "id": "id",
+        "uid": "uid",
+        "eventTypeId": "eventTypeId",
+        "title": "title",
+        "description": "description",
+        "startTime": "startTime",
+        "endTime": "endTime",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt",
+        "location": "location",
+        "paid": "paid",
+        "status": "status",
+        "rescheduled": "rescheduled",
+        "userId": "userId",
+        "teamId": "teamId",
+        "eventLength": "eventLength",
+        "eventParentId": "eventParentId",
+        "userEmail": "userEmail",
+        "userName": "userName",
+        "userUsername": "userUsername",
+        "ratingFeedback": "ratingFeedback",
+        "rating": "rating",
+        "noShowHost": "noShowHost",
+        "isTeamBooking": "isTeamBooking"
+      },
+      "nullable": [
+        "eventTypeId",
+        "description",
+        "updatedAt",
+        "location",
+        "rescheduled",
+        "userId",
+        "teamId",
+        "eventLength",
+        "eventParentId",
+        "userEmail",
+        "userName",
+        "userUsername",
+        "ratingFeedback",
+        "rating",
+        "noShowHost"
+      ],
+      "relations": {}
+    },
+    "BookingTimeStatusDenormalized": {
+      "table": "BookingTimeStatusDenormalized",
+      "json": [],
+      "list": {},
+      "enum": {
+        "status": "BookingStatus"
+      },
+      "columns": {
+        "id": "id",
+        "uid": "uid",
+        "eventTypeId": "eventTypeId",
+        "title": "title",
+        "description": "description",
+        "startTime": "startTime",
+        "endTime": "endTime",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt",
+        "location": "location",
+        "paid": "paid",
+        "status": "status",
+        "rescheduled": "rescheduled",
+        "userId": "userId",
+        "teamId": "teamId",
+        "eventLength": "eventLength",
+        "eventParentId": "eventParentId",
+        "userEmail": "userEmail",
+        "userName": "userName",
+        "userUsername": "userUsername",
+        "ratingFeedback": "ratingFeedback",
+        "rating": "rating",
+        "noShowHost": "noShowHost",
+        "isTeamBooking": "isTeamBooking",
+        "timeStatus": "timeStatus"
+      },
+      "nullable": [
+        "eventTypeId",
+        "description",
+        "updatedAt",
+        "location",
+        "rescheduled",
+        "userId",
+        "teamId",
+        "eventLength",
+        "eventParentId",
+        "userEmail",
+        "userName",
+        "userUsername",
+        "ratingFeedback",
+        "rating",
+        "noShowHost",
+        "timeStatus"
+      ],
+      "relations": {}
+    },
+    "CalendarCache": {
+      "table": "CalendarCache",
+      "json": [
+        "value"
+      ],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "key": "key",
+        "value": "value",
+        "expiresAt": "expiresAt",
+        "updatedAt": "updatedAt",
+        "credentialId": "credentialId",
+        "userId": "userId"
+      },
+      "nullable": [
+        "id",
+        "userId"
+      ],
+      "relations": {
+        "credential": "Credential"
+      }
+    },
+    "TempOrgRedirect": {
+      "table": "TempOrgRedirect",
+      "json": [],
+      "list": {},
+      "enum": {
+        "type": "RedirectType"
+      },
+      "columns": {
+        "id": "id",
+        "from": "from",
+        "fromOrgId": "fromOrgId",
+        "type": "type",
+        "toUrl": "toUrl",
+        "enabled": "enabled",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt"
+      },
+      "nullable": [],
+      "relations": {}
+    },
+    "Avatar": {
+      "table": "avatars",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "teamId": "teamId",
+        "userId": "userId",
+        "data": "data",
+        "objectKey": "objectKey",
+        "isBanner": "isBanner"
+      },
+      "nullable": [],
+      "relations": {}
+    },
+    "OutOfOfficeEntry": {
+      "table": "OutOfOfficeEntry",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "uuid": "uuid",
+        "start": "start",
+        "end": "end",
+        "notes": "notes",
+        "showNotePublicly": "showNotePublicly",
+        "userId": "userId",
+        "toUserId": "toUserId",
+        "reasonId": "reasonId",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt"
+      },
+      "nullable": [
+        "notes",
+        "toUserId",
+        "reasonId"
+      ],
+      "relations": {
+        "user": "User",
+        "toUser": "User",
+        "reason": "OutOfOfficeReason"
+      }
+    },
+    "OutOfOfficeReason": {
+      "table": "OutOfOfficeReason",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "emoji": "emoji",
+        "reason": "reason",
+        "enabled": "enabled",
+        "userId": "userId"
+      },
+      "nullable": [
+        "userId"
+      ],
+      "relations": {
+        "user": "User",
+        "entries": "OutOfOfficeEntry"
+      }
+    },
+    "UserHolidaySettings": {
+      "table": "UserHolidaySettings",
+      "json": [],
+      "list": {
+        "disabledIds": "String"
+      },
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "userId": "userId",
+        "countryCode": "countryCode",
+        "disabledIds": "disabledIds",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt"
+      },
+      "nullable": [
+        "countryCode"
+      ],
+      "relations": {
+        "user": "User"
+      }
+    },
+    "HolidayCache": {
+      "table": "HolidayCache",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "countryCode": "countryCode",
+        "calendarId": "calendarId",
+        "eventId": "eventId",
+        "name": "name",
+        "date": "date",
+        "year": "year",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt"
+      },
+      "nullable": [],
+      "relations": {}
+    },
+    "PlatformOAuthClient": {
+      "table": "PlatformOAuthClient",
+      "json": [],
+      "list": {
+        "redirectUris": "String"
+      },
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "name": "name",
+        "secret": "secret",
+        "permissions": "permissions",
+        "logo": "logo",
+        "redirectUris": "redirectUris",
+        "organizationId": "organizationId",
+        "bookingRedirectUri": "bookingRedirectUri",
+        "bookingCancelRedirectUri": "bookingCancelRedirectUri",
+        "bookingRescheduleRedirectUri": "bookingRescheduleRedirectUri",
+        "areEmailsEnabled": "areEmailsEnabled",
+        "areDefaultEventTypesEnabled": "areDefaultEventTypesEnabled",
+        "areCalendarEventsEnabled": "areCalendarEventsEnabled",
+        "createdAt": "createdAt"
+      },
+      "nullable": [
+        "logo",
+        "bookingRedirectUri",
+        "bookingCancelRedirectUri",
+        "bookingRescheduleRedirectUri"
+      ],
+      "relations": {
+        "users": "User",
+        "organization": "Team",
+        "teams": "Team",
+        "accessTokens": "AccessToken",
+        "refreshToken": "RefreshToken",
+        "authorizationTokens": "PlatformAuthorizationToken",
+        "webhook": "Webhook"
+      }
+    },
+    "PlatformAuthorizationToken": {
+      "table": "PlatformAuthorizationToken",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "platformOAuthClientId": "platformOAuthClientId",
+        "userId": "userId",
+        "createdAt": "createdAt"
+      },
+      "nullable": [],
+      "relations": {
+        "owner": "User",
+        "client": "PlatformOAuthClient"
+      }
+    },
+    "AccessToken": {
+      "table": "AccessToken",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "secret": "secret",
+        "createdAt": "createdAt",
+        "expiresAt": "expiresAt",
+        "platformOAuthClientId": "platformOAuthClientId",
+        "userId": "userId"
+      },
+      "nullable": [],
+      "relations": {
+        "owner": "User",
+        "client": "PlatformOAuthClient"
+      }
+    },
+    "RefreshToken": {
+      "table": "RefreshToken",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "secret": "secret",
+        "createdAt": "createdAt",
+        "expiresAt": "expiresAt",
+        "platformOAuthClientId": "platformOAuthClientId",
+        "userId": "userId"
+      },
+      "nullable": [],
+      "relations": {
+        "owner": "User",
+        "client": "PlatformOAuthClient"
+      }
+    },
+    "DSyncData": {
+      "table": "DSyncData",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "directoryId": "directoryId",
+        "tenant": "tenant",
+        "organizationId": "organizationId"
+      },
+      "nullable": [
+        "organizationId"
+      ],
+      "relations": {
+        "org": "OrganizationSettings",
+        "teamGroupMapping": "DSyncTeamGroupMapping",
+        "createdAttributeToUsers": "AttributeToUser",
+        "updatedAttributeToUsers": "AttributeToUser"
+      }
+    },
+    "DSyncTeamGroupMapping": {
+      "table": "DSyncTeamGroupMapping",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "organizationId": "organizationId",
+        "teamId": "teamId",
+        "directoryId": "directoryId",
+        "groupName": "groupName"
+      },
+      "nullable": [],
+      "relations": {
+        "team": "Team",
+        "directory": "DSyncData"
+      }
+    },
+    "SecondaryEmail": {
+      "table": "SecondaryEmail",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "userId": "userId",
+        "email": "email",
+        "emailVerified": "emailVerified"
+      },
+      "nullable": [
+        "emailVerified"
+      ],
+      "relations": {
+        "user": "User",
+        "verificationTokens": "VerificationToken",
+        "eventTypes": "EventType"
+      }
+    },
+    "Task": {
+      "table": "Task",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt",
+        "scheduledAt": "scheduledAt",
+        "succeededAt": "succeededAt",
+        "type": "type",
+        "payload": "payload",
+        "attempts": "attempts",
+        "maxAttempts": "maxAttempts",
+        "lastError": "lastError",
+        "lastFailedAttemptAt": "lastFailedAttemptAt",
+        "referenceUid": "referenceUid"
+      },
+      "nullable": [
+        "succeededAt",
+        "lastError",
+        "lastFailedAttemptAt",
+        "referenceUid"
+      ],
+      "relations": {}
+    },
+    "ManagedOrganization": {
+      "table": "ManagedOrganization",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "managedOrganizationId": "managedOrganizationId",
+        "managerOrganizationId": "managerOrganizationId",
+        "createdAt": "createdAt"
+      },
+      "nullable": [],
+      "relations": {
+        "managedOrganization": "Team",
+        "managerOrganization": "Team"
+      }
+    },
+    "PlatformBilling": {
+      "table": "PlatformBilling",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "customerId": "customerId",
+        "subscriptionId": "subscriptionId",
+        "priceId": "priceId",
+        "plan": "plan",
+        "billingCycleStart": "billingCycleStart",
+        "billingCycleEnd": "billingCycleEnd",
+        "overdue": "overdue",
+        "managerBillingId": "managerBillingId"
+      },
+      "nullable": [
+        "subscriptionId",
+        "priceId",
+        "billingCycleStart",
+        "billingCycleEnd",
+        "overdue",
+        "managerBillingId"
+      ],
+      "relations": {
+        "managerBilling": "PlatformBilling",
+        "managedBillings": "PlatformBilling",
+        "team": "Team"
+      }
+    },
+    "AttributeOption": {
+      "table": "AttributeOption",
+      "json": [],
+      "list": {
+        "contains": "String"
+      },
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "attributeId": "attributeId",
+        "value": "value",
+        "slug": "slug",
+        "isGroup": "isGroup",
+        "contains": "contains"
+      },
+      "nullable": [],
+      "relations": {
+        "attribute": "Attribute",
+        "assignedUsers": "AttributeToUser"
+      }
+    },
+    "Attribute": {
+      "table": "Attribute",
+      "json": [],
+      "list": {},
+      "enum": {
+        "type": "AttributeType"
+      },
+      "columns": {
+        "id": "id",
+        "teamId": "teamId",
+        "type": "type",
+        "name": "name",
+        "slug": "slug",
+        "enabled": "enabled",
+        "usersCanEditRelation": "usersCanEditRelation",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt",
+        "isWeightsEnabled": "isWeightsEnabled",
+        "isLocked": "isLocked"
+      },
+      "nullable": [],
+      "relations": {
+        "team": "Team",
+        "options": "AttributeOption",
+        "attributeSyncFieldMappings": "AttributeSyncFieldMapping"
+      }
+    },
+    "AttributeToUser": {
+      "table": "AttributeToUser",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "memberId": "memberId",
+        "attributeOptionId": "attributeOptionId",
+        "weight": "weight",
+        "createdAt": "createdAt",
+        "createdById": "createdById",
+        "createdByDSyncId": "createdByDSyncId",
+        "updatedAt": "updatedAt",
+        "updatedById": "updatedById",
+        "updatedByDSyncId": "updatedByDSyncId"
+      },
+      "nullable": [
+        "weight",
+        "createdById",
+        "createdByDSyncId",
+        "updatedAt",
+        "updatedById",
+        "updatedByDSyncId"
+      ],
+      "relations": {
+        "member": "Membership",
+        "attributeOption": "AttributeOption",
+        "createdBy": "User",
+        "createdByDSync": "DSyncData",
+        "updatedBy": "User",
+        "updatedByDSync": "DSyncData"
+      }
+    },
+    "AssignmentReason": {
+      "table": "AssignmentReason",
+      "json": [],
+      "list": {},
+      "enum": {
+        "reasonEnum": "AssignmentReasonEnum"
+      },
+      "columns": {
+        "id": "id",
+        "createdAt": "createdAt",
+        "bookingId": "bookingId",
+        "reasonEnum": "reasonEnum",
+        "reasonString": "reasonString"
+      },
+      "nullable": [],
+      "relations": {
+        "booking": "Booking"
+      }
+    },
+    "DelegationCredential": {
+      "table": "DelegationCredential",
+      "json": [
+        "serviceAccountKey"
+      ],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "workspacePlatformId": "workspacePlatformId",
+        "serviceAccountKey": "serviceAccountKey",
+        "enabled": "enabled",
+        "lastEnabledAt": "lastEnabledAt",
+        "lastDisabledAt": "lastDisabledAt",
+        "organizationId": "organizationId",
+        "domain": "domain",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt"
+      },
+      "nullable": [
+        "lastEnabledAt",
+        "lastDisabledAt"
+      ],
+      "relations": {
+        "workspacePlatform": "WorkspacePlatform",
+        "organization": "Team",
+        "selectedCalendars": "SelectedCalendar",
+        "destinationCalendar": "DestinationCalendar",
+        "bookingReferences": "BookingReference",
+        "credentials": "Credential"
+      }
+    },
+    "WorkspacePlatform": {
+      "table": "WorkspacePlatform",
+      "json": [
+        "defaultServiceAccountKey"
+      ],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "slug": "slug",
+        "name": "name",
+        "description": "description",
+        "defaultServiceAccountKey": "defaultServiceAccountKey",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt",
+        "enabled": "enabled"
+      },
+      "nullable": [],
+      "relations": {
+        "delegationCredentials": "DelegationCredential"
+      }
+    },
+    "EventTypeTranslation": {
+      "table": "EventTypeTranslation",
+      "json": [],
+      "list": {},
+      "enum": {
+        "field": "EventTypeAutoTranslatedField"
+      },
+      "columns": {
+        "uid": "uid",
+        "eventTypeId": "eventTypeId",
+        "field": "field",
+        "sourceLocale": "sourceLocale",
+        "targetLocale": "targetLocale",
+        "translatedText": "translatedText",
+        "createdAt": "createdAt",
+        "createdBy": "createdBy",
+        "updatedAt": "updatedAt",
+        "updatedBy": "updatedBy"
+      },
+      "nullable": [
+        "updatedBy"
+      ],
+      "relations": {
+        "eventType": "EventType",
+        "creator": "User",
+        "updater": "User"
+      }
+    },
+    "Watchlist": {
+      "table": "Watchlist",
+      "json": [],
+      "list": {},
+      "enum": {
+        "type": "WatchlistType",
+        "action": "WatchlistAction",
+        "source": "WatchlistSource"
+      },
+      "columns": {
+        "id": "id",
+        "type": "type",
+        "value": "value",
+        "description": "description",
+        "isGlobal": "isGlobal",
+        "organizationId": "organizationId",
+        "action": "action",
+        "source": "source",
+        "lastUpdatedAt": "lastUpdatedAt"
+      },
+      "nullable": [
+        "description",
+        "organizationId"
+      ],
+      "relations": {
+        "bookingReports": "BookingReport",
+        "globalBookingReports": "BookingReport",
+        "audits": "WatchlistAudit"
+      }
+    },
+    "WatchlistAudit": {
+      "table": "WatchlistAudit",
+      "json": [],
+      "list": {},
+      "enum": {
+        "type": "WatchlistType",
+        "action": "WatchlistAction"
+      },
+      "columns": {
+        "id": "id",
+        "type": "type",
+        "value": "value",
+        "description": "description",
+        "action": "action",
+        "changedAt": "changedAt",
+        "changedByUserId": "changedByUserId",
+        "watchlistId": "watchlistId"
+      },
+      "nullable": [
+        "description",
+        "changedByUserId",
+        "watchlistId"
+      ],
+      "relations": {
+        "watchlist": "Watchlist"
+      }
+    },
+    "WatchlistEventAudit": {
+      "table": "WatchlistEventAudit",
+      "json": [],
+      "list": {},
+      "enum": {
+        "actionTaken": "WatchlistAction"
+      },
+      "columns": {
+        "id": "id",
+        "watchlistId": "watchlistId",
+        "eventTypeId": "eventTypeId",
+        "actionTaken": "actionTaken",
+        "timestamp": "timestamp"
+      },
+      "nullable": [],
+      "relations": {}
+    },
+    "BookingReport": {
+      "table": "BookingReport",
+      "json": [],
+      "list": {},
+      "enum": {
+        "reason": "BookingReportReason",
+        "status": "BookingReportStatus",
+        "systemStatus": "SystemReportStatus"
+      },
+      "columns": {
+        "id": "id",
+        "bookingUid": "bookingUid",
+        "bookerEmail": "bookerEmail",
+        "reportedById": "reportedById",
+        "organizationId": "organizationId",
+        "reason": "reason",
+        "description": "description",
+        "cancelled": "cancelled",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt",
+        "status": "status",
+        "systemStatus": "systemStatus",
+        "watchlistId": "watchlistId",
+        "globalWatchlistId": "globalWatchlistId"
+      },
+      "nullable": [
+        "reportedById",
+        "organizationId",
+        "description",
+        "watchlistId",
+        "globalWatchlistId"
+      ],
+      "relations": {
+        "booking": "Booking",
+        "reportedBy": "User",
+        "organization": "Team",
+        "watchlist": "Watchlist",
+        "globalWatchlist": "Watchlist"
+      }
+    },
+    "WrongAssignmentReport": {
+      "table": "WrongAssignmentReport",
+      "json": [],
+      "list": {},
+      "enum": {
+        "status": "WrongAssignmentReportStatus"
+      },
+      "columns": {
+        "id": "id",
+        "bookingUid": "bookingUid",
+        "reportedById": "reportedById",
+        "correctAssignee": "correctAssignee",
+        "additionalNotes": "additionalNotes",
+        "teamId": "teamId",
+        "status": "status",
+        "reviewedById": "reviewedById",
+        "reviewedAt": "reviewedAt",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt"
+      },
+      "nullable": [
+        "reportedById",
+        "correctAssignee",
+        "teamId",
+        "reviewedById",
+        "reviewedAt"
+      ],
+      "relations": {
+        "booking": "Booking",
+        "reportedBy": "User",
+        "team": "Team",
+        "reviewedBy": "User"
+      }
+    },
+    "OrganizationOnboarding": {
+      "table": "OrganizationOnboarding",
+      "json": [
+        "invitedMembers",
+        "teams"
+      ],
+      "list": {},
+      "enum": {
+        "billingPeriod": "BillingPeriod"
+      },
+      "columns": {
+        "id": "id",
+        "createdById": "createdById",
+        "createdAt": "createdAt",
+        "orgOwnerEmail": "orgOwnerEmail",
+        "error": "error",
+        "updatedAt": "updatedAt",
+        "organizationId": "organizationId",
+        "billingPeriod": "billingPeriod",
+        "pricePerSeat": "pricePerSeat",
+        "seats": "seats",
+        "isPlatform": "isPlatform",
+        "name": "name",
+        "slug": "slug",
+        "logo": "logo",
+        "bio": "bio",
+        "brandColor": "brandColor",
+        "bannerUrl": "bannerUrl",
+        "isDomainConfigured": "isDomainConfigured",
+        "stripeCustomerId": "stripeCustomerId",
+        "stripeSubscriptionId": "stripeSubscriptionId",
+        "stripeSubscriptionItemId": "stripeSubscriptionItemId",
+        "invitedMembers": "invitedMembers",
+        "teams": "teams",
+        "isComplete": "isComplete"
+      },
+      "nullable": [
+        "error",
+        "organizationId",
+        "logo",
+        "bio",
+        "brandColor",
+        "bannerUrl",
+        "stripeCustomerId",
+        "stripeSubscriptionId",
+        "stripeSubscriptionItemId"
+      ],
+      "relations": {
+        "createdBy": "User",
+        "organization": "Team"
+      }
+    },
+    "InternalNotePreset": {
+      "table": "InternalNotePreset",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "name": "name",
+        "cancellationReason": "cancellationReason",
+        "teamId": "teamId",
+        "createdAt": "createdAt"
+      },
+      "nullable": [
+        "cancellationReason"
+      ],
+      "relations": {
+        "team": "Team",
+        "BookingInternalNote": "BookingInternalNote"
+      }
+    },
+    "FilterSegment": {
+      "table": "FilterSegment",
+      "json": [
+        "activeFilters",
+        "sorting",
+        "columnVisibility",
+        "columnSizing"
+      ],
+      "list": {},
+      "enum": {
+        "scope": "FilterSegmentScope"
+      },
+      "columns": {
+        "id": "id",
+        "name": "name",
+        "tableIdentifier": "tableIdentifier",
+        "scope": "scope",
+        "activeFilters": "activeFilters",
+        "sorting": "sorting",
+        "columnVisibility": "columnVisibility",
+        "columnSizing": "columnSizing",
+        "perPage": "perPage",
+        "searchTerm": "searchTerm",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt",
+        "userId": "userId",
+        "teamId": "teamId"
+      },
+      "nullable": [
+        "activeFilters",
+        "sorting",
+        "columnVisibility",
+        "columnSizing",
+        "searchTerm",
+        "teamId"
+      ],
+      "relations": {
+        "user": "User",
+        "team": "Team",
+        "userPreferences": "UserFilterSegmentPreference"
+      }
+    },
+    "UserFilterSegmentPreference": {
+      "table": "UserFilterSegmentPreference",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "userId": "userId",
+        "tableIdentifier": "tableIdentifier",
+        "segmentId": "segmentId",
+        "systemSegmentId": "systemSegmentId",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt"
+      },
+      "nullable": [
+        "segmentId",
+        "systemSegmentId"
+      ],
+      "relations": {
+        "user": "User",
+        "segment": "FilterSegment"
+      }
+    },
+    "BookingInternalNote": {
+      "table": "BookingInternalNote",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "notePresetId": "notePresetId",
+        "text": "text",
+        "bookingId": "bookingId",
+        "createdById": "createdById",
+        "createdAt": "createdAt"
+      },
+      "nullable": [
+        "notePresetId",
+        "text"
+      ],
+      "relations": {
+        "notePreset": "InternalNotePreset",
+        "booking": "Booking",
+        "createdBy": "User"
+      }
+    },
+    "Role": {
+      "table": "Role",
+      "json": [],
+      "list": {},
+      "enum": {
+        "type": "RoleType"
+      },
+      "columns": {
+        "id": "id",
+        "name": "name",
+        "color": "color",
+        "description": "description",
+        "teamId": "teamId",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt",
+        "type": "type"
+      },
+      "nullable": [
+        "color",
+        "description",
+        "teamId"
+      ],
+      "relations": {
+        "team": "Team",
+        "permissions": "RolePermission",
+        "memberships": "Membership"
+      }
+    },
+    "RolePermission": {
+      "table": "RolePermission",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "roleId": "roleId",
+        "resource": "resource",
+        "action": "action",
+        "createdAt": "createdAt"
+      },
+      "nullable": [],
+      "relations": {
+        "role": "Role"
+      }
+    },
+    "AuditActor": {
+      "table": "AuditActor",
+      "json": [],
+      "list": {},
+      "enum": {
+        "type": "AuditActorType"
+      },
+      "columns": {
+        "id": "id",
+        "type": "type",
+        "userUuid": "userUuid",
+        "attendeeId": "attendeeId",
+        "credentialId": "credentialId",
+        "email": "email",
+        "phone": "phone",
+        "name": "name",
+        "createdAt": "createdAt"
+      },
+      "nullable": [
+        "userUuid",
+        "attendeeId",
+        "credentialId",
+        "email",
+        "phone",
+        "name"
+      ],
+      "relations": {
+        "bookingAudits": "BookingAudit"
+      }
+    },
+    "BookingAudit": {
+      "table": "BookingAudit",
+      "json": [
+        "data",
+        "context"
+      ],
+      "list": {},
+      "enum": {
+        "type": "BookingAuditType",
+        "action": "BookingAuditAction",
+        "source": "BookingAuditSource"
+      },
+      "columns": {
+        "id": "id",
+        "bookingUid": "bookingUid",
+        "actorId": "actorId",
+        "type": "type",
+        "action": "action",
+        "timestamp": "timestamp",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt",
+        "source": "source",
+        "operationId": "operationId",
+        "data": "data",
+        "context": "context"
+      },
+      "nullable": [
+        "data",
+        "context"
+      ],
+      "relations": {
+        "actor": "AuditActor"
+      }
+    },
+    "Agent": {
+      "table": "Agent",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "name": "name",
+        "userId": "userId",
+        "teamId": "teamId",
+        "providerAgentId": "providerAgentId",
+        "inboundEventTypeId": "inboundEventTypeId",
+        "outboundEventTypeId": "outboundEventTypeId",
+        "enabled": "enabled",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt"
+      },
+      "nullable": [
+        "userId",
+        "teamId",
+        "inboundEventTypeId",
+        "outboundEventTypeId"
+      ],
+      "relations": {
+        "user": "User",
+        "team": "Team",
+        "inboundPhoneNumbers": "CalAiPhoneNumber",
+        "outboundPhoneNumbers": "CalAiPhoneNumber"
+      }
+    },
+    "CalAiPhoneNumber": {
+      "table": "CalAiPhoneNumber",
+      "json": [],
+      "list": {},
+      "enum": {
+        "subscriptionStatus": "PhoneNumberSubscriptionStatus"
+      },
+      "columns": {
+        "id": "id",
+        "userId": "userId",
+        "teamId": "teamId",
+        "phoneNumber": "phoneNumber",
+        "provider": "provider",
+        "providerPhoneNumberId": "providerPhoneNumberId",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt",
+        "stripeCustomerId": "stripeCustomerId",
+        "stripeSubscriptionId": "stripeSubscriptionId",
+        "subscriptionStatus": "subscriptionStatus",
+        "inboundAgentId": "inboundAgentId",
+        "outboundAgentId": "outboundAgentId"
+      },
+      "nullable": [
+        "userId",
+        "teamId",
+        "providerPhoneNumberId",
+        "stripeCustomerId",
+        "stripeSubscriptionId",
+        "subscriptionStatus",
+        "inboundAgentId",
+        "outboundAgentId"
+      ],
+      "relations": {
+        "user": "User",
+        "team": "Team",
+        "inboundAgent": "Agent",
+        "outboundAgent": "Agent"
+      }
+    },
+    "TeamBilling": {
+      "table": "TeamBilling",
+      "json": [],
+      "list": {},
+      "enum": {
+        "billingPeriod": "BillingPeriod",
+        "billingMode": "BillingMode"
+      },
+      "columns": {
+        "id": "id",
+        "teamId": "teamId",
+        "subscriptionId": "subscriptionId",
+        "subscriptionItemId": "subscriptionItemId",
+        "customerId": "customerId",
+        "status": "status",
+        "planName": "planName",
+        "subscriptionStart": "subscriptionStart",
+        "subscriptionTrialEnd": "subscriptionTrialEnd",
+        "subscriptionEnd": "subscriptionEnd",
+        "billingPeriod": "billingPeriod",
+        "billingMode": "billingMode",
+        "pricePerSeat": "pricePerSeat",
+        "paidSeats": "paidSeats",
+        "highWaterMark": "highWaterMark",
+        "highWaterMarkPeriodStart": "highWaterMarkPeriodStart",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt"
+      },
+      "nullable": [
+        "subscriptionStart",
+        "subscriptionTrialEnd",
+        "subscriptionEnd",
+        "billingPeriod",
+        "pricePerSeat",
+        "paidSeats",
+        "highWaterMark",
+        "highWaterMarkPeriodStart"
+      ],
+      "relations": {
+        "team": "Team",
+        "monthlyProrations": "MonthlyProration",
+        "seatChangeLogs": "SeatChangeLog"
+      }
+    },
+    "OrganizationBilling": {
+      "table": "OrganizationBilling",
+      "json": [],
+      "list": {},
+      "enum": {
+        "billingPeriod": "BillingPeriod",
+        "billingMode": "BillingMode"
+      },
+      "columns": {
+        "id": "id",
+        "teamId": "teamId",
+        "subscriptionId": "subscriptionId",
+        "subscriptionItemId": "subscriptionItemId",
+        "customerId": "customerId",
+        "status": "status",
+        "planName": "planName",
+        "subscriptionStart": "subscriptionStart",
+        "subscriptionTrialEnd": "subscriptionTrialEnd",
+        "subscriptionEnd": "subscriptionEnd",
+        "billingPeriod": "billingPeriod",
+        "billingMode": "billingMode",
+        "pricePerSeat": "pricePerSeat",
+        "paidSeats": "paidSeats",
+        "highWaterMark": "highWaterMark",
+        "highWaterMarkPeriodStart": "highWaterMarkPeriodStart",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt"
+      },
+      "nullable": [
+        "subscriptionStart",
+        "subscriptionTrialEnd",
+        "subscriptionEnd",
+        "billingPeriod",
+        "pricePerSeat",
+        "paidSeats",
+        "highWaterMark",
+        "highWaterMarkPeriodStart"
+      ],
+      "relations": {
+        "team": "Team",
+        "monthlyProrations": "MonthlyProration",
+        "seatChangeLogs": "SeatChangeLog"
+      }
+    },
+    "SeatChangeLog": {
+      "table": "SeatChangeLog",
+      "json": [
+        "metadata"
+      ],
+      "list": {},
+      "enum": {
+        "changeType": "SeatChangeType"
+      },
+      "columns": {
+        "id": "id",
+        "teamId": "teamId",
+        "changeType": "changeType",
+        "seatCount": "seatCount",
+        "userId": "userId",
+        "triggeredBy": "triggeredBy",
+        "changeDate": "changeDate",
+        "monthKey": "monthKey",
+        "operationId": "operationId",
+        "processedInProrationId": "processedInProrationId",
+        "metadata": "metadata",
+        "createdAt": "createdAt",
+        "teamBillingId": "teamBillingId",
+        "organizationBillingId": "organizationBillingId"
+      },
+      "nullable": [
+        "userId",
+        "triggeredBy",
+        "operationId",
+        "processedInProrationId",
+        "metadata",
+        "teamBillingId",
+        "organizationBillingId"
+      ],
+      "relations": {
+        "team": "Team",
+        "proration": "MonthlyProration",
+        "teamBilling": "TeamBilling",
+        "organizationBilling": "OrganizationBilling"
+      }
+    },
+    "MonthlyProration": {
+      "table": "MonthlyProration",
+      "json": [
+        "metadata"
+      ],
+      "list": {},
+      "enum": {
+        "status": "ProrationStatus"
+      },
+      "columns": {
+        "id": "id",
+        "teamId": "teamId",
+        "monthKey": "monthKey",
+        "periodStart": "periodStart",
+        "periodEnd": "periodEnd",
+        "seatsAtStart": "seatsAtStart",
+        "seatsAdded": "seatsAdded",
+        "seatsRemoved": "seatsRemoved",
+        "netSeatIncrease": "netSeatIncrease",
+        "seatsAtEnd": "seatsAtEnd",
+        "subscriptionId": "subscriptionId",
+        "subscriptionItemId": "subscriptionItemId",
+        "customerId": "customerId",
+        "subscriptionStart": "subscriptionStart",
+        "subscriptionEnd": "subscriptionEnd",
+        "remainingDays": "remainingDays",
+        "pricePerSeat": "pricePerSeat",
+        "proratedAmount": "proratedAmount",
+        "invoiceItemId": "invoiceItemId",
+        "invoiceId": "invoiceId",
+        "invoiceUrl": "invoiceUrl",
+        "status": "status",
+        "chargedAt": "chargedAt",
+        "failedAt": "failedAt",
+        "failureReason": "failureReason",
+        "retryCount": "retryCount",
+        "metadata": "metadata",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt",
+        "teamBillingId": "teamBillingId",
+        "organizationBillingId": "organizationBillingId"
+      },
+      "nullable": [
+        "invoiceItemId",
+        "invoiceId",
+        "invoiceUrl",
+        "chargedAt",
+        "failedAt",
+        "failureReason",
+        "metadata",
+        "teamBillingId",
+        "organizationBillingId"
+      ],
+      "relations": {
+        "team": "Team",
+        "seatChanges": "SeatChangeLog",
+        "teamBilling": "TeamBilling",
+        "organizationBilling": "OrganizationBilling"
+      }
+    },
+    "CalendarCacheEvent": {
+      "table": "CalendarCacheEvent",
+      "json": [],
+      "list": {},
+      "enum": {
+        "status": "CalendarCacheEventStatus"
+      },
+      "columns": {
+        "id": "id",
+        "selectedCalendarId": "selectedCalendarId",
+        "externalId": "externalId",
+        "externalEtag": "externalEtag",
+        "iCalUID": "iCalUID",
+        "iCalSequence": "iCalSequence",
+        "summary": "summary",
+        "description": "description",
+        "location": "location",
+        "start": "start",
+        "end": "end",
+        "isAllDay": "isAllDay",
+        "timeZone": "timeZone",
+        "status": "status",
+        "recurringEventId": "recurringEventId",
+        "originalStartTime": "originalStartTime",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt",
+        "externalCreatedAt": "externalCreatedAt",
+        "externalUpdatedAt": "externalUpdatedAt"
+      },
+      "nullable": [
+        "iCalUID",
+        "summary",
+        "description",
+        "location",
+        "timeZone",
+        "recurringEventId",
+        "originalStartTime",
+        "externalCreatedAt",
+        "externalUpdatedAt"
+      ],
+      "relations": {
+        "selectedCalendar": "SelectedCalendar"
+      }
+    },
+    "IntegrationAttributeSync": {
+      "table": "IntegrationAttributeSync",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "organizationId": "organizationId",
+        "name": "name",
+        "integration": "integration",
+        "credentialId": "credentialId",
+        "enabled": "enabled",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt"
+      },
+      "nullable": [
+        "credentialId"
+      ],
+      "relations": {
+        "organization": "Team",
+        "credential": "Credential",
+        "attributeSyncRule": "AttributeSyncRule",
+        "syncFieldMappings": "AttributeSyncFieldMapping"
+      }
+    },
+    "AttributeSyncRule": {
+      "table": "AttributeSyncRule",
+      "json": [
+        "rule"
+      ],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "integrationAttributeSyncId": "integrationAttributeSyncId",
+        "rule": "rule",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt"
+      },
+      "nullable": [],
+      "relations": {
+        "integrationAttributeSync": "IntegrationAttributeSync"
+      }
+    },
+    "AttributeSyncFieldMapping": {
+      "table": "AttributeSyncFieldMapping",
+      "json": [],
+      "list": {},
+      "enum": {},
+      "columns": {
+        "id": "id",
+        "integrationFieldName": "integrationFieldName",
+        "attributeId": "attributeId",
+        "enabled": "enabled",
+        "integrationAttributeSyncId": "integrationAttributeSyncId",
+        "createdAt": "createdAt",
+        "updatedAt": "updatedAt"
+      },
+      "nullable": [],
+      "relations": {
+        "attribute": "Attribute",
+        "integrationAttributeSync": "IntegrationAttributeSync"
+      }
+    }
+  },
+  "emulatedRelations": [
+    {
+      "parent": "Schedule",
+      "child": "Host",
+      "field": "schedule",
+      "onDelete": "SetNull",
+      "fields": [
+        "scheduleId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "HostGroup",
+      "child": "Host",
+      "field": "group",
+      "onDelete": "SetNull",
+      "fields": [
+        "groupId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "Credential",
+      "child": "HostLocation",
+      "field": "credential",
+      "onDelete": "SetNull",
+      "fields": [
+        "credentialId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "User",
+      "child": "EventType",
+      "field": "owner",
+      "onDelete": "Cascade",
+      "fields": [
+        "userId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "Profile",
+      "child": "EventType",
+      "field": "profile",
+      "onDelete": "SetNull",
+      "fields": [
+        "profileId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "EventType",
+      "child": "EventType",
+      "field": "parent",
+      "onDelete": "Cascade",
+      "fields": [
+        "parentId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "Schedule",
+      "child": "EventType",
+      "field": "schedule",
+      "onDelete": "SetNull",
+      "fields": [
+        "scheduleId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "Schedule",
+      "child": "EventType",
+      "field": "instantMeetingSchedule",
+      "onDelete": "SetNull",
+      "fields": [
+        "instantMeetingScheduleId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "Schedule",
+      "child": "EventType",
+      "field": "restrictionSchedule",
+      "onDelete": "SetNull",
+      "fields": [
+        "restrictionScheduleId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "Credential",
+      "child": "DestinationCalendar",
+      "field": "credential",
+      "onDelete": "Cascade",
+      "fields": [
+        "credentialId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "Team",
+      "child": "User",
+      "field": "organization",
+      "onDelete": "SetNull",
+      "fields": [
+        "organizationId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "Profile",
+      "child": "User",
+      "field": "movedToProfile",
+      "onDelete": "SetNull",
+      "fields": [
+        "movedToProfileId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "Team",
+      "child": "Team",
+      "field": "parent",
+      "onDelete": "Cascade",
+      "fields": [
+        "parentId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "Role",
+      "child": "Membership",
+      "field": "customRole",
+      "onDelete": "SetNull",
+      "fields": [
+        "customRoleId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "Team",
+      "child": "Membership",
+      "field": "team",
+      "onDelete": "Cascade",
+      "fields": [
+        "teamId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "User",
+      "child": "Membership",
+      "field": "user",
+      "onDelete": "Cascade",
+      "fields": [
+        "userId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "DelegationCredential",
+      "child": "BookingReference",
+      "field": "delegationCredential",
+      "onDelete": "SetNull",
+      "fields": [
+        "delegationCredentialId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "User",
+      "child": "Booking",
+      "field": "user",
+      "onDelete": "Cascade",
+      "fields": [
+        "userId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "EventType",
+      "child": "Booking",
+      "field": "eventType",
+      "onDelete": "SetNull",
+      "fields": [
+        "eventTypeId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "DestinationCalendar",
+      "child": "Booking",
+      "field": "destinationCalendar",
+      "onDelete": "SetNull",
+      "fields": [
+        "destinationCalendarId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "User",
+      "child": "Booking",
+      "field": "reassignBy",
+      "onDelete": "SetNull",
+      "fields": [
+        "reassignById"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "Schedule",
+      "child": "Availability",
+      "field": "Schedule",
+      "onDelete": "SetNull",
+      "fields": [
+        "scheduleId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "Credential",
+      "child": "SelectedCalendar",
+      "field": "credential",
+      "onDelete": "Cascade",
+      "fields": [
+        "credentialId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "EventType",
+      "child": "Webhook",
+      "field": "eventType",
+      "onDelete": "Cascade",
+      "fields": [
+        "eventTypeId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "PlatformOAuthClient",
+      "child": "Webhook",
+      "field": "platformOAuthClient",
+      "onDelete": "Cascade",
+      "fields": [
+        "platformOAuthClientId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "Attendee",
+      "child": "BookingSeat",
+      "field": "attendee",
+      "onDelete": "Cascade",
+      "fields": [
+        "attendeeId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "User",
+      "child": "OAuthClient",
+      "field": "user",
+      "onDelete": "SetNull",
+      "fields": [
+        "userId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "User",
+      "child": "OutOfOfficeEntry",
+      "field": "toUser",
+      "onDelete": "Cascade",
+      "fields": [
+        "toUserId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "OutOfOfficeReason",
+      "child": "OutOfOfficeEntry",
+      "field": "reason",
+      "onDelete": "SetNull",
+      "fields": [
+        "reasonId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "Team",
+      "child": "PlatformOAuthClient",
+      "field": "organization",
+      "onDelete": "Cascade",
+      "fields": [
+        "organizationId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "DSyncData",
+      "child": "DSyncTeamGroupMapping",
+      "field": "directory",
+      "onDelete": "Cascade",
+      "fields": [
+        "directoryId"
+      ],
+      "references": [
+        "directoryId"
+      ]
+    },
+    {
+      "parent": "User",
+      "child": "SecondaryEmail",
+      "field": "user",
+      "onDelete": "Cascade",
+      "fields": [
+        "userId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "Team",
+      "child": "ManagedOrganization",
+      "field": "managerOrganization",
+      "onDelete": "Cascade",
+      "fields": [
+        "managerOrganizationId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "PlatformBilling",
+      "child": "PlatformBilling",
+      "field": "managerBilling",
+      "onDelete": "SetNull",
+      "fields": [
+        "managerBillingId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "DSyncData",
+      "child": "AttributeToUser",
+      "field": "createdByDSync",
+      "onDelete": "SetNull",
+      "fields": [
+        "createdByDSyncId"
+      ],
+      "references": [
+        "directoryId"
+      ]
+    },
+    {
+      "parent": "User",
+      "child": "AttributeToUser",
+      "field": "updatedBy",
+      "onDelete": "SetNull",
+      "fields": [
+        "updatedById"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "DSyncData",
+      "child": "AttributeToUser",
+      "field": "updatedByDSync",
+      "onDelete": "SetNull",
+      "fields": [
+        "updatedByDSyncId"
+      ],
+      "references": [
+        "directoryId"
+      ]
+    },
+    {
+      "parent": "Team",
+      "child": "DelegationCredential",
+      "field": "organization",
+      "onDelete": "Cascade",
+      "fields": [
+        "organizationId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "Watchlist",
+      "child": "BookingReport",
+      "field": "globalWatchlist",
+      "onDelete": "SetNull",
+      "fields": [
+        "globalWatchlistId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "User",
+      "child": "WrongAssignmentReport",
+      "field": "reviewedBy",
+      "onDelete": "SetNull",
+      "fields": [
+        "reviewedById"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "FilterSegment",
+      "child": "UserFilterSegmentPreference",
+      "field": "segment",
+      "onDelete": "Cascade",
+      "fields": [
+        "segmentId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "Agent",
+      "child": "CalAiPhoneNumber",
+      "field": "inboundAgent",
+      "onDelete": "SetNull",
+      "fields": [
+        "inboundAgentId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "Agent",
+      "child": "CalAiPhoneNumber",
+      "field": "outboundAgent",
+      "onDelete": "SetNull",
+      "fields": [
+        "outboundAgentId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "MonthlyProration",
+      "child": "SeatChangeLog",
+      "field": "proration",
+      "onDelete": "SetNull",
+      "fields": [
+        "processedInProrationId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "TeamBilling",
+      "child": "SeatChangeLog",
+      "field": "teamBilling",
+      "onDelete": "SetNull",
+      "fields": [
+        "teamBillingId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "OrganizationBilling",
+      "child": "SeatChangeLog",
+      "field": "organizationBilling",
+      "onDelete": "SetNull",
+      "fields": [
+        "organizationBillingId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "TeamBilling",
+      "child": "MonthlyProration",
+      "field": "teamBilling",
+      "onDelete": "SetNull",
+      "fields": [
+        "teamBillingId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "OrganizationBilling",
+      "child": "MonthlyProration",
+      "field": "organizationBilling",
+      "onDelete": "SetNull",
+      "fields": [
+        "organizationBillingId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "Credential",
+      "child": "IntegrationAttributeSync",
+      "field": "credential",
+      "onDelete": "Cascade",
+      "fields": [
+        "credentialId"
+      ],
+      "references": [
+        "id"
+      ]
+    },
+    {
+      "parent": "IntegrationAttributeSync",
+      "child": "AttributeSyncFieldMapping",
+      "field": "integrationAttributeSync",
+      "onDelete": "Cascade",
+      "fields": [
+        "integrationAttributeSyncId"
+      ],
+      "references": [
+        "id"
+      ]
+    }
+  ]
+}

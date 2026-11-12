@@ -70,6 +70,8 @@ packages/prisma/client/*
 !packages/prisma/client/index.ts
 apps/api/v2/generated/prisma/*
 packages/prisma/generated/prisma/*
+packages/prisma/generated/prisma-sqlserver/*
+packages/prisma/provider/selected.ts
 packages/prisma/zod/**/*.ts
 packages/prisma/enums
 

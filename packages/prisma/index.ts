@@ -1,23 +1,35 @@
-import { PrismaPg } from "@prisma/adapter-pg";
-import { Pool } from "pg";
+import process from "node:process";
+import { bookingIdempotencyKeyExtension } from "./extensions/booking-idempotency-key.ts";
+import { disallowUndefinedDeleteUpdateManyExtension } from "./extensions/disallow-undefined-delete-update-many.ts";
+import { excludeLockedUsersExtension } from "./extensions/exclude-locked-users.ts";
+import { excludePendingPaymentsExtension } from "./extensions/exclude-pending-payment-teams.ts";
+import type { PrismaClient as PgPrismaClient, Prisma } from "./generated/prisma/client.ts";
+// The database driver and generated client for DATABASE_PROVIDER (postgresql by default, or sqlserver).
+import {
+  createAdapter,
+  DATABASE_PROVIDER,
+  PrismaClient,
+  withProviderExtensions,
+} from "./provider/selected.ts";
+import { getConfiguredDatabaseProvider } from "./provider/types.ts";
 
-import { bookingIdempotencyKeyExtension } from "./extensions/booking-idempotency-key";
-import { disallowUndefinedDeleteUpdateManyExtension } from "./extensions/disallow-undefined-delete-update-many";
-import { excludeLockedUsersExtension } from "./extensions/exclude-locked-users";
-import { excludePendingPaymentsExtension } from "./extensions/exclude-pending-payment-teams";
-import { PrismaClient, type Prisma } from "./generated/prisma/client";
+type PrismaClient = PgPrismaClient;
+
+// The client is chosen when `prisma generate` runs; a different DATABASE_PROVIDER at runtime would
+// send this client's SQL to the wrong kind of database.
+if (getConfiguredDatabaseProvider() !== DATABASE_PROVIDER) {
+  throw new Error(
+    `DATABASE_PROVIDER is "${process.env.DATABASE_PROVIDER ?? ""}" but the Prisma client was generated for ` +
+      `"${DATABASE_PROVIDER}". Run \`yarn prisma generate\` (or yarn install) with the same DATABASE_PROVIDER.`
+  );
+}
 
 const connectionString = process.env.DATABASE_URL || "";
-const pool =
-  process.env.USE_POOL === "true" || process.env.USE_POOL === "1"
-    ? new Pool({
-        connectionString: connectionString,
-        max: 5,
-        idleTimeoutMillis: 300000,
-      })
-    : undefined;
-
-const adapter = pool ? new PrismaPg(pool) : new PrismaPg({ connectionString });
+const usePool = process.env.USE_POOL === "true" || process.env.USE_POOL === "1";
+const { adapter } = createAdapter(
+  connectionString,
+  usePool ? { pool: { max: 5, idleTimeoutMillis: 300000 } } : undefined
+);
 const prismaOptions: Prisma.PrismaClientOptions = {
   adapter,
 };
@@ -45,7 +57,7 @@ if (!isNaN(loggerLevel)) {
       break;
   }
 }
-const baseClient = globalForPrisma.baseClient || new PrismaClient(prismaOptions);
+const baseClient = globalForPrisma.baseClient || withProviderExtensions(new PrismaClient(prismaOptions));
 
 // Prisma 7 removed the `datasources` client option; a different database means a different driver adapter.
 type CustomPrismaOptions = Pick<Prisma.PrismaClientOptions, "log" | "errorFormat" | "transactionOptions"> & {
@@ -58,10 +70,10 @@ export const customPrisma = (options?: CustomPrismaOptions) => {
   const finalOptions: Prisma.PrismaClientOptions = {
     ...prismaOptions,
     ...restOptions,
-    adapter: customConnectionString ? new PrismaPg({ connectionString: customConnectionString }) : adapter,
+    adapter: customConnectionString ? createAdapter(customConnectionString).adapter : adapter,
   };
 
-  return new PrismaClient(finalOptions)
+  return withProviderExtensions(new PrismaClient(finalOptions))
     .$extends(excludeLockedUsersExtension())
     .$extends(excludePendingPaymentsExtension())
     .$extends(bookingIdempotencyKeyExtension())
@@ -107,4 +119,4 @@ export type {
  * @deprecated Use named export `prisma` instead
  */
 export default prisma;
-export * from "./selects";
+export * from "./selects/index.ts";
