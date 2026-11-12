@@ -1,6 +1,8 @@
 import process from "node:process";
 import type { CalendarService } from "@calcom/types/Calendar";
-import matchers from "@testing-library/jest-dom/matchers";
+// jest-dom 6+ ships named matchers and no longer adds its jest types globally on its own.
+/// <reference types="@testing-library/jest-dom" />
+import * as matchers from "@testing-library/jest-dom/matchers";
 import ResizeObserver from "resize-observer-polyfill";
 import { expect, vi } from "vitest";
 import createFetchMock from "vitest-fetch-mock";
@@ -10,6 +12,12 @@ global.ResizeObserver = ResizeObserver;
 // jsdom has no scrollIntoView; cmdk 1.x calls it when it highlights an item.
 if (typeof Element !== "undefined" && !Element.prototype.scrollIntoView) {
   Element.prototype.scrollIntoView = vi.fn();
+}
+
+// jsdom has no layout for Range either; lexical measures the selection after typing.
+if (typeof Range !== "undefined" && !Range.prototype.getBoundingClientRect) {
+  Range.prototype.getBoundingClientRect = () => DOMRect.fromRect();
+  Range.prototype.getClientRects = () => [] as unknown as DOMRectList;
 }
 
 if (typeof window !== "undefined") {

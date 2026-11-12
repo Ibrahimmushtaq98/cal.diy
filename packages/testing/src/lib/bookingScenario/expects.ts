@@ -255,15 +255,24 @@ expect.extend({
         return;
       }
 
-      const expectedRrule = `FREQ=${
-        expectedRecurrence.freq === 0 ? "YEARLY" : expectedRecurrence.freq === 1 ? "MONTHLY" : "WEEKLY"
-      };COUNT=${expectedRecurrence.count};INTERVAL=${expectedRecurrence.interval}`;
+      const expectedParts = [
+        `FREQ=${
+          expectedRecurrence.freq === 0 ? "YEARLY" : expectedRecurrence.freq === 1 ? "MONTHLY" : "WEEKLY"
+        }`,
+        `COUNT=${expectedRecurrence.count}`,
+        // node-ical drops INTERVAL when it's the default of 1.
+        ...(expectedRecurrence.interval === 1 ? [] : [`INTERVAL=${expectedRecurrence.interval}`]),
+      ];
 
       logger.silly({
-        expectedRrule,
+        expectedParts,
         rrule,
       });
-      expect(rrule).toContain(expectedRrule);
+      // node-ical doesn't promise an order for the RRULE parts, so compare them as a set.
+      // Only node-ical's re-serialised rule is checked here; the ICS we send is built by `ics`.
+      const rruleLine = rrule.split(/\r?\n/).find((line) => line.includes("FREQ=")) ?? "";
+      const actualParts = rruleLine.replace(/^RRULE:/, "").split(";");
+      expect(actualParts).toEqual(expect.arrayContaining(expectedParts));
     }
   },
 });
