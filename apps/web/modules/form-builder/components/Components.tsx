@@ -214,26 +214,28 @@ export const Components: Record<FieldType, Component> = {
         return <div />;
       }
 
+      // setValue isn't an input attribute; keep it off the DOM element.
+      const { setValue, ...inputProps } = props;
       return (
         <InputField
           type="email"
           id={props.name}
           noLabel={true}
           autoComplete="email"
-          {...props}
-          onChange={(e) => props.setValue(e.target.value)}
+          {...inputProps}
+          onChange={(e) => setValue(e.target.value)}
         />
       );
     },
   },
   address: {
     propsType: propsTypes.address,
-    factory: (props) => {
+    factory: ({ setValue, ...props }) => {
       return (
         <AddressInput
           id={props.name}
           onChange={(val) => {
-            props.setValue(val);
+            setValue(val);
           }}
           {...props}
           disabled={props.readOnly}
