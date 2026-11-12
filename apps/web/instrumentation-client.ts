@@ -6,6 +6,8 @@ import { initBotId } from "botid/client/core";
 
 if (process.env.NODE_ENV === "production") {
   Sentry.init({
+    // Sentry 11 collects cookies, user fields and HTTP bodies by default; keep them off like sendDefaultPii: false did.
+    dataCollection: { userInfo: false, cookies: false, httpBodies: [] },
     dsn: process.env.NEXT_PUBLIC_SENTRY_DSN_CLIENT,
 
     sampleRate: parseFloat(process.env.SENTRY_SAMPLE_RATE ?? "1.0") || 1.0,
