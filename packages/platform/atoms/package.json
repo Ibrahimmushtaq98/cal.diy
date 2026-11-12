@@ -49,6 +49,7 @@
   ],
   "module": "./dist/cal-atoms.js",
   "exports": {
+    "./availability/types": "./availability/types.ts",
     ".": {
       "import": "./dist/cal-atoms.js",
       "types": "./dist/index.d.ts",

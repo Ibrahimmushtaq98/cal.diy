@@ -12,7 +12,12 @@ export const getReactSelectProps = <
 }: {
   components: SelectComponentsConfig<Option, IsMulti, Group>;
   menuPlacement?: MenuPlacement;
-}) => {
+}): {
+  // Spelled out so the declaration doesn't point into react-select's internal file paths.
+  menuPlacement: MenuPlacement;
+  components: SelectComponentsConfig<Option, IsMulti, Group>;
+  unstyled: boolean;
+} => {
   return {
     menuPlacement,
     components: {

@@ -1,3 +1,4 @@
+import type { Mock } from "vitest";
 import { beforeEach, vi } from "vitest";
 import { mockClear, mockDeep } from "vitest-mock-extended";
 
@@ -28,7 +29,8 @@ export default oAuthManagerMock;
 const setFullMockOAuthManagerRequest = () => {
   useFullMockOAuthManagerRequest = true;
 };
-const defaultMockOAuthManager = vi.fn().mockImplementation(function() {
+// Typed explicitly so the declaration doesn't point into vitest's internal chunk files.
+const defaultMockOAuthManager: Mock = vi.fn().mockImplementation(function() {
   return {
     getTokenObjectOrFetch: vi.fn().mockImplementation(function() {
       return {

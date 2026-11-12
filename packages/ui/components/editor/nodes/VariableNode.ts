@@ -21,6 +21,10 @@ export class VariableNode extends TextNode {
     return dom;
   }
 
+  static importJSON(serializedNode: SerializedTextNode): VariableNode {
+    return $createVariableNode().updateFromJSON(serializedNode);
+  }
+
   exportJSON(): SerializedTextNode {
     return {
       ...super.exportJSON(),

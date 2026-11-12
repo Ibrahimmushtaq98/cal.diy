@@ -3,7 +3,7 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import {
   LexicalTypeaheadMenuPlugin,
-  TypeaheadOption,
+  MenuOption,
   useBasicTypeaheadTriggerMatch,
 } from "@lexical/react/LexicalTypeaheadMenuPlugin";
 import type { LexicalEditor } from "lexical";
@@ -68,7 +68,7 @@ function useVariablesTransform(editor: LexicalEditor): void {
   }, [editor]);
 }
 
-class VariableTypeaheadOption extends TypeaheadOption {
+class VariableTypeaheadOption extends MenuOption {
   name: string;
   constructor(name: string) {
     super(name);

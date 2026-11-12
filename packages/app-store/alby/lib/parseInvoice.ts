@@ -1,5 +1,7 @@
-import type { Invoice } from "@getalby/sdk/dist/types";
+import type { types as albyTypes } from "@getalby/sdk";
 import { Webhook } from "svix";
+
+type Invoice = albyTypes.Invoice;
 
 export default function parseInvoice(
   body: string,

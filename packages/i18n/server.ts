@@ -76,6 +76,7 @@ export const getTranslation = async (locale: string, ns: string) => {
   });
 
   // Cache the i18n instance
-  i18nInstanceCache.set(cacheKey, _i18n);
+  // react-i18next augments i18next's types for only one of its ESM/CJS declaration files.
+  i18nInstanceCache.set(cacheKey, _i18n as unknown as I18nInstance);
   return _i18n.getFixedT(locale, ns);
 };
