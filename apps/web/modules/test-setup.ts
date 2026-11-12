@@ -1,5 +1,6 @@
 // jest-dom 6+ ships named matchers and no longer adds its jest types globally on its own.
 /// <reference types="@testing-library/jest-dom" />
+/// <reference types="@testing-library/jest-dom/vitest" />
 import * as matchers from "@testing-library/jest-dom/matchers";
 import React from "react";
 import ResizeObserver from "resize-observer-polyfill";

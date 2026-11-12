@@ -27,8 +27,6 @@ afterAll(() => {
     // If it was originally undefined, delete it
     delete (Element.prototype as { scrollIntoView?: unknown }).scrollIntoView;
   }
-  // Clean up module mocks to avoid polluting other tests
-  vi.unmock("@calcom/embed-core/embed-iframe");
 });
 
 afterEach(() => {

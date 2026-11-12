@@ -3,7 +3,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { fakeCurrentDocumentUrl, nextTick } from "../embed-iframe/__tests__/test-utils";
 
 
-describe("embed-iframe", async () => {
+describe("embed-iframe", () => {
   let sdkActionManager: typeof import("../sdk-event").sdkActionManager;
   let embedStore: typeof import("../embed-iframe/lib/embedStore").embedStore
   let resetPageData: typeof import("../embed-iframe/lib/embedStore").resetPageData;
@@ -30,8 +30,8 @@ describe("embed-iframe", async () => {
     resetPageData();
   });
 
-  describe("embedStore.router.ensureQueryParamsInUrl", async () => {
-    const originalHistory = window.history;
+  describe("embedStore.router.ensureQueryParamsInUrl", () => {
+    const originalReplaceState = window.history.replaceState;
     const originalURL = window.URL;
     beforeEach(async () => {
       vi.useFakeTimers();
@@ -54,7 +54,8 @@ describe("embed-iframe", async () => {
     afterEach(() => {
       vi.useRealTimers();
       // Cleanup
-      window.history = originalHistory;
+      // window.history is getter-only under jsdom 30; restore the method we replaced instead.
+      window.history.replaceState = originalReplaceState;
       window.URL = originalURL;
       vi.resetAllMocks();
     });
@@ -145,7 +146,7 @@ describe("embed-iframe", async () => {
     });
   });
 
-  describe("getEmbedBookerState", async () => {
+  describe("getEmbedBookerState", () => {
     let getEmbedBookerState: typeof import("../embed-iframe").getEmbedBookerState;
     beforeEach(async () => {
       fakeCurrentDocumentUrl();
@@ -231,7 +232,7 @@ describe("embed-iframe", async () => {
     });
   });
 
-  describe("linkReady event handler", async () => {
+  describe("linkReady event handler", () => {
     const createTestEmbedState = (overrides?: {
       viewId?: number | null;
       bookerViewedHasFired?: boolean;

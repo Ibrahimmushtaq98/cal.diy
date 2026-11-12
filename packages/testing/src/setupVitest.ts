@@ -2,6 +2,7 @@ import process from "node:process";
 import type { CalendarService } from "@calcom/types/Calendar";
 // jest-dom 6+ ships named matchers and no longer adds its jest types globally on its own.
 /// <reference types="@testing-library/jest-dom" />
+/// <reference types="@testing-library/jest-dom/vitest" />
 import * as matchers from "@testing-library/jest-dom/matchers";
 import ResizeObserver from "resize-observer-polyfill";
 import { expect, vi } from "vitest";
@@ -219,8 +220,7 @@ vi.mock("@calcom/app-store/crm.apps.generated", () => ({
   },
 }));
 
-if (!process.env.INTEGRATION_TESTS) {
-  vi.mock("@calcom/app-store/salesforce/lib/graphql/documents/queries", () => ({
-    GetAccountRecordsForRRSkip: {},
-  }));
-}
+// vi.mock is hoisted, so it can't sit inside an `if` (vitest 5 rejects that). Decide inside the factory.
+vi.mock("@calcom/app-store/salesforce/lib/graphql/documents/queries", async (importOriginal) =>
+  process.env.INTEGRATION_TESTS ? importOriginal() : { GetAccountRecordsForRRSkip: {} }
+);

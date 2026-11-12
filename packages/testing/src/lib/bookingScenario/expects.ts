@@ -89,6 +89,13 @@ declare global {
   }
 }
 
+// vitest 5 no longer reads jest.Matchers, so declare the matcher on vitest's own interface too.
+declare module "vitest" {
+  interface Matchers<R extends void | Promise<void> = void | Promise<void>, T = unknown> {
+    toHaveEmail(expectedEmail: ExpectedEmail, to: string, subject?: string): R;
+  }
+}
+
 expect.extend({
   toHaveEmail(emails: Fixtures["emails"], expectedEmail: ExpectedEmail, to: string, subject?: string) {
     const { isNot } = this;

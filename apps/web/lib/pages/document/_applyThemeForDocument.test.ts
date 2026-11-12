@@ -23,21 +23,15 @@ describe("applyTheme", () => {
       key: vi.fn(() => null),
       length: 0,
     };
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    global.localStorage = mockLocalStorage;
+    vi.stubGlobal("localStorage", mockLocalStorage);
 
     // Mock requestAnimationFrame
     mockRequestAnimationFrame = vi.fn((cb) => {
       cb(0);
       return 0;
     });
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    global.window = { location: { pathname: "/" } };
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    global.requestAnimationFrame = mockRequestAnimationFrame;
+    vi.stubGlobal("window", { location: { pathname: "/" } });
+    vi.stubGlobal("requestAnimationFrame", mockRequestAnimationFrame);
 
     // Mock document
     addedClasses = [];
@@ -50,9 +44,7 @@ describe("applyTheme", () => {
         },
       },
     } as unknown as Document;
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    global.document = mockDocument;
+    vi.stubGlobal("document", mockDocument);
 
     // Mock console.error
     global.console.error = vi.fn();
@@ -60,6 +52,7 @@ describe("applyTheme", () => {
 
   afterEach(() => {
     vi.clearAllMocks();
+    vi.unstubAllGlobals();
   });
 
   it("should be reconstructable from toString() and executable", () => {

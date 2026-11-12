@@ -30,11 +30,13 @@ import { BookingStatus } from "@calcom/prisma/enums";
 import { getNewBookingHandler } from "../../handleNewBooking/test/getNewBookingHandler";
 import * as handleSeatsModule from "../handleSeats";
 
+// vi.mock is hoisted anyway; vitest 5 requires it at the top level.
+vi.mock("./handleSeats");
+
 describe("handleSeats", () => {
   setupAndTeardown();
 
   describe("Correct parameters being passed into handleSeats from handleNewBooking", () => {
-    vi.mock("./handleSeats");
 
     test("On new booking handleSeats is not called", async () => {
       const handleNewBooking = getNewBookingHandler();

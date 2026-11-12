@@ -71,11 +71,19 @@ declare global {
   }
 }
 
+// vitest 5 no longer reads jest.Matchers, so declare the matchers on vitest's own interface too.
+declare module "vitest" {
+  interface Matchers<R extends void | Promise<void> = void | Promise<void>, T = unknown> {
+    toHaveTimeSlots(expectedSlots: string[], date: { dateString: string; doExactMatch?: boolean }): R;
+    toHaveDateDisabled(date: { dateString: string }): R;
+  }
+}
+
 expect.extend({
   toHaveTimeSlots(
     schedule: { slots: Record<string, Slot[]> },
     expectedSlots: string[],
-    { dateString, doExactMatch }: { dateString: string; doExactMatch: boolean }
+    { dateString, doExactMatch }: { dateString: string; doExactMatch?: boolean }
   ) {
     if (!schedule.slots[`${dateString}`]) {
       return {

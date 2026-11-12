@@ -73,6 +73,24 @@ const openMenu = async () => {
   });
 };
 
+// vi.mock is hoisted anyway; vitest 5 requires it at the top level.
+vi.mock("@calcom/trpc/react", () => ({
+  trpc: {
+    viewer: {
+      timezones: {
+        cityTimezones: {
+          useQuery() {
+            return {
+              data: cityTimezonesMock,
+              isPending: false,
+            };
+          },
+        },
+      },
+    },
+  },
+}));
+
 describe("Test TimezoneSelect", () => {
   afterEach(() => {
     vi.clearAllMocks();
@@ -86,22 +104,6 @@ describe("Test TimezoneSelect", () => {
       // errors of "Cannot set property 'trpc' of [object Module] which has only a getter"
       // TODO: Update this pattern to be more consistent. Using this direct mocking in the
       // functions below breaks some tests.
-      vi.mock("@calcom/trpc/react", () => ({
-        trpc: {
-          viewer: {
-            timezones: {
-              cityTimezones: {
-                useQuery() {
-                  return {
-                    data: cityTimezonesMock,
-                    isPending: false,
-                  };
-                },
-              },
-            },
-          },
-        },
-      }));
     });
     test("Should render with the correct CSS when provided with classNames prop", async () => {
       renderSelect({ value: timezoneMockValues[0], classNames });

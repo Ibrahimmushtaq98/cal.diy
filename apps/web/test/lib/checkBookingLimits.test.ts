@@ -37,20 +37,20 @@ const checkBookingLimitsService = getCheckBookingLimitsService();
 describe("Check Booking Limits Tests", () => {
   it("Should return no errors", async () => {
     mockCountBookingsByEventTypeAndDateRange.mockResolvedValue(0);
-    expect(
+    await expect(
       checkBookingLimitsService.checkBookingLimits(MOCK_DATA.bookingLimits, MOCK_DATA.startDate, MOCK_DATA.id)
     ).resolves.toBeTruthy();
   });
   it("Should throw an error", async () => {
     mockCountBookingsByEventTypeAndDateRange.mockResolvedValue(2);
-    expect(
+    await expect(
       checkBookingLimitsService.checkBookingLimits(MOCK_DATA.bookingLimits, MOCK_DATA.startDate, MOCK_DATA.id)
     ).rejects.toThrowError();
   });
 
   it("Should pass with multiple booking limits", async () => {
     mockCountBookingsByEventTypeAndDateRange.mockResolvedValue(0);
-    expect(
+    await expect(
       checkBookingLimitsService.checkBookingLimits(
         {
           PER_DAY: 1,
@@ -64,7 +64,7 @@ describe("Check Booking Limits Tests", () => {
   it("Should pass with multiple booking limits with one undefined", async () => {
     mockCountBookingsByEventTypeAndDateRange.mockResolvedValue(0);
 
-    expect(
+    await expect(
       checkBookingLimitsService.checkBookingLimits(
         {
           PER_DAY: 1,
@@ -77,7 +77,7 @@ describe("Check Booking Limits Tests", () => {
   });
   it("Should handle multiple limits correctly", async () => {
     mockCountBookingsByEventTypeAndDateRange.mockResolvedValue(1);
-    expect(
+    await expect(
       checkBookingLimitsService.checkBookingLimit({
         key: "PER_DAY",
         limitingNumber: 2,
@@ -86,7 +86,7 @@ describe("Check Booking Limits Tests", () => {
       })
     ).resolves.not.toThrow();
     mockCountBookingsByEventTypeAndDateRange.mockResolvedValue(3);
-    expect(
+    await expect(
       checkBookingLimitsService.checkBookingLimit({
         key: "PER_WEEK",
         limitingNumber: 2,

@@ -411,7 +411,7 @@ describe("Credential Sync Disabled", () => {
         expireAccessToken: expireAccessToken,
       });
 
-      expect(async () => {
+      await expect(async () => {
         return auth.getTokenObjectOrFetch();
       }).rejects.toThrowError("could not refresh the token");
     });
@@ -444,7 +444,7 @@ describe("Credential Sync Disabled", () => {
         expireAccessToken: expireAccessToken,
       });
 
-      expect(async () => {
+      await expect(async () => {
         return auth.getTokenObjectOrFetch();
       }).rejects.toThrowError("fetchNewTokenObject error");
     });
@@ -479,7 +479,7 @@ describe("Credential Sync Disabled", () => {
         expireAccessToken: expireAccessToken,
       });
 
-      expect(async () => {
+      await expect(async () => {
         return auth.getTokenObjectOrFetch();
       }).rejects.toThrowError("fetchNewTokenObject error");
     });
