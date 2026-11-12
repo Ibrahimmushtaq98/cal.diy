@@ -2284,10 +2284,8 @@ ALTER TABLE [dbo].[Host] ADD CONSTRAINT [Host_userId_fkey] FOREIGN KEY ([userId]
 ALTER TABLE [dbo].[Host] ADD CONSTRAINT [Host_eventTypeId_fkey] FOREIGN KEY ([eventTypeId]) REFERENCES [dbo].[EventType]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[Host] ADD CONSTRAINT [Host_scheduleId_fkey] FOREIGN KEY ([scheduleId]) REFERENCES [dbo].[Schedule]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[Host] ADD CONSTRAINT [Host_groupId_fkey] FOREIGN KEY ([groupId]) REFERENCES [dbo].[HostGroup]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[Host] ADD CONSTRAINT [Host_memberId_fkey] FOREIGN KEY ([memberId]) REFERENCES [dbo].[Membership]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
@@ -2299,34 +2297,27 @@ ALTER TABLE [dbo].[HostGroup] ADD CONSTRAINT [HostGroup_eventTypeId_fkey] FOREIG
 ALTER TABLE [dbo].[HostLocation] ADD CONSTRAINT [HostLocation_userId_eventTypeId_fkey] FOREIGN KEY ([userId], [eventTypeId]) REFERENCES [dbo].[Host]([userId],[eventTypeId]) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[HostLocation] ADD CONSTRAINT [HostLocation_credentialId_fkey] FOREIGN KEY ([credentialId]) REFERENCES [dbo].[Credential]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[CalVideoSettings] ADD CONSTRAINT [CalVideoSettings_eventTypeId_fkey] FOREIGN KEY ([eventTypeId]) REFERENCES [dbo].[EventType]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[EventType] ADD CONSTRAINT [EventType_userId_fkey] FOREIGN KEY ([userId]) REFERENCES [dbo].[users]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[EventType] ADD CONSTRAINT [EventType_profileId_fkey] FOREIGN KEY ([profileId]) REFERENCES [dbo].[Profile]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[EventType] ADD CONSTRAINT [EventType_teamId_fkey] FOREIGN KEY ([teamId]) REFERENCES [dbo].[Team]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[EventType] ADD CONSTRAINT [EventType_parentId_fkey] FOREIGN KEY ([parentId]) REFERENCES [dbo].[EventType]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[EventType] ADD CONSTRAINT [EventType_scheduleId_fkey] FOREIGN KEY ([scheduleId]) REFERENCES [dbo].[Schedule]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[EventType] ADD CONSTRAINT [EventType_instantMeetingScheduleId_fkey] FOREIGN KEY ([instantMeetingScheduleId]) REFERENCES [dbo].[Schedule]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[EventType] ADD CONSTRAINT [EventType_secondaryEmailId_fkey] FOREIGN KEY ([secondaryEmailId]) REFERENCES [dbo].[SecondaryEmail]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[EventType] ADD CONSTRAINT [EventType_restrictionScheduleId_fkey] FOREIGN KEY ([restrictionScheduleId]) REFERENCES [dbo].[Schedule]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[Credential] ADD CONSTRAINT [Credential_userId_fkey] FOREIGN KEY ([userId]) REFERENCES [dbo].[users]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
@@ -2347,7 +2338,6 @@ ALTER TABLE [dbo].[DestinationCalendar] ADD CONSTRAINT [DestinationCalendar_user
 ALTER TABLE [dbo].[DestinationCalendar] ADD CONSTRAINT [DestinationCalendar_eventTypeId_fkey] FOREIGN KEY ([eventTypeId]) REFERENCES [dbo].[EventType]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[DestinationCalendar] ADD CONSTRAINT [DestinationCalendar_credentialId_fkey] FOREIGN KEY ([credentialId]) REFERENCES [dbo].[Credential]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[DestinationCalendar] ADD CONSTRAINT [DestinationCalendar_delegationCredentialId_fkey] FOREIGN KEY ([delegationCredentialId]) REFERENCES [dbo].[DelegationCredential]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
@@ -2359,10 +2349,8 @@ ALTER TABLE [dbo].[UserPassword] ADD CONSTRAINT [UserPassword_userId_fkey] FOREI
 ALTER TABLE [dbo].[TravelSchedule] ADD CONSTRAINT [TravelSchedule_userId_fkey] FOREIGN KEY ([userId]) REFERENCES [dbo].[users]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[users] ADD CONSTRAINT [users_organizationId_fkey] FOREIGN KEY ([organizationId]) REFERENCES [dbo].[Team]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[users] ADD CONSTRAINT [users_movedToProfileId_fkey] FOREIGN KEY ([movedToProfileId]) REFERENCES [dbo].[Profile]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[NotificationsSubscriptions] ADD CONSTRAINT [NotificationsSubscriptions_userId_fkey] FOREIGN KEY ([userId]) REFERENCES [dbo].[users]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
@@ -2374,7 +2362,6 @@ ALTER TABLE [dbo].[Profile] ADD CONSTRAINT [Profile_userId_fkey] FOREIGN KEY ([u
 ALTER TABLE [dbo].[Profile] ADD CONSTRAINT [Profile_organizationId_fkey] FOREIGN KEY ([organizationId]) REFERENCES [dbo].[Team]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[Team] ADD CONSTRAINT [Team_parentId_fkey] FOREIGN KEY ([parentId]) REFERENCES [dbo].[Team]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[Team] ADD CONSTRAINT [Team_createdByOAuthClientId_fkey] FOREIGN KEY ([createdByOAuthClientId]) REFERENCES [dbo].[PlatformOAuthClient]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
@@ -2398,13 +2385,10 @@ ALTER TABLE [dbo].[CreditExpenseLog] ADD CONSTRAINT [CreditExpenseLog_bookingUid
 ALTER TABLE [dbo].[OrganizationSettings] ADD CONSTRAINT [OrganizationSettings_organizationId_fkey] FOREIGN KEY ([organizationId]) REFERENCES [dbo].[Team]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[Membership] ADD CONSTRAINT [Membership_customRoleId_fkey] FOREIGN KEY ([customRoleId]) REFERENCES [dbo].[Role]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[Membership] ADD CONSTRAINT [Membership_teamId_fkey] FOREIGN KEY ([teamId]) REFERENCES [dbo].[Team]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[Membership] ADD CONSTRAINT [Membership_userId_fkey] FOREIGN KEY ([userId]) REFERENCES [dbo].[users]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[VerificationToken] ADD CONSTRAINT [VerificationToken_teamId_fkey] FOREIGN KEY ([teamId]) REFERENCES [dbo].[Team]([id]) ON DELETE SET NULL ON UPDATE NO ACTION;
@@ -2425,22 +2409,17 @@ ALTER TABLE [dbo].[BookingReference] ADD CONSTRAINT [BookingReference_bookingId_
 ALTER TABLE [dbo].[BookingReference] ADD CONSTRAINT [BookingReference_credentialId_fkey] FOREIGN KEY ([credentialId]) REFERENCES [dbo].[Credential]([id]) ON DELETE SET NULL ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[BookingReference] ADD CONSTRAINT [BookingReference_delegationCredentialId_fkey] FOREIGN KEY ([delegationCredentialId]) REFERENCES [dbo].[DelegationCredential]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[Attendee] ADD CONSTRAINT [Attendee_bookingId_fkey] FOREIGN KEY ([bookingId]) REFERENCES [dbo].[Booking]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[Booking] ADD CONSTRAINT [Booking_userId_fkey] FOREIGN KEY ([userId]) REFERENCES [dbo].[users]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[Booking] ADD CONSTRAINT [Booking_eventTypeId_fkey] FOREIGN KEY ([eventTypeId]) REFERENCES [dbo].[EventType]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[Booking] ADD CONSTRAINT [Booking_destinationCalendarId_fkey] FOREIGN KEY ([destinationCalendarId]) REFERENCES [dbo].[DestinationCalendar]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[Booking] ADD CONSTRAINT [Booking_reassignById_fkey] FOREIGN KEY ([reassignById]) REFERENCES [dbo].[users]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[Tracking] ADD CONSTRAINT [Tracking_bookingId_fkey] FOREIGN KEY ([bookingId]) REFERENCES [dbo].[Booking]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
@@ -2455,13 +2434,11 @@ ALTER TABLE [dbo].[Availability] ADD CONSTRAINT [Availability_userId_fkey] FOREI
 ALTER TABLE [dbo].[Availability] ADD CONSTRAINT [Availability_eventTypeId_fkey] FOREIGN KEY ([eventTypeId]) REFERENCES [dbo].[EventType]([id]) ON DELETE SET NULL ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[Availability] ADD CONSTRAINT [Availability_scheduleId_fkey] FOREIGN KEY ([scheduleId]) REFERENCES [dbo].[Schedule]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[SelectedCalendar] ADD CONSTRAINT [SelectedCalendar_userId_fkey] FOREIGN KEY ([userId]) REFERENCES [dbo].[users]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[SelectedCalendar] ADD CONSTRAINT [SelectedCalendar_credentialId_fkey] FOREIGN KEY ([credentialId]) REFERENCES [dbo].[Credential]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[SelectedCalendar] ADD CONSTRAINT [SelectedCalendar_delegationCredentialId_fkey] FOREIGN KEY ([delegationCredentialId]) REFERENCES [dbo].[DelegationCredential]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
@@ -2485,10 +2462,8 @@ ALTER TABLE [dbo].[Webhook] ADD CONSTRAINT [Webhook_userId_fkey] FOREIGN KEY ([u
 ALTER TABLE [dbo].[Webhook] ADD CONSTRAINT [Webhook_teamId_fkey] FOREIGN KEY ([teamId]) REFERENCES [dbo].[Team]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[Webhook] ADD CONSTRAINT [Webhook_eventTypeId_fkey] FOREIGN KEY ([eventTypeId]) REFERENCES [dbo].[EventType]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[Webhook] ADD CONSTRAINT [Webhook_platformOAuthClientId_fkey] FOREIGN KEY ([platformOAuthClientId]) REFERENCES [dbo].[PlatformOAuthClient]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[Webhook] ADD CONSTRAINT [Webhook_appId_fkey] FOREIGN KEY ([appId]) REFERENCES [dbo].[App]([slug]) ON DELETE CASCADE ON UPDATE NO ACTION;
@@ -2527,7 +2502,6 @@ ALTER TABLE [dbo].[WebhookScheduledTriggers] ADD CONSTRAINT [WebhookScheduledTri
 ALTER TABLE [dbo].[BookingSeat] ADD CONSTRAINT [BookingSeat_bookingId_fkey] FOREIGN KEY ([bookingId]) REFERENCES [dbo].[Booking]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[BookingSeat] ADD CONSTRAINT [BookingSeat_attendeeId_fkey] FOREIGN KEY ([attendeeId]) REFERENCES [dbo].[Attendee]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[VerifiedNumber] ADD CONSTRAINT [VerifiedNumber_userId_fkey] FOREIGN KEY ([userId]) REFERENCES [dbo].[users]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
@@ -2554,7 +2528,6 @@ ALTER TABLE [dbo].[TeamFeatures] ADD CONSTRAINT [TeamFeatures_teamId_fkey] FOREI
 ALTER TABLE [dbo].[TeamFeatures] ADD CONSTRAINT [TeamFeatures_featureId_fkey] FOREIGN KEY ([featureId]) REFERENCES [dbo].[Feature]([slug]) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[OAuthClient] ADD CONSTRAINT [OAuthClient_userId_fkey] FOREIGN KEY ([userId]) REFERENCES [dbo].[users]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[AccessCode] ADD CONSTRAINT [AccessCode_clientId_fkey] FOREIGN KEY ([clientId]) REFERENCES [dbo].[OAuthClient]([clientId]) ON DELETE CASCADE ON UPDATE NO ACTION;
@@ -2572,10 +2545,8 @@ ALTER TABLE [dbo].[CalendarCache] ADD CONSTRAINT [CalendarCache_credentialId_fke
 ALTER TABLE [dbo].[OutOfOfficeEntry] ADD CONSTRAINT [OutOfOfficeEntry_userId_fkey] FOREIGN KEY ([userId]) REFERENCES [dbo].[users]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[OutOfOfficeEntry] ADD CONSTRAINT [OutOfOfficeEntry_toUserId_fkey] FOREIGN KEY ([toUserId]) REFERENCES [dbo].[users]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[OutOfOfficeEntry] ADD CONSTRAINT [OutOfOfficeEntry_reasonId_fkey] FOREIGN KEY ([reasonId]) REFERENCES [dbo].[OutOfOfficeReason]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[OutOfOfficeReason] ADD CONSTRAINT [OutOfOfficeReason_userId_fkey] FOREIGN KEY ([userId]) REFERENCES [dbo].[users]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
@@ -2584,7 +2555,6 @@ ALTER TABLE [dbo].[OutOfOfficeReason] ADD CONSTRAINT [OutOfOfficeReason_userId_f
 ALTER TABLE [dbo].[UserHolidaySettings] ADD CONSTRAINT [UserHolidaySettings_userId_fkey] FOREIGN KEY ([userId]) REFERENCES [dbo].[users]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[PlatformOAuthClient] ADD CONSTRAINT [PlatformOAuthClient_organizationId_fkey] FOREIGN KEY ([organizationId]) REFERENCES [dbo].[Team]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[PlatformAuthorizationToken] ADD CONSTRAINT [PlatformAuthorizationToken_userId_fkey] FOREIGN KEY ([userId]) REFERENCES [dbo].[users]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
@@ -2611,19 +2581,15 @@ ALTER TABLE [dbo].[DSyncData] ADD CONSTRAINT [DSyncData_organizationId_fkey] FOR
 ALTER TABLE [dbo].[DSyncTeamGroupMapping] ADD CONSTRAINT [DSyncTeamGroupMapping_teamId_fkey] FOREIGN KEY ([teamId]) REFERENCES [dbo].[Team]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[DSyncTeamGroupMapping] ADD CONSTRAINT [DSyncTeamGroupMapping_directoryId_fkey] FOREIGN KEY ([directoryId]) REFERENCES [dbo].[DSyncData]([directoryId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[SecondaryEmail] ADD CONSTRAINT [SecondaryEmail_userId_fkey] FOREIGN KEY ([userId]) REFERENCES [dbo].[users]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[ManagedOrganization] ADD CONSTRAINT [ManagedOrganization_managedOrganizationId_fkey] FOREIGN KEY ([managedOrganizationId]) REFERENCES [dbo].[Team]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[ManagedOrganization] ADD CONSTRAINT [ManagedOrganization_managerOrganizationId_fkey] FOREIGN KEY ([managerOrganizationId]) REFERENCES [dbo].[Team]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[PlatformBilling] ADD CONSTRAINT [PlatformBilling_managerBillingId_fkey] FOREIGN KEY ([managerBillingId]) REFERENCES [dbo].[PlatformBilling]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[PlatformBilling] ADD CONSTRAINT [PlatformBilling_id_fkey] FOREIGN KEY ([id]) REFERENCES [dbo].[Team]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
@@ -2644,13 +2610,10 @@ ALTER TABLE [dbo].[AttributeToUser] ADD CONSTRAINT [AttributeToUser_attributeOpt
 ALTER TABLE [dbo].[AttributeToUser] ADD CONSTRAINT [AttributeToUser_createdById_fkey] FOREIGN KEY ([createdById]) REFERENCES [dbo].[users]([id]) ON DELETE SET NULL ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[AttributeToUser] ADD CONSTRAINT [AttributeToUser_createdByDSyncId_fkey] FOREIGN KEY ([createdByDSyncId]) REFERENCES [dbo].[DSyncData]([directoryId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[AttributeToUser] ADD CONSTRAINT [AttributeToUser_updatedById_fkey] FOREIGN KEY ([updatedById]) REFERENCES [dbo].[users]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[AttributeToUser] ADD CONSTRAINT [AttributeToUser_updatedByDSyncId_fkey] FOREIGN KEY ([updatedByDSyncId]) REFERENCES [dbo].[DSyncData]([directoryId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[AssignmentReason] ADD CONSTRAINT [AssignmentReason_bookingId_fkey] FOREIGN KEY ([bookingId]) REFERENCES [dbo].[Booking]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
@@ -2659,7 +2622,6 @@ ALTER TABLE [dbo].[AssignmentReason] ADD CONSTRAINT [AssignmentReason_bookingId_
 ALTER TABLE [dbo].[DelegationCredential] ADD CONSTRAINT [DelegationCredential_workspacePlatformId_fkey] FOREIGN KEY ([workspacePlatformId]) REFERENCES [dbo].[WorkspacePlatform]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[DelegationCredential] ADD CONSTRAINT [DelegationCredential_organizationId_fkey] FOREIGN KEY ([organizationId]) REFERENCES [dbo].[Team]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[EventTypeTranslation] ADD CONSTRAINT [EventTypeTranslation_eventTypeId_fkey] FOREIGN KEY ([eventTypeId]) REFERENCES [dbo].[EventType]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
@@ -2686,7 +2648,6 @@ ALTER TABLE [dbo].[BookingReport] ADD CONSTRAINT [BookingReport_organizationId_f
 ALTER TABLE [dbo].[BookingReport] ADD CONSTRAINT [BookingReport_watchlistId_fkey] FOREIGN KEY ([watchlistId]) REFERENCES [dbo].[Watchlist]([id]) ON DELETE SET NULL ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[BookingReport] ADD CONSTRAINT [BookingReport_globalWatchlistId_fkey] FOREIGN KEY ([globalWatchlistId]) REFERENCES [dbo].[Watchlist]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[WrongAssignmentReport] ADD CONSTRAINT [WrongAssignmentReport_bookingUid_fkey] FOREIGN KEY ([bookingUid]) REFERENCES [dbo].[Booking]([uid]) ON DELETE CASCADE ON UPDATE NO ACTION;
@@ -2698,7 +2659,6 @@ ALTER TABLE [dbo].[WrongAssignmentReport] ADD CONSTRAINT [WrongAssignmentReport_
 ALTER TABLE [dbo].[WrongAssignmentReport] ADD CONSTRAINT [WrongAssignmentReport_teamId_fkey] FOREIGN KEY ([teamId]) REFERENCES [dbo].[Team]([id]) ON DELETE SET NULL ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[WrongAssignmentReport] ADD CONSTRAINT [WrongAssignmentReport_reviewedById_fkey] FOREIGN KEY ([reviewedById]) REFERENCES [dbo].[users]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[OrganizationOnboarding] ADD CONSTRAINT [OrganizationOnboarding_createdById_fkey] FOREIGN KEY ([createdById]) REFERENCES [dbo].[users]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
@@ -2719,7 +2679,6 @@ ALTER TABLE [dbo].[FilterSegment] ADD CONSTRAINT [FilterSegment_teamId_fkey] FOR
 ALTER TABLE [dbo].[UserFilterSegmentPreference] ADD CONSTRAINT [UserFilterSegmentPreference_userId_fkey] FOREIGN KEY ([userId]) REFERENCES [dbo].[users]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[UserFilterSegmentPreference] ADD CONSTRAINT [UserFilterSegmentPreference_segmentId_fkey] FOREIGN KEY ([segmentId]) REFERENCES [dbo].[FilterSegment]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[BookingInternalNote] ADD CONSTRAINT [BookingInternalNote_notePresetId_fkey] FOREIGN KEY ([notePresetId]) REFERENCES [dbo].[InternalNotePreset]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
@@ -2752,10 +2711,8 @@ ALTER TABLE [dbo].[CalAiPhoneNumber] ADD CONSTRAINT [CalAiPhoneNumber_userId_fke
 ALTER TABLE [dbo].[CalAiPhoneNumber] ADD CONSTRAINT [CalAiPhoneNumber_teamId_fkey] FOREIGN KEY ([teamId]) REFERENCES [dbo].[Team]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[CalAiPhoneNumber] ADD CONSTRAINT [CalAiPhoneNumber_inboundAgentId_fkey] FOREIGN KEY ([inboundAgentId]) REFERENCES [dbo].[Agent]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[CalAiPhoneNumber] ADD CONSTRAINT [CalAiPhoneNumber_outboundAgentId_fkey] FOREIGN KEY ([outboundAgentId]) REFERENCES [dbo].[Agent]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[TeamBilling] ADD CONSTRAINT [TeamBilling_teamId_fkey] FOREIGN KEY ([teamId]) REFERENCES [dbo].[Team]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
@@ -2767,22 +2724,17 @@ ALTER TABLE [dbo].[OrganizationBilling] ADD CONSTRAINT [OrganizationBilling_team
 ALTER TABLE [dbo].[SeatChangeLog] ADD CONSTRAINT [SeatChangeLog_teamId_fkey] FOREIGN KEY ([teamId]) REFERENCES [dbo].[Team]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[SeatChangeLog] ADD CONSTRAINT [SeatChangeLog_processedInProrationId_fkey] FOREIGN KEY ([processedInProrationId]) REFERENCES [dbo].[MonthlyProration]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[SeatChangeLog] ADD CONSTRAINT [SeatChangeLog_teamBillingId_fkey] FOREIGN KEY ([teamBillingId]) REFERENCES [dbo].[TeamBilling]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[SeatChangeLog] ADD CONSTRAINT [SeatChangeLog_organizationBillingId_fkey] FOREIGN KEY ([organizationBillingId]) REFERENCES [dbo].[OrganizationBilling]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[MonthlyProration] ADD CONSTRAINT [MonthlyProration_teamId_fkey] FOREIGN KEY ([teamId]) REFERENCES [dbo].[Team]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[MonthlyProration] ADD CONSTRAINT [MonthlyProration_teamBillingId_fkey] FOREIGN KEY ([teamBillingId]) REFERENCES [dbo].[TeamBilling]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[MonthlyProration] ADD CONSTRAINT [MonthlyProration_organizationBillingId_fkey] FOREIGN KEY ([organizationBillingId]) REFERENCES [dbo].[OrganizationBilling]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[CalendarCacheEvent] ADD CONSTRAINT [CalendarCacheEvent_selectedCalendarId_fkey] FOREIGN KEY ([selectedCalendarId]) REFERENCES [dbo].[SelectedCalendar]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
@@ -2791,7 +2743,6 @@ ALTER TABLE [dbo].[CalendarCacheEvent] ADD CONSTRAINT [CalendarCacheEvent_select
 ALTER TABLE [dbo].[IntegrationAttributeSync] ADD CONSTRAINT [IntegrationAttributeSync_organizationId_fkey] FOREIGN KEY ([organizationId]) REFERENCES [dbo].[Team]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[IntegrationAttributeSync] ADD CONSTRAINT [IntegrationAttributeSync_credentialId_fkey] FOREIGN KEY ([credentialId]) REFERENCES [dbo].[Credential]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[AttributeSyncRule] ADD CONSTRAINT [AttributeSyncRule_integrationAttributeSyncId_fkey] FOREIGN KEY ([integrationAttributeSyncId]) REFERENCES [dbo].[IntegrationAttributeSync]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
@@ -2800,7 +2751,6 @@ ALTER TABLE [dbo].[AttributeSyncRule] ADD CONSTRAINT [AttributeSyncRule_integrat
 ALTER TABLE [dbo].[AttributeSyncFieldMapping] ADD CONSTRAINT [AttributeSyncFieldMapping_attributeId_fkey] FOREIGN KEY ([attributeId]) REFERENCES [dbo].[Attribute]([id]) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE [dbo].[AttributeSyncFieldMapping] ADD CONSTRAINT [AttributeSyncFieldMapping_integrationAttributeSyncId_fkey] FOREIGN KEY ([integrationAttributeSyncId]) REFERENCES [dbo].[IntegrationAttributeSync]([id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE [dbo].[_user_eventtype] ADD CONSTRAINT [_user_eventtype_A_fkey] FOREIGN KEY ([A]) REFERENCES [dbo].[EventType]([id]) ON DELETE CASCADE ON UPDATE CASCADE;
@@ -2813,6 +2763,157 @@ ALTER TABLE [dbo].[_PlatformOAuthClientToUser] ADD CONSTRAINT [_PlatformOAuthCli
 
 -- AddForeignKey
 ALTER TABLE [dbo].[_PlatformOAuthClientToUser] ADD CONSTRAINT [_PlatformOAuthClientToUser_B_fkey] FOREIGN KEY ([B]) REFERENCES [dbo].[users]([id]) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- Emulated ON DELETE actions (sqlserver/emulated-relations.sql)
+-- GENERATED by packages/prisma/sqlserver/generate-schema.mjs. Do not edit.
+-- ON DELETE behaviour SQL Server can't hold as foreign keys (see emulatedRelations in fields.json).
+-- new-migration.mjs adds this to a migration whenever it changes.
+DECLARE @drop NVARCHAR(MAX) = N'';
+SELECT @drop += N'DROP TRIGGER [dbo].' + QUOTENAME(name) + N';' FROM sys.triggers WHERE name LIKE N'%[_]emulated[_]on[_]delete';
+EXEC sp_executesql @drop;
+EXEC(N'CREATE TRIGGER [dbo].[Agent_emulated_on_delete] ON [dbo].[Agent] AFTER DELETE AS
+BEGIN
+  SET NOCOUNT ON;
+  UPDATE c SET c.[inboundAgentId] = NULL FROM [dbo].[CalAiPhoneNumber] c INNER JOIN deleted d ON c.[inboundAgentId] = d.[id]; -- CalAiPhoneNumber.inboundAgent
+  UPDATE c SET c.[outboundAgentId] = NULL FROM [dbo].[CalAiPhoneNumber] c INNER JOIN deleted d ON c.[outboundAgentId] = d.[id]; -- CalAiPhoneNumber.outboundAgent
+END');
+EXEC(N'CREATE TRIGGER [dbo].[Attendee_emulated_on_delete] ON [dbo].[Attendee] AFTER DELETE AS
+BEGIN
+  SET NOCOUNT ON;
+  DELETE c FROM [dbo].[BookingSeat] c INNER JOIN deleted d ON c.[attendeeId] = d.[id]; -- BookingSeat.attendee
+END');
+EXEC(N'CREATE TRIGGER [dbo].[Credential_emulated_on_delete] ON [dbo].[Credential] AFTER DELETE AS
+BEGIN
+  SET NOCOUNT ON;
+  UPDATE c SET c.[credentialId] = NULL FROM [dbo].[HostLocation] c INNER JOIN deleted d ON c.[credentialId] = d.[id]; -- HostLocation.credential
+  DELETE c FROM [dbo].[DestinationCalendar] c INNER JOIN deleted d ON c.[credentialId] = d.[id]; -- DestinationCalendar.credential
+  DELETE c FROM [dbo].[SelectedCalendar] c INNER JOIN deleted d ON c.[credentialId] = d.[id]; -- SelectedCalendar.credential
+  DELETE c FROM [dbo].[IntegrationAttributeSync] c INNER JOIN deleted d ON c.[credentialId] = d.[id]; -- IntegrationAttributeSync.credential
+END');
+EXEC(N'CREATE TRIGGER [dbo].[DelegationCredential_emulated_on_delete] ON [dbo].[DelegationCredential] AFTER DELETE AS
+BEGIN
+  SET NOCOUNT ON;
+  UPDATE c SET c.[delegationCredentialId] = NULL FROM [dbo].[BookingReference] c INNER JOIN deleted d ON c.[delegationCredentialId] = d.[id]; -- BookingReference.delegationCredential
+END');
+EXEC(N'CREATE TRIGGER [dbo].[DestinationCalendar_emulated_on_delete] ON [dbo].[DestinationCalendar] AFTER DELETE AS
+BEGIN
+  SET NOCOUNT ON;
+  UPDATE c SET c.[destinationCalendarId] = NULL FROM [dbo].[Booking] c INNER JOIN deleted d ON c.[destinationCalendarId] = d.[id]; -- Booking.destinationCalendar
+END');
+EXEC(N'CREATE TRIGGER [dbo].[DSyncData_emulated_on_delete] ON [dbo].[DSyncData] AFTER DELETE AS
+BEGIN
+  SET NOCOUNT ON;
+  DELETE c FROM [dbo].[DSyncTeamGroupMapping] c INNER JOIN deleted d ON c.[directoryId] = d.[directoryId]; -- DSyncTeamGroupMapping.directory
+  UPDATE c SET c.[createdByDSyncId] = NULL FROM [dbo].[AttributeToUser] c INNER JOIN deleted d ON c.[createdByDSyncId] = d.[directoryId]; -- AttributeToUser.createdByDSync
+  UPDATE c SET c.[updatedByDSyncId] = NULL FROM [dbo].[AttributeToUser] c INNER JOIN deleted d ON c.[updatedByDSyncId] = d.[directoryId]; -- AttributeToUser.updatedByDSync
+END');
+EXEC(N'CREATE TRIGGER [dbo].[EventType_emulated_on_delete] ON [dbo].[EventType] AFTER DELETE AS
+BEGIN
+  SET NOCOUNT ON;
+  DECLARE @gone TABLE ([id] INT PRIMARY KEY);
+  WITH tree AS (SELECT [id] FROM deleted UNION ALL SELECT c.[id] FROM [dbo].[EventType] c INNER JOIN tree t ON c.[parentId] = t.[id]) INSERT INTO @gone SELECT DISTINCT [id] FROM tree OPTION (MAXRECURSION 100);
+  UPDATE c SET c.[eventTypeId] = NULL FROM [dbo].[Booking] c INNER JOIN @gone d ON c.[eventTypeId] = d.[id]; -- Booking.eventType
+  DELETE c FROM [dbo].[Webhook] c INNER JOIN @gone d ON c.[eventTypeId] = d.[id]; -- Webhook.eventType
+  DELETE p FROM [dbo].[EventType] p INNER JOIN @gone g ON p.[id] = g.[id]; -- EventType.parent
+END');
+EXEC(N'CREATE TRIGGER [dbo].[FilterSegment_emulated_on_delete] ON [dbo].[FilterSegment] AFTER DELETE AS
+BEGIN
+  SET NOCOUNT ON;
+  DELETE c FROM [dbo].[UserFilterSegmentPreference] c INNER JOIN deleted d ON c.[segmentId] = d.[id]; -- UserFilterSegmentPreference.segment
+END');
+EXEC(N'CREATE TRIGGER [dbo].[HostGroup_emulated_on_delete] ON [dbo].[HostGroup] AFTER DELETE AS
+BEGIN
+  SET NOCOUNT ON;
+  UPDATE c SET c.[groupId] = NULL FROM [dbo].[Host] c INNER JOIN deleted d ON c.[groupId] = d.[id]; -- Host.group
+END');
+EXEC(N'CREATE TRIGGER [dbo].[IntegrationAttributeSync_emulated_on_delete] ON [dbo].[IntegrationAttributeSync] AFTER DELETE AS
+BEGIN
+  SET NOCOUNT ON;
+  DELETE c FROM [dbo].[AttributeSyncFieldMapping] c INNER JOIN deleted d ON c.[integrationAttributeSyncId] = d.[id]; -- AttributeSyncFieldMapping.integrationAttributeSync
+END');
+EXEC(N'CREATE TRIGGER [dbo].[MonthlyProration_emulated_on_delete] ON [dbo].[MonthlyProration] AFTER DELETE AS
+BEGIN
+  SET NOCOUNT ON;
+  UPDATE c SET c.[processedInProrationId] = NULL FROM [dbo].[SeatChangeLog] c INNER JOIN deleted d ON c.[processedInProrationId] = d.[id]; -- SeatChangeLog.proration
+END');
+EXEC(N'CREATE TRIGGER [dbo].[OrganizationBilling_emulated_on_delete] ON [dbo].[OrganizationBilling] AFTER DELETE AS
+BEGIN
+  SET NOCOUNT ON;
+  UPDATE c SET c.[organizationBillingId] = NULL FROM [dbo].[SeatChangeLog] c INNER JOIN deleted d ON c.[organizationBillingId] = d.[id]; -- SeatChangeLog.organizationBilling
+  UPDATE c SET c.[organizationBillingId] = NULL FROM [dbo].[MonthlyProration] c INNER JOIN deleted d ON c.[organizationBillingId] = d.[id]; -- MonthlyProration.organizationBilling
+END');
+EXEC(N'CREATE TRIGGER [dbo].[OutOfOfficeReason_emulated_on_delete] ON [dbo].[OutOfOfficeReason] AFTER DELETE AS
+BEGIN
+  SET NOCOUNT ON;
+  UPDATE c SET c.[reasonId] = NULL FROM [dbo].[OutOfOfficeEntry] c INNER JOIN deleted d ON c.[reasonId] = d.[id]; -- OutOfOfficeEntry.reason
+END');
+EXEC(N'CREATE TRIGGER [dbo].[PlatformBilling_emulated_on_delete] ON [dbo].[PlatformBilling] AFTER DELETE AS
+BEGIN
+  SET NOCOUNT ON;
+  UPDATE c SET c.[managerBillingId] = NULL FROM [dbo].[PlatformBilling] c INNER JOIN deleted d ON c.[managerBillingId] = d.[id]; -- PlatformBilling.managerBilling
+END');
+EXEC(N'CREATE TRIGGER [dbo].[PlatformOAuthClient_emulated_on_delete] ON [dbo].[PlatformOAuthClient] AFTER DELETE AS
+BEGIN
+  SET NOCOUNT ON;
+  DELETE c FROM [dbo].[Webhook] c INNER JOIN deleted d ON c.[platformOAuthClientId] = d.[id]; -- Webhook.platformOAuthClient
+END');
+EXEC(N'CREATE TRIGGER [dbo].[Profile_emulated_on_delete] ON [dbo].[Profile] AFTER DELETE AS
+BEGIN
+  SET NOCOUNT ON;
+  UPDATE c SET c.[profileId] = NULL FROM [dbo].[EventType] c INNER JOIN deleted d ON c.[profileId] = d.[id]; -- EventType.profile
+  UPDATE c SET c.[movedToProfileId] = NULL FROM [dbo].[users] c INNER JOIN deleted d ON c.[movedToProfileId] = d.[id]; -- User.movedToProfile
+END');
+EXEC(N'CREATE TRIGGER [dbo].[Role_emulated_on_delete] ON [dbo].[Role] AFTER DELETE AS
+BEGIN
+  SET NOCOUNT ON;
+  UPDATE c SET c.[customRoleId] = NULL FROM [dbo].[Membership] c INNER JOIN deleted d ON c.[customRoleId] = d.[id]; -- Membership.customRole
+END');
+EXEC(N'CREATE TRIGGER [dbo].[Schedule_emulated_on_delete] ON [dbo].[Schedule] AFTER DELETE AS
+BEGIN
+  SET NOCOUNT ON;
+  UPDATE c SET c.[scheduleId] = NULL FROM [dbo].[Host] c INNER JOIN deleted d ON c.[scheduleId] = d.[id]; -- Host.schedule
+  UPDATE c SET c.[scheduleId] = NULL FROM [dbo].[EventType] c INNER JOIN deleted d ON c.[scheduleId] = d.[id]; -- EventType.schedule
+  UPDATE c SET c.[instantMeetingScheduleId] = NULL FROM [dbo].[EventType] c INNER JOIN deleted d ON c.[instantMeetingScheduleId] = d.[id]; -- EventType.instantMeetingSchedule
+  UPDATE c SET c.[restrictionScheduleId] = NULL FROM [dbo].[EventType] c INNER JOIN deleted d ON c.[restrictionScheduleId] = d.[id]; -- EventType.restrictionSchedule
+  UPDATE c SET c.[scheduleId] = NULL FROM [dbo].[Availability] c INNER JOIN deleted d ON c.[scheduleId] = d.[id]; -- Availability.Schedule
+END');
+EXEC(N'CREATE TRIGGER [dbo].[Team_emulated_on_delete] ON [dbo].[Team] AFTER DELETE AS
+BEGIN
+  SET NOCOUNT ON;
+  DECLARE @gone TABLE ([id] INT PRIMARY KEY);
+  WITH tree AS (SELECT [id] FROM deleted UNION ALL SELECT c.[id] FROM [dbo].[Team] c INNER JOIN tree t ON c.[parentId] = t.[id]) INSERT INTO @gone SELECT DISTINCT [id] FROM tree OPTION (MAXRECURSION 100);
+  UPDATE c SET c.[organizationId] = NULL FROM [dbo].[users] c INNER JOIN @gone d ON c.[organizationId] = d.[id]; -- User.organization
+  DELETE c FROM [dbo].[Membership] c INNER JOIN @gone d ON c.[teamId] = d.[id]; -- Membership.team
+  DELETE c FROM [dbo].[PlatformOAuthClient] c INNER JOIN @gone d ON c.[organizationId] = d.[id]; -- PlatformOAuthClient.organization
+  DELETE c FROM [dbo].[ManagedOrganization] c INNER JOIN @gone d ON c.[managerOrganizationId] = d.[id]; -- ManagedOrganization.managerOrganization
+  DELETE c FROM [dbo].[DelegationCredential] c INNER JOIN @gone d ON c.[organizationId] = d.[id]; -- DelegationCredential.organization
+  DELETE p FROM [dbo].[Team] p INNER JOIN @gone g ON p.[id] = g.[id]; -- Team.parent
+END');
+EXEC(N'CREATE TRIGGER [dbo].[TeamBilling_emulated_on_delete] ON [dbo].[TeamBilling] AFTER DELETE AS
+BEGIN
+  SET NOCOUNT ON;
+  UPDATE c SET c.[teamBillingId] = NULL FROM [dbo].[SeatChangeLog] c INNER JOIN deleted d ON c.[teamBillingId] = d.[id]; -- SeatChangeLog.teamBilling
+  UPDATE c SET c.[teamBillingId] = NULL FROM [dbo].[MonthlyProration] c INNER JOIN deleted d ON c.[teamBillingId] = d.[id]; -- MonthlyProration.teamBilling
+END');
+EXEC(N'CREATE TRIGGER [dbo].[users_emulated_on_delete] ON [dbo].[users] AFTER DELETE AS
+BEGIN
+  SET NOCOUNT ON;
+  DELETE c FROM [dbo].[EventType] c INNER JOIN deleted d ON c.[userId] = d.[id]; -- EventType.owner
+  DELETE c FROM [dbo].[Membership] c INNER JOIN deleted d ON c.[userId] = d.[id]; -- Membership.user
+  DELETE c FROM [dbo].[Booking] c INNER JOIN deleted d ON c.[userId] = d.[id]; -- Booking.user
+  UPDATE c SET c.[reassignById] = NULL FROM [dbo].[Booking] c INNER JOIN deleted d ON c.[reassignById] = d.[id]; -- Booking.reassignBy
+  UPDATE c SET c.[userId] = NULL FROM [dbo].[OAuthClient] c INNER JOIN deleted d ON c.[userId] = d.[id]; -- OAuthClient.user
+  DELETE c FROM [dbo].[OutOfOfficeEntry] c INNER JOIN deleted d ON c.[toUserId] = d.[id]; -- OutOfOfficeEntry.toUser
+  DELETE c FROM [dbo].[SecondaryEmail] c INNER JOIN deleted d ON c.[userId] = d.[id]; -- SecondaryEmail.user
+  UPDATE c SET c.[updatedById] = NULL FROM [dbo].[AttributeToUser] c INNER JOIN deleted d ON c.[updatedById] = d.[id]; -- AttributeToUser.updatedBy
+  UPDATE c SET c.[reviewedById] = NULL FROM [dbo].[WrongAssignmentReport] c INNER JOIN deleted d ON c.[reviewedById] = d.[id]; -- WrongAssignmentReport.reviewedBy
+END');
+EXEC(N'CREATE TRIGGER [dbo].[Watchlist_emulated_on_delete] ON [dbo].[Watchlist] AFTER DELETE AS
+BEGIN
+  SET NOCOUNT ON;
+  UPDATE c SET c.[globalWatchlistId] = NULL FROM [dbo].[BookingReport] c INNER JOIN deleted d ON c.[globalWatchlistId] = d.[id]; -- BookingReport.globalWatchlist
+END');
+
 
 COMMIT TRAN;
 

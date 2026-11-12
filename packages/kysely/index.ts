@@ -11,7 +11,7 @@ import {
 import { Pool } from "pg";
 import * as Tarn from "tarn";
 import * as Tedious from "tedious";
-import type { Booking, DB } from "./types.ts";
+import type { Booking, DB } from "./types";
 
 export type { Booking, DB };
 

@@ -1,17 +1,17 @@
 import process from "node:process";
-import { bookingIdempotencyKeyExtension } from "./extensions/booking-idempotency-key.ts";
-import { disallowUndefinedDeleteUpdateManyExtension } from "./extensions/disallow-undefined-delete-update-many.ts";
-import { excludeLockedUsersExtension } from "./extensions/exclude-locked-users.ts";
-import { excludePendingPaymentsExtension } from "./extensions/exclude-pending-payment-teams.ts";
-import type { PrismaClient as PgPrismaClient, Prisma } from "./generated/prisma/client.ts";
+import { bookingIdempotencyKeyExtension } from "./extensions/booking-idempotency-key";
+import { disallowUndefinedDeleteUpdateManyExtension } from "./extensions/disallow-undefined-delete-update-many";
+import { excludeLockedUsersExtension } from "./extensions/exclude-locked-users";
+import { excludePendingPaymentsExtension } from "./extensions/exclude-pending-payment-teams";
+import type { PrismaClient as PgPrismaClient, Prisma } from "./generated/prisma/client";
 // The database driver and generated client for DATABASE_PROVIDER (postgresql by default, or sqlserver).
 import {
   createAdapter,
   DATABASE_PROVIDER,
   PrismaClient,
   withProviderExtensions,
-} from "./provider/selected.ts";
-import { getConfiguredDatabaseProvider } from "./provider/types.ts";
+} from "./provider/selected";
+import { getConfiguredDatabaseProvider } from "./provider/types";
 
 type PrismaClient = PgPrismaClient;
 
@@ -119,4 +119,4 @@ export type {
  * @deprecated Use named export `prisma` instead
  */
 export default prisma;
-export * from "./selects/index.ts";
+export * from "./selects/index";

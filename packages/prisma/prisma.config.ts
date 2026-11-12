@@ -2,7 +2,7 @@ import path from "node:path";
 import process from "node:process";
 import { config as loadEnv } from "dotenv";
 import { defineConfig } from "prisma/config";
-import { getConfiguredDatabaseProvider } from "./provider/types.ts";
+import { getConfiguredDatabaseProvider } from "./provider/types";
 
 // Prisma 7 no longer reads .env on its own. The CLI runs from packages/prisma; the env lives at the repo root.
 loadEnv({ path: path.resolve(__dirname, "../../.env"), quiet: true });

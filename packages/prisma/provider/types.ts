@@ -1,5 +1,5 @@
 import process from "node:process";
-import type { Prisma, PrismaClient } from "../generated/prisma/client.ts";
+import type { Prisma, PrismaClient } from "../generated/prisma/client";
 
 export type DatabaseProvider = "postgresql" | "sqlserver";
 

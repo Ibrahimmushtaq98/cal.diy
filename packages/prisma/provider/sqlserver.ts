@@ -5,10 +5,10 @@
 // Postgres client, which is what the app is written against; sqlserverExtension makes the runtime
 // shapes match (Json/list fields, filters). See packages/prisma/sqlserver/README.md.
 import { PrismaMssql } from "@prisma/adapter-mssql";
-import type { PrismaClient as PgPrismaClient } from "../generated/prisma/client.ts";
-import { PrismaClient as GeneratedPrismaClient } from "../generated/prisma-sqlserver/client.ts";
-import { sqlServerExtension } from "../sqlserver/extension.ts";
-import type { DatabaseProviderModule } from "./types.ts";
+import type { PrismaClient as PgPrismaClient } from "../generated/prisma/client";
+import { PrismaClient as GeneratedPrismaClient } from "../generated/prisma-sqlserver/client";
+import { sqlServerExtension } from "../sqlserver/extension";
+import type { DatabaseProviderModule } from "./types";
 
 export const DATABASE_PROVIDER = "sqlserver" as const;
 

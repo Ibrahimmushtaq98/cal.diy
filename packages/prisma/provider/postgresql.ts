@@ -2,8 +2,8 @@
 // selected.ts re-exports this module or ./sqlserver, depending on DATABASE_PROVIDER at generate time.
 import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";
-import { PrismaClient as GeneratedPrismaClient } from "../generated/prisma/client.ts";
-import type { DatabaseProviderModule } from "./types.ts";
+import { PrismaClient as GeneratedPrismaClient } from "../generated/prisma/client";
+import type { DatabaseProviderModule } from "./types";
 
 export const DATABASE_PROVIDER = "postgresql" as const;
 

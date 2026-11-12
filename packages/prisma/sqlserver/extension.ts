@@ -9,7 +9,7 @@
 //   - reads: Json and list columns are JSON.parse'd, through nested include/select results
 // Filters with no SQL Server equivalent (Json `path`, `array_contains`, list `push`) throw a clear error
 // so the call site can be ported, rather than silently returning wrong rows.
-import { Prisma as PgPrisma, type PrismaClient } from "../generated/prisma/client.ts";
+import { Prisma as PgPrisma, type PrismaClient } from "../generated/prisma/client";
 import fieldMap from "./fields.json";
 
 type ModelInfo = {

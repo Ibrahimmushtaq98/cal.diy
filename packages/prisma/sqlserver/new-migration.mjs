@@ -9,9 +9,13 @@
 //   3. post-process the SQL (see below)
 //   4. write sqlserver/migrations/<timestamp>_<name>/migration.sql and update the snapshot
 //
-// Post-processing: Postgres lets any number of rows share NULL in a unique key; SQL Server allows one.
-// Unique keys with nullable columns become filtered unique indexes (WHERE col IS NOT NULL ...),
-// which is exactly the Postgres behaviour.
+// Post-processing:
+//   - Postgres lets any number of rows share NULL in a unique key; SQL Server allows one. Unique keys
+//     with nullable columns become filtered unique indexes (WHERE col IS NOT NULL ...), which is
+//     exactly the Postgres behaviour.
+//   - Relations whose ON DELETE SQL Server can't hold (emulatedRelations in fields.json) get no
+//     foreign key; the AFTER DELETE triggers in emulated-relations.sql do the cascade / set-null,
+//     and are added to the migration whenever they change.
 //
 // Data changes in upstream Postgres migrations (UPDATE/INSERT statements, triggers, views) are not in
 // the schema, so they are not carried over: add them by hand to the generated migration.sql.
@@ -105,6 +109,41 @@ sql = sql.replace(/ALTER TABLE \[dbo\]\.\[(\w+)\] DROP CONSTRAINT \[(\w+_key)\];
   return wasNullable ? `DROP INDEX [${idx}] ON [dbo].[${table}];` : stmt;
 });
 
+// 5) emulated relations get no foreign key: the AFTER DELETE triggers in emulated-relations.sql
+//    clean up their rows, and a NO ACTION foreign key would block the parent delete first.
+const { emulatedRelations } = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "fields.json"), "utf8"));
+const emulatedFks = new Set(
+  emulatedRelations.map(
+    (r) => `${models[r.child].table}|${r.fields.map((f) => models[r.child].columns[f] ?? f).join(",")}|${models[r.parent].table}`
+  )
+);
+let droppedFks = 0;
+sql = sql.replace(
+  /ALTER TABLE \[dbo\]\.\[(\w+)\] ADD CONSTRAINT \[\w+\] FOREIGN KEY \(([^)]*)\) REFERENCES \[dbo\]\.\[(\w+)\][^;]*;\n?/g,
+  (stmt, child, cols, parent) => {
+    const key = `${child}|${cols.replace(/[[\]\s]/g, "")}|${parent}`;
+    if (!emulatedFks.has(key)) return stmt;
+    droppedFks++;
+    return "";
+  }
+);
+// a relation that stops being emulated may have no foreign key to drop
+sql = sql.replace(
+  /ALTER TABLE \[dbo\]\.\[(\w+)\] DROP CONSTRAINT \[(\w+_fkey)\];/g,
+  "ALTER TABLE [dbo].[$1] DROP CONSTRAINT IF EXISTS [$2];"
+);
+
+// 6) the triggers, whenever they changed since the last migration
+const triggersPath = path.join(import.meta.dirname, "emulated-relations.sql");
+const triggersSnapshot = path.join(migrationsDir, "emulated-relations.snapshot.sql");
+const triggers = fs.readFileSync(triggersPath, "utf8").replace(/\r\n/g, "\n");
+const triggersChanged =
+  !fs.existsSync(triggersSnapshot) || fs.readFileSync(triggersSnapshot, "utf8").replace(/\r\n/g, "\n") !== triggers;
+if (triggersChanged) {
+  const section = `\n-- Emulated ON DELETE actions (sqlserver/emulated-relations.sql)\n${triggers}\n`;
+  sql = /\nCOMMIT TRAN;/.test(sql) ? sql.replace(/\nCOMMIT TRAN;/, `${section}\nCOMMIT TRAN;`) : sql + section;
+}
+
 if (printOnly) {
   process.stdout.write(sql);
   process.exit(0);
@@ -119,7 +158,9 @@ fs.mkdirSync(dir, { recursive: true });
 fs.writeFileSync(path.join(dir, "migration.sql"), sql);
 fs.writeFileSync(path.join(migrationsDir, "migration_lock.toml"), 'provider = "mssql"\n'); // Prisma's name for it here
 fs.copyFileSync(schemaPath, snapshotPath);
+if (triggersChanged) fs.writeFileSync(triggersSnapshot, triggers);
 console.log(
-  `Wrote ${path.relative(prismaDir, dir)}/migration.sql (${filteredIndexNames.size} unique keys as filtered indexes). ` +
+  `Wrote ${path.relative(prismaDir, dir)}/migration.sql (${filteredIndexNames.size} unique keys as filtered indexes, ` +
+    `${droppedFks} foreign keys left to triggers${triggersChanged ? ", triggers updated" : ""}). ` +
     "Review it and add any data changes by hand."
 );
