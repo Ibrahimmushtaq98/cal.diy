@@ -1646,14 +1646,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.12.0, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.20.13, @babel/runtime@npm:^7.20.6, @babel/runtime@npm:^7.23.2, @babel/runtime@npm:^7.26.10, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.8.7":
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.12.0, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.20.13, @babel/runtime@npm:^7.23.2, @babel/runtime@npm:^7.26.10, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.8.7":
   version: 7.28.4
   resolution: "@babel/runtime@npm:7.28.4"
   checksum: 10/6c9a70452322ea80b3c9b2a412bcf60771819213a67576c8cec41e88a95bb7bf01fc983754cda35dc19603eef52df22203ccbf7777b9d6316932f9fb77c25163
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.28.4, @babel/runtime@npm:^7.28.6":
+"@babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.28.4, @babel/runtime@npm:^7.28.6, @babel/runtime@npm:^7.29.7":
   version: 7.29.14
   resolution: "@babel/runtime@npm:7.29.14"
   checksum: 10/c6d6407e2e2ce042a9f64881b15364d509bc9a1865adfb2cff74b91a5cc22e3a088bdd75d6369e0443095aff04fb00a66ea13d8adbc16c304be2468b37b1f13d
@@ -2290,7 +2290,7 @@ __metadata:
     "@calcom/zoomvideo": "workspace:*"
     lodash: "npm:4.18.1"
     qs-stringify: "npm:1.2.1"
-    react-i18next: "npm:12.3.1"
+    react-i18next: "npm:17.1.12"
   peerDependencies:
     react: ^18.0.0 || ^19.0.0
     react-dom: ^18.0.0 || ^19.0.0
@@ -2876,7 +2876,7 @@ __metadata:
   resolution: "@calcom/i18n@workspace:packages/i18n"
   dependencies:
     "@calcom/tsconfig": "workspace:*"
-    i18next: "npm:23.16.8"
+    i18next: "npm:26.7.1"
     typescript: "npm:5.9.3"
   languageName: unknown
   linkType: soft
@@ -2970,7 +2970,7 @@ __metadata:
     "@unkey/ratelimit": "npm:2.1.4"
     "@vercel/og": "npm:0.6.3"
     city-timezones: "npm:1.2.1"
-    i18next: "npm:23.16.8"
+    i18next: "npm:26.7.1"
     ical.js: "npm:2.2.1"
     ics: "npm:3.12.1"
     ipaddr.js: "npm:2.5.0"
@@ -3621,7 +3621,7 @@ __metadata:
     glob: "npm:14.0.3"
     google-auth-library: "npm:9.15.0"
     handlebars: "npm:4.7.10"
-    i18next: "npm:23.16.8"
+    i18next: "npm:26.7.1"
     ical.js: "npm:2.2.1"
     ics: "npm:3.12.1"
     isbot: "npm:5.2.2"
@@ -3639,7 +3639,7 @@ __metadata:
     next: "npm:16.4.3"
     next-auth: "npm:4.24.15"
     next-axiom: "npm:0.17.0"
-    next-i18next: "npm:15.4.3"
+    next-i18next: "npm:16.4.6"
     next-seo: "npm:6.8.0"
     next-themes: "npm:0.4.6"
     node-html-parser: "npm:9.0.6"
@@ -3660,7 +3660,7 @@ __metadata:
     react-easy-crop: "npm:6.2.4"
     react-error-boundary: "npm:3.1.4"
     react-hook-form: "npm:7.91.0"
-    react-i18next: "npm:12.3.1"
+    react-i18next: "npm:17.1.12"
     react-live-chat-loader: "npm:2.11.0"
     react-phone-input-2: "npm:2.15.1"
     react-phone-number-input: "npm:3.4.18"
@@ -16188,13 +16188,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/hoist-non-react-statics@npm:^3.3.6":
-  version: 3.3.6
-  resolution: "@types/hoist-non-react-statics@npm:3.3.6"
+"@types/hoist-non-react-statics@npm:^3.3.7":
+  version: 3.3.7
+  resolution: "@types/hoist-non-react-statics@npm:3.3.7"
   dependencies:
-    "@types/react": "npm:*"
     hoist-non-react-statics: "npm:^3.3.0"
-  checksum: 10/f03e43bd081876c49584ffa0eb690d69991f258203efca44dcc30efdda49a50653ff06402917d1edc9cb7e2adebbe9e2d1d0e739bc99c1b5372103b1cc534e47
+  peerDependencies:
+    "@types/react": "*"
+  checksum: 10/13f610572c073970b3f43cc446396974fed786fee6eac2d6fd4b0ca5c985f13e79d4a0de58af4e5b4c68470d808567c3a14108d98edb7d526d4d46c8ec851ed1
   languageName: node
   linkType: hard
 
@@ -20796,13 +20797,6 @@ __metadata:
   dependencies:
     toggle-selection: "npm:^1.0.6"
   checksum: 10/e0a325e39b7615108e6c1c8ac110ae7b829cdc4ee3278b1df6a0e4228c490442cc86444cd643e2da344fbc424b3aab8909e2fec82f8bc75e7e5b190b7c24eecf
-  languageName: node
-  linkType: hard
-
-"core-js@npm:^3":
-  version: 3.39.0
-  resolution: "core-js@npm:3.39.0"
-  checksum: 10/a3d34e669783dfc878e545f1983f60d9ff48a3867cd1d7ff8839b849e053002a208c7c14a5ca354b8e0b54982901e2f83dc87c3d9b95de0a94b4071d1c74e5f6
   languageName: node
   linkType: hard
 
@@ -25580,12 +25574,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"html-parse-stringify@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "html-parse-stringify@npm:3.0.1"
-  dependencies:
-    void-elements: "npm:3.1.0"
-  checksum: 10/8743b76cc50e46d1956c1ad879d18eb9613b0d2d81e24686d633f9f69bb26b84676f64a926973de793cca479997017a63219278476d617b6c42d68246d7c07fe
+"html-parse-stringify@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "html-parse-stringify@npm:4.0.1"
+  checksum: 10/c30ce1fbc81c32c87808d8a527519a7524c73499b223cf2002e9fddd49ecf98626ee8c13bb011a3cc283803831d67fdb75ae9f566666d05c915e460d5b5016cc
   languageName: node
   linkType: hard
 
@@ -25902,19 +25894,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next-fs-backend@npm:^2.6.6":
-  version: 2.6.6
-  resolution: "i18next-fs-backend@npm:2.6.6"
-  checksum: 10/1be64a7fb945692c2d6700c2739f92ecc2fe2d32e3047e98bb21a6b2531ed162e0cc0b13ad996b64e0db50d9e828f3de8b2684e730b212ba04d85a00f19c10c5
+"i18next-resources-to-backend@npm:^1.2.3":
+  version: 1.2.4
+  resolution: "i18next-resources-to-backend@npm:1.2.4"
+  dependencies:
+    "@babel/runtime": "npm:^7.23.2"
+  checksum: 10/9ba285552ef68cafbc5f71664829ef8e6a4e0094af800ab0b7da69c1a5ec13444bf5920be1a2e7f73112ebdffb062c2395287b9ce21a73324857fba2c7d0756b
   languageName: node
   linkType: hard
 
-"i18next@npm:23.16.8":
-  version: 23.16.8
-  resolution: "i18next@npm:23.16.8"
-  dependencies:
-    "@babel/runtime": "npm:^7.23.2"
-  checksum: 10/d5c38011de4d3b4aa466fac6773520eb28007b9d6138e03432bfbfc0d041c04df45e15c67d96f22cd660088cc9b24d3eda32cddc9fb4c6508c5afada6c2e6290
+"i18next@npm:26.7.1":
+  version: 26.7.1
+  resolution: "i18next@npm:26.7.1"
+  peerDependencies:
+    typescript: ^5 || ^6 || ^7
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 10/f3305d668fff3a3bab45c6ac2b28048774e9f814a7a9bf7e50d179a75ae0570f5d594853f014e63412b28e9ca793fcb1d46bc624e0de64125e00e77c5d86c5f6
   languageName: node
   linkType: hard
 
@@ -31215,21 +31212,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-i18next@npm:15.4.3":
-  version: 15.4.3
-  resolution: "next-i18next@npm:15.4.3"
+"next-i18next@npm:16.4.6":
+  version: 16.4.6
+  resolution: "next-i18next@npm:16.4.6"
   dependencies:
-    "@babel/runtime": "npm:^7.23.2"
-    "@types/hoist-non-react-statics": "npm:^3.3.6"
-    core-js: "npm:^3"
+    "@types/hoist-non-react-statics": "npm:^3.3.7"
     hoist-non-react-statics: "npm:^3.3.2"
-    i18next-fs-backend: "npm:^2.6.0"
+    i18next-resources-to-backend: "npm:^1.2.3"
   peerDependencies:
     i18next: ">= 23.7.13"
-    next: ">= 12.0.0"
-    react: ">= 17.0.2"
-    react-i18next: ">= 13.5.0"
-  checksum: 10/de546f82fc16f3f4367cba224cbf12ca2784a87b0cee8e22b6ec36919b3caf1358080596611d03c4f0b03d8b9a2b82cf06998ec236e478405f45fd30e0c57f94
+    i18next-icu: ">= 2.0.0"
+    i18next-mf2: ">= 1.0.0"
+    next: ">= 14.1.0"
+    react: ">= 18.0.0"
+    react-i18next: ">= 14.0.0"
+  peerDependenciesMeta:
+    i18next-icu:
+      optional: true
+    i18next-mf2:
+      optional: true
+  checksum: 10/d48d5397c4f993dd3aebe1926d25a8c66bbed875378ac5d0133db445132db401b0e94bc871ee5370aaf9b815e4530388a6bbba9cb762ed32560d622299765f8c
   languageName: node
   linkType: hard
 
@@ -34579,21 +34581,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-i18next@npm:12.3.1":
-  version: 12.3.1
-  resolution: "react-i18next@npm:12.3.1"
+"react-i18next@npm:17.1.12":
+  version: 17.1.12
+  resolution: "react-i18next@npm:17.1.12"
   dependencies:
-    "@babel/runtime": "npm:^7.20.6"
-    html-parse-stringify: "npm:^3.0.1"
+    "@babel/runtime": "npm:^7.29.7"
+    html-parse-stringify: "npm:^4.0.1"
+    use-sync-external-store: "npm:^1.6.0"
   peerDependencies:
-    i18next: ">= 19.0.0"
+    i18next: ">= 26.2.0"
     react: ">= 16.8.0"
+    typescript: ^5 || ^6 || ^7
   peerDependenciesMeta:
     react-dom:
       optional: true
     react-native:
       optional: true
-  checksum: 10/94d7ed6e361e359f07a1c900ff22900adb2022f4dc08beda8b749788609f6d520abbe7ae73b3a8e37dfc8fc162581c293d84ef5339f3f43246843d550f88d38b
+    typescript:
+      optional: true
+  checksum: 10/c218a01fcce10218909fac6b8d2c893941bbb633faeb7c821ff7991c61d9364d625ea3f63264297a5e0100417616d5b8f82ff5662355c26f0e9e9f57f4707002
   languageName: node
   linkType: hard
 
@@ -40346,13 +40352,6 @@ __metadata:
   bin:
     vitest: ./vitest.mjs
   checksum: 10/1e04646b4953e10625794fba01f8393145d617700974b8622ef6966b380bb5271c4e0df79b644d9355b08345cc6d4e5e6ef76004bb5d343fe4cee0f707105cbe
-  languageName: node
-  linkType: hard
-
-"void-elements@npm:3.1.0":
-  version: 3.1.0
-  resolution: "void-elements@npm:3.1.0"
-  checksum: 10/0390f818107fa8fce55bb0a5c3f661056001c1d5a2a48c28d582d4d847347c2ab5b7f8272314cac58acf62345126b6b09bea623a185935f6b1c3bbce0dfd7f7f
   languageName: node
   linkType: hard
 

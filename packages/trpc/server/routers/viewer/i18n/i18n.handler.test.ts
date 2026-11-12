@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-vi.mock("next-i18next/serverSideTranslations", () => ({
+vi.mock("next-i18next/pages/serverSideTranslations", () => ({
   serverSideTranslations: vi.fn(),
 }));
 
@@ -11,7 +11,7 @@ describe("i18n handler", () => {
     vi.clearAllMocks();
   });
   it("passes i18n config to serverSideTranslations", async () => {
-    const { serverSideTranslations } = await import("next-i18next/serverSideTranslations");
+    const { serverSideTranslations } = await import("next-i18next/pages/serverSideTranslations");
     const mockedSST = vi.mocked(serverSideTranslations);
 
     const fakeResult = {
@@ -36,7 +36,7 @@ describe("i18n handler", () => {
   });
 
   it("passes the locale from input to serverSideTranslations", async () => {
-    const { serverSideTranslations } = await import("next-i18next/serverSideTranslations");
+    const { serverSideTranslations } = await import("next-i18next/pages/serverSideTranslations");
     const mockedSST = vi.mocked(serverSideTranslations);
 
     mockedSST.mockResolvedValueOnce({

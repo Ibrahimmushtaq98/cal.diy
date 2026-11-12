@@ -20,7 +20,7 @@
     "@unkey/ratelimit": "2.1.4",
     "@vercel/og": "0.6.3",
     "city-timezones": "1.2.1",
-    "i18next": "23.16.8",
+    "i18next": "26.7.1",
     "ical.js": "2.2.1",
     "ics": "3.12.1",
     "ipaddr.js": "2.5.0",

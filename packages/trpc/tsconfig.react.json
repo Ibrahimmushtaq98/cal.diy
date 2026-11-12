@@ -19,7 +19,7 @@
     "declarationMap": false,
     "resolveJsonModule": true,
     "declarationDir": "types/react",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "paths": {
       "~/*": ["./*"]
     }
