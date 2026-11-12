@@ -8,7 +8,13 @@ export default function BookingPageErrorBoundary({ children }: { children: React
   return (
     <ErrorBoundary
       fallbackRender={({ error, resetErrorBoundary }) => (
-        <ErrorPage reset={resetErrorBoundary} error={error} message={`${error}`} displayDebug={true} />
+        // react-error-boundary 6 types the caught value as unknown.
+        <ErrorPage
+          reset={resetErrorBoundary}
+          error={error instanceof Error ? error : new Error(String(error))}
+          message={`${error}`}
+          displayDebug={true}
+        />
       )}
       onError={(error, info) => {
         console.error(error);

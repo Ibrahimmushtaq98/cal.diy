@@ -1,4 +1,4 @@
-import type { DefaultSeoProps, NextSeoProps } from "next-seo";
+import type { DefaultSeoProps, NextSeoProps } from "next-seo/pages";
 
 import { APP_NAME, SEO_IMG_DEFAULT, SEO_IMG_OGIMG } from "@calcom/lib/constants";
 

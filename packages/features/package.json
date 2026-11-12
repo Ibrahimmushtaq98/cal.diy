@@ -25,7 +25,7 @@
     "@tanstack/react-table": "8.21.3",
     "@tanstack/react-virtual": "3.14.26",
     "@trigger.dev/sdk": "4.8.3",
-    "@vercel/functions": "1.6.0",
+    "@vercel/functions": "3.10.6",
     "city-timezones": "1.2.1",
     "class-variance-authority": "0.7.1",
     "date-fns-tz": "3.2.0",

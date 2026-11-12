@@ -8,7 +8,7 @@
  */
 
 "use client";;
-import { DefaultSeo } from "next-seo";
+import { generateDefaultSeo } from "next-seo/pages";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import Head from "next/head";
@@ -69,16 +69,15 @@ function PageWrapper(props: AppProps) {
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover"
         />
-      </Head>
-      <DefaultSeo
-        // Set canonical to https://cal.com or self-hosted URL
-        canonical={
-          IS_CALCOM
+        {/* next-seo 7 replaced the <DefaultSeo> component with this generator for <Head>. */}
+        {generateDefaultSeo({
+          // Set canonical to https://cal.com or self-hosted URL
+          canonical: IS_CALCOM
             ? buildCanonical({ path, origin: getCalcomUrl() }) // cal.com & .dev
-            : buildCanonical({ path, origin: WEBAPP_URL }) // self-hosted
-        }
-        {...seoConfig.defaultNextSeo}
-      />
+            : buildCanonical({ path, origin: WEBAPP_URL }), // self-hosted
+          ...seoConfig.defaultNextSeo,
+        })}
+      </Head>
       <Script
         id="page-status"
         // It is strictly not necessary to disable, but in a future update of react/no-danger this will error.

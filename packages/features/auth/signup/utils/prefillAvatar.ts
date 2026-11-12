@@ -79,7 +79,7 @@ const getImageUrlAvatarAPI = async (email: string) => {
 
     clearTimeout(timeout);
 
-    const info = await response.json();
+    const info = (await response.json()) as { Success?: boolean; Error?: string; Image?: string };
 
     if (!info.Success) {
       if (info.Error === "Not found") {

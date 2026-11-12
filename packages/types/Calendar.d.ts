@@ -86,7 +86,8 @@ export type NewCalendarEventType = {
 
 export type CalendarEventType = {
   uid: string;
-  etag: string;
+  /** CalDAV servers don't always send one (tsdav 2.5 types it as optional too). */
+  etag?: string;
   /** This is the actual caldav event url, not the location url. */
   url: string;
   summary: string;
