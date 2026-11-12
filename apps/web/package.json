@@ -153,7 +153,7 @@
     "zod": "4.6.7"
   },
   "devDependencies": {
-    "@babel/core": "7.29.13",
+    "@babel/core": "8.1.0",
     "@biomejs/biome": "2.6.5",
     "@calcom/config": "workspace:*",
     "@calcom/testing": "workspace:*",
