@@ -15,6 +15,10 @@ export class ApiAuthMockStrategy extends PassportStrategy(BaseStrategy, "api-aut
     super();
   }
 
+  validate(): never {
+    throw new Error("validate is not used, authenticate handles the request");
+  }
+
   async authenticate(request: ApiAuthGuardRequest) {
     try {
       const user = await this.usersRepository.findByEmailWithProfile(this.email);

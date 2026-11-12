@@ -1,4 +1,4 @@
-import { ApiProperty as DocsProperty, ApiProperty } from "@nestjs/swagger";
+import { ApiExtraModels, ApiProperty as DocsProperty, ApiProperty, getSchemaPath } from "@nestjs/swagger";
 import { Type } from "class-transformer";
 import { IsString, IsBoolean, IsOptional, ValidateNested, IsArray, IsDate } from "class-validator";
 import { DateTime } from "luxon";
@@ -56,6 +56,7 @@ class DateOverride {
   end!: Date;
 }
 
+@ApiExtraModels(ScheduleItem)
 export class UpdateScheduleInput_2024_04_15 {
   @IsString()
   @IsOptional()
@@ -78,7 +79,8 @@ export class UpdateScheduleInput_2024_04_15 {
   @DocsProperty()
   @IsArray()
   @ApiProperty({
-    type: [[ScheduleItem]],
+    type: "array",
+    items: { type: "array", items: { $ref: getSchemaPath(ScheduleItem) } },
     example: [
       [],
       [{ start: "2022-01-01T00:00:00.000Z", end: "2022-01-02T00:00:00.000Z" }],
@@ -88,7 +90,6 @@ export class UpdateScheduleInput_2024_04_15 {
       [],
       [],
     ],
-    isArray: true,
   })
   schedule?: ScheduleItem[][];
 

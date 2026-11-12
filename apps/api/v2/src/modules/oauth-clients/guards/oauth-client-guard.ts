@@ -18,7 +18,7 @@ export class OAuthClientGuard implements CanActivate {
     const request = context.switchToHttp().getRequest<ApiAuthGuardRequest>();
     const organizationId = this.getOrganizationId(context);
     const user: ApiAuthGuardUser = request.user;
-    const oAuthClientId = request.params.clientId;
+    const oAuthClientId = request.params.clientId as string;
 
     if (!oAuthClientId) {
       throw new ForbiddenException("OAuthClientGuard - No OAuth client associated with the request.");

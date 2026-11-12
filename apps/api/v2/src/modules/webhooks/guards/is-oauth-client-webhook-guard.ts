@@ -27,8 +27,8 @@ export class IsOAuthClientWebhookGuard implements CanActivate {
       .switchToHttp()
       .getRequest<Request & { webhook: Webhook; oAuthClient: PlatformOAuthClient }>();
     const user = request.user as ApiAuthGuardUser;
-    const webhookId = request.params.webhookId;
-    const oAuthClientId = request.params.clientId;
+    const webhookId = request.params.webhookId as string;
+    const oAuthClientId = request.params.clientId as string;
     const organizationId = this.usersService.getUserMainOrgId(user);
 
     if (!user) {

@@ -8,6 +8,11 @@ export class NextAuthMockStrategy extends PassportStrategy(NextAuthPassportStrat
   constructor(private readonly email: string, private readonly userRepository: UsersRepository) {
     super();
   }
+
+  validate(): never {
+    throw new Error("validate is not used, authenticate handles the request");
+  }
+
   async authenticate() {
     try {
       const user = await this.userRepository.findByEmailWithProfile(this.email);

@@ -12,6 +12,10 @@ export class NextAuthStrategy extends PassportStrategy(NextAuthPassportStrategy,
     super();
   }
 
+  validate(): never {
+    throw new Error("validate is not used, authenticate handles the request");
+  }
+
   async authenticate(req: Request) {
     try {
       const nextAuthSecret = this.config.get("next.authSecret", { infer: true });

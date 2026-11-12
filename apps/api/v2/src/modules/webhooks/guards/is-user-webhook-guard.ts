@@ -12,7 +12,7 @@ export class IsUserWebhookGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest<Request & { webhook: Webhook }>();
     const user = request.user as ApiAuthGuardUser;
-    const webhookId = request.params.webhookId;
+    const webhookId = request.params.webhookId as string;
 
     if (!user) {
       throw new ForbiddenException("IsUserWebhookGuard - No user associated with the request.");

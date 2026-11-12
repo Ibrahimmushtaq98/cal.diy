@@ -8,8 +8,8 @@ export class IsUserOOO implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest<Request>();
-    const oooId: string = request.params.oooId;
-    const userId: string = request.params.userId;
+    const oooId: string = request.params.oooId as string;
+    const userId: string = request.params.userId as string;
 
     if (!userId) {
       throw new ForbiddenException("No user id found in request params.");

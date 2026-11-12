@@ -25,8 +25,8 @@ export class IsUserEventTypeWebhookGuard implements CanActivate {
       .switchToHttp()
       .getRequest<Request & { webhook: Webhook } & { eventType: EventType }>();
     const user = request.user as ApiAuthGuardUser;
-    const webhookId = request.params.webhookId;
-    const eventTypeId = request.params.eventTypeId;
+    const webhookId = request.params.webhookId as string;
+    const eventTypeId = request.params.eventTypeId as string;
 
     if (!user) {
       throw new ForbiddenException("IsUserEventTypeWebhookGuard - No user associated with the request.");

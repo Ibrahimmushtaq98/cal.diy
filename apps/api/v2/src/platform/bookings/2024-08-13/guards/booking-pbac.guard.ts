@@ -29,7 +29,7 @@ export class BookingPbacGuard implements CanActivate {
         Request & { user?: ApiAuthGuardUser; pbacAuthorizedRequest?: boolean }
       >();
     const user = request.user;
-    const bookingUid = request.params.bookingUid;
+    const bookingUid = request.params.bookingUid as string;
 
     if (!user) {
       throw new UnauthorizedException();

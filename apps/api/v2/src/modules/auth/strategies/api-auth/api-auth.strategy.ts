@@ -52,11 +52,15 @@ export class ApiAuthStrategy extends PassportStrategy(BaseStrategy, "api-auth") 
     super();
   }
 
+  validate(): never {
+    throw new Error("validate is not used, authenticate handles the request");
+  }
+
   async authenticate(request: ApiAuthGuardRequest) {
     try {
       const { params } = request;
       const oAuthClientSecret = request.get(X_CAL_SECRET_KEY);
-      const oAuthClientId = params.clientId || request.get(X_CAL_CLIENT_ID);
+      const oAuthClientId = (params.clientId as string | undefined) || request.get(X_CAL_CLIENT_ID);
       const bearerToken = request.get("Authorization")?.replace("Bearer ", "");
 
       const allowedMethods = request.allowedAuthMethods;
