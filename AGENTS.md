@@ -290,7 +290,7 @@ Stop it with Ctrl-C in both terminals. The Docker containers can keep running.
   cd apps/web
   NEXT_PUBLIC_WEBAPP_URL=http://localhost:3000 NEXT_PUBLIC_WEBSITE_URL=http://localhost:3000 NEXTAUTH_URL=http://localhost:3000 yarn next dev --turbopack
   ```
-- Next.js writes an `apps/web/AGENTS.md` on dev start. It's generated, so don't commit it.
+- Next.js writes an `apps/web/AGENTS.md` on dev start. It's committed so `next dev` doesn't leave an untracked file behind; if a Next upgrade changes its text, commit the new version.
 - The browser console always shows "Service Worker registration failed" inside embedded browsers (for example the Claude Code browser pane). A normal browser registers it fine.
 
 ### Package versions held back on purpose
