@@ -1,4 +1,4 @@
-import { createHash } from "node:crypto";
+import { createHash, randomUUID as uuid } from "node:crypto";
 import process from "node:process";
 import dailyMeta from "@calcom/app-store/dailyvideo/_metadata";
 import googleMeetMeta from "@calcom/app-store/googlevideo/_metadata";
@@ -12,7 +12,6 @@ import type { Membership, Team, User, UserPermissionRole } from "@calcom/prisma/
 import { Prisma } from "@calcom/prisma/client";
 import { BookingStatus, MembershipRole, RedirectType, SchedulingType } from "@calcom/prisma/enums";
 import type { Ensure } from "@calcom/types/utils";
-import { uuid } from "short-uuid";
 import type z from "zod";
 import type { teamMetadataSchema } from "../packages/prisma/zod-utils";
 import mainAppStore from "./seed-app-store";

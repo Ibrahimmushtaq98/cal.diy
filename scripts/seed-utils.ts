@@ -6,7 +6,7 @@ import prisma from "@calcom/prisma";
 import type { Prisma, UserPermissionRole } from "@calcom/prisma/client";
 import { MembershipRole } from "@calcom/prisma/enums";
 import type { teamMetadataSchema } from "@calcom/prisma/zod-utils";
-import { uuid } from "short-uuid";
+import { randomUUID as uuid } from "node:crypto";
 import type z from "zod";
 
 export async function createUserAndEventType({
