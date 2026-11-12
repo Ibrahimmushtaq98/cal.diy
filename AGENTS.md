@@ -295,29 +295,47 @@ Stop it with Ctrl-C in both terminals. The Docker containers can keep running.
 
 ### Package versions held back on purpose
 
-These were tried during the November 2026 update and broke something. Don't bump them without fixing what's listed.
+These were tried during the November 2026 updates (patch/minor first, then the major-version pass) and broke something. Don't bump them without fixing what's listed. When a package says "CommonJS", the reason is that API v2's jest run (and CI/Docker) is on Node 22, where jest can't `require()` an ESM-only package.
 
 | Package | Held at | Why |
 |---|---|---|
-| `next` | 16.4.3 | 16.4.5 puts dev pages into a full-reload loop (event types never load). |
+| `typescript` | 5.9.3 | 6.0 defaults `rootDir` to the tsconfig folder and stops loading `@types` on its own; API v2's nest build layout, the platform-libraries declaration build and the embed builds all rely on the old computed root. Needs an explicit `rootDir` per emitting package. 7.0 has no compiler API yet (ts-jest, Nest CLI, Prisma generators need it). |
+| `next` | 16.4.3 | 16.4.5 puts dev pages into a full-reload loop (event types never load). 16.4.4 untested. |
+| `@nestjs/*` | 11.x | Nest 12 is ESM-only (see CommonJS above) and its CLI wants TypeScript 6. |
+| `@tanstack/react-table` | 8.21.3 | 9 moves to explicit feature registration and new generics: 244 type errors across the data tables. Needs its own pass with the bookings/users/OOO tables checked in a browser. |
+| `otplib` | 12.0.1 | 13 is a rewrite of the TOTP API used by 2FA, email verification codes and account deletion. A mismatch locks people out; move it with tests that compare codes across versions. |
+| `tslog` | 4.11.0 | 5 changes every logger call's signature. |
+| `uuid` (API v2, prisma, platform-libraries) | 11.1.1 | 12+ is ESM-only (CommonJS). The rest of the repo is on 14. |
+| `entities` (platform-libraries) | 4.5.0 | Same: the newer ones are ESM-only and get bundled into API v2's imports. |
+| `sanitize-html` | 2.17.0 | 2.18 pulls in the ESM-only htmlparser2 12 (CommonJS). |
+| `superjson` | 1.13.3 | 2.2.6 is ESM-only and 2.2.5's CJS build still loads the ESM-only copy-anything (CommonJS). |
+| `@axiomhq/winston` 1.8, `http-proxy-middleware` 3.0.10 | as pinned | Next majors are ESM-only (CommonJS). |
+| `meow` (app-store-cli) | 9.0.0 | 10+ needs `import.meta`; the CLI runs as CommonJS through ts-node. |
+| `ink`, `ink-select-input`, `ink-text-input` | 3 / 4 / 4 | 4+ is ESM-only; ink 8 would also let app-store-cli leave React 18. Needs the CLI turned into an ES module. |
+| `jotai` | 2.20.3 | `@daily-co/daily-react` (even its latest) needs jotai 2. |
+| `stripe`, `@stripe/stripe-js`, `@stripe/react-stripe-js` | as pinned | New API-version pin and the old redirectToCheckout flow is gone; needs a Stripe test account to redo. |
+| `@hubspot/api-client`, `@getalby/sdk`, `@getalby/lightning-tools`, `svix`, `@tryvital/vital-node`, `dub` | as pinned | API changes in app-store integrations that can't be checked without real accounts. |
 | `jest-date-mock` | 1.0.10 | 1.0.11+ (published 19 May 2026) depends on a GitHub commit that doesn't exist; treat it as a bad publish. |
-| `city-timezones` | 1.2.1 | 1.3.x adds `Europe/Kyiv`, which the bundled `react-timezone-select`/spacetime can't parse, so the timezone pickers crash. |
-| `@tanstack/react-query` | 5.17.19 | Newer types don't fit the `@trpc/*` 11 beta in use; move both together. |
-| `@trpc/*` | 11.0.0-next-beta.222 | Beta to stable 11.x is a migration, not a bump. |
-| `react-timezone-select` | 1.4.0 | 1.5 changes its `isMulti` typing and breaks `TimezoneSelect.test.tsx`. |
 | `@base-ui/react` | 1.0.0 | 1.9 changes the `Input` props in `packages/coss-ui`. |
-| `@formkit/auto-animate` | 1.0.0-beta.5 | Update tools sort `1.0.0-pre-alpha.3` as newer; it's older and breaks the hook typing. |
-| `botid`, `tsdav`, `@evyweb/ioctopus`, `@googleapis/calendar`, `google-auth-library`, `@types/lodash`, `@types/glidejs__glide` | as pinned | Each newer version breaks type-checking in code that uses it. |
-| `@nestjs/throttler`, `@nest-lab/throttler-storage-redis` | 6.2.1, 1.0.0 | 6.7 changes `ThrottlerGuard`, breaking `apps/api/v2/src/lib/throttler-guard.ts`. |
+| `@formkit/auto-animate` | 1.0.0-beta.5 | Its stable 0.x line is older than the 1.0 beta in use; update tools pick it anyway. |
+| `botid`, `@evyweb/ioctopus`, `@types/lodash`, `@types/glidejs__glide` | as pinned | Each newer version breaks type-checking in code that uses it. |
+| `@microsoft/microsoft-graph-types-beta`, `@vercel/edge-config`, `next-axiom` | as pinned | No newer stable release to move to (preview-only or none eligible). |
 
-Other major-version upgrades (Prisma 7, zod 4, tRPC stable and others) were not attempted.
+### November 2026 major-version update: things to know
+
+- **TypeScript resolution.** `nextjs.json`, `react-library.json` and the trpc tsconfigs use `moduleResolution: "bundler"` (lexical 0.53, react-timezone-select 4 and next-i18next 16 only publish types through `exports`). That also means deep imports must be listed in a package's `exports`. API v2 and the platform packages still compile with node resolution, so code they share can't import `exports`-only subpaths (see `packages/trpc/server/lib/ssrConfig.ts`).
+- **zod 4.** A one-argument `z.ZodType<T>` annotation means input = `unknown` in zod 4; write `z.ZodType<T, T>` to get the zod 3 meaning. `packages/prisma/zod-utils.ts` sets zod's global `customError` so missing values still say "Required" (booking forms show these). Use `@calcom/lib/zodResolver`, not `@hookform/resolvers/zod` directly: it keeps `useForm<Values>` typing.
+- **tRPC 11 stable.** The superjson transformer goes on each `httpLink`/`httpBatchLink`; `createTRPCNext` still needs it too for SSR.
+- **Prisma 7.** Connection URLs and the seed command live in `packages/prisma/prisma.config.ts`, which also loads the root `.env`. `prismock` is patched (`.yarn/patches`) to import `@prisma/client/runtime/client`.
+- **vitest 5 / Vite 8.** `vi.mock` must be top-level, `.resolves`/`.rejects` must be awaited, and Oxc only lowers our legacy decorators because `vitest.config.mts` sets `oxc.decorator.legacy`.
+- **Sentry 11.** Every `Sentry.init` sets `dataCollection` to keep cookies, user fields and HTTP bodies off (Sentry 11 collects them by default).
 
 ### React 19
 
 The web app, UI packages and atoms run on React 19.3 with `@types/react` 19.3 (November 2026). Things to know:
 
 - `packages/types/react-global-jsx.d.ts` re-adds the global `JSX` namespace that React 19's types removed. react-select (and anything else still typed against global `JSX`) silently turns into `any` without it. Workspaces that type-check React code include it in their `tsconfig.json`.
-- `packages/app-store-cli` stays on React 18: it uses ink 3, whose renderer only supports React 17/18.
+- `packages/app-store-cli` stays on React 18: it uses ink 3, whose renderer only supports React 17/18 (ink 4+ is ESM-only; see the held table).
 - React 19 calls function components with props only. Tests that assert a mocked component was called with `(props, {})` or `(props, expect.anything())` need to check `mock.lastCall?.[0]` instead.
 - `@testing-library/react` 16 needs `@testing-library/dom` installed next to it; `renderHook` comes from `@testing-library/react` (the old `@testing-library/react-hooks` is gone).
 
