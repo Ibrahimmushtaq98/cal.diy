@@ -1,4 +1,4 @@
-import { serialize } from "cookie";
+import { stringifySetCookie } from "cookie";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { v4 as uuid } from "uuid";
 
@@ -114,7 +114,9 @@ export const reserveSlotHandler = async ({ ctx, input }: ReserveSlotOptions) => 
   const useSecureCookies = WEBAPP_URL.startsWith("https://");
   res?.setHeader(
     "Set-Cookie",
-    serialize("uid", uid, {
+    stringifySetCookie({
+      name: "uid",
+      value: uid,
       path: "/",
       sameSite: useSecureCookies ? "none" : "lax",
       secure: useSecureCookies,
