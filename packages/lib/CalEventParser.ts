@@ -1,5 +1,5 @@
 import type { TFunction } from "i18next";
-import short from "short-uuid";
+import { createTranslator } from "short-uuid";
 
 import getLabelValueMapFromResponses from "@calcom/lib/bookings/getLabelValueMapFromResponses";
 import { Prisma } from "@calcom/prisma/client";
@@ -22,7 +22,7 @@ import {
   buildStandardRescheduleLink,
 } from "./LinkBuilder";
 
-const translator = short();
+const translator = createTranslator();
 
 // The odd indentation in this file is necessary because otherwise the leading tabs will be applied into the event description.
 
@@ -216,7 +216,7 @@ export const getUid = (uid?: string | null): string => {
   // If uid is provided, return it. Otherwise generate a random short UUID as fallback.
   // Note: The original implementation used JSON.stringify(calEvent) for deterministic fallback,
   // but with narrow inputs we can't do that. In practice, uid should always be set.
-  return uid ?? translator.new();
+  return uid ?? translator.generate();
 };
 
 const getSeatReferenceId = (attendeeSeatId?: string): string => {

@@ -1,4 +1,4 @@
-import short from "short-uuid";
+import { createTranslator } from "short-uuid";
 import { v5 as uuidv5 } from "uuid";
 
 import { DailyLocationType } from "@calcom/app-store/constants";
@@ -19,7 +19,7 @@ import type { VideoCallData } from "@calcom/types/VideoApiAdapter";
 
 const log = logger.getSubLogger({ prefix: ["[features/conferencing/lib] videoClient"] });
 
-const translator = short();
+const translator = createTranslator();
 
 const getBusyVideoTimes = async (withCredentials: CredentialPayload[]) =>
   Promise.all((await getVideoAdapters(withCredentials)).map((c) => c?.getAvailability())).then((results) =>

@@ -1,4 +1,4 @@
-import short from "short-uuid";
+import { createTranslator } from "short-uuid";
 import { v5 as uuidv5 } from "uuid";
 
 import dayjs from "@calcom/dayjs";
@@ -10,7 +10,7 @@ import type { CalendarEvent } from "@calcom/types/Calendar";
 
 import { CalendarEventClass } from "./class";
 
-const translator = short();
+const translator = createTranslator();
 const userSelect = {
   id: true,
   email: true,

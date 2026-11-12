@@ -1,5 +1,5 @@
 import { cloneDeep } from "lodash";
-import { uuid } from "short-uuid";
+import { v4 as uuid } from "uuid";
 
 import { sendRescheduledEmailsAndSMS } from "@calcom/emails/email-manager";
 import type EventManager from "@calcom/features/bookings/lib/EventManager";

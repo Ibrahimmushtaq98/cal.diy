@@ -16,7 +16,7 @@ vi.mock("@calcom/lib/constants", () => ({
 
 vi.mock("short-uuid", () => ({
   __esModule: true,
-  default: () => ({ fromUUID: () => "FAKE_UUID" }),
+  createTranslator: () => ({ fromUUID: () => "FAKE_UUID", generate: () => "FAKE_UUID" }),
 }));
 
 describe("getLocation", () => {

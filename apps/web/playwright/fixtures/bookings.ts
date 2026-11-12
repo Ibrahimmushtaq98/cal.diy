@@ -1,12 +1,12 @@
 import type { Page, WorkerInfo } from "@playwright/test";
-import short from "short-uuid";
+import { createTranslator } from "short-uuid";
 import { v5 as uuidv5 } from "uuid";
 
 import _dayjs from "@calcom/dayjs";
 import { prisma } from "@calcom/prisma";
 import type { Booking, Prisma } from "@calcom/prisma/client";
 
-const translator = short();
+const translator = createTranslator();
 
 type BookingFixture = ReturnType<typeof createBookingFixture>;
 

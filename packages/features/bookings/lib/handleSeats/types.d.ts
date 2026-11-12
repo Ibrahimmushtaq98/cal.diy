@@ -49,7 +49,7 @@ export type NewSeatedBookingObject = {
   fullName: ReturnType<typeof getFullName>;
   smsReminderNumber: SmsReminderNumber;
   eventTypeInfo: EventTypeInfo;
-  uid: short.SUUID;
+  uid: string;
   eventTypeId: EventTypeId;
   reqBodyMetadata: ReqBodyMetadata;
   subscriberOptions: GetSubscriberOptions;

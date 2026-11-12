@@ -80,7 +80,8 @@ import type {
 } from "@calcom/types/Calendar";
 import type { CredentialForCalendarService } from "@calcom/types/Credential";
 import type { EventResult, PartialReference } from "@calcom/types/EventManager";
-import short, { uuid } from "short-uuid";
+import { createTranslator } from "short-uuid";
+import { v4 as uuid } from "uuid";
 import { v5 as uuidv5 } from "uuid";
 import type { BookingRepository } from "../../repositories/BookingRepository";
 import { BookingActionMap, type BookingActionType, BookingEmailSmsHandler } from "../BookingEmailSmsHandler";
@@ -115,7 +116,7 @@ import type { BookingEventHandlerService } from "../onBookingEvents/BookingEvent
 import type { BookingRescheduledPayload } from "../onBookingEvents/types";
 import { isWithinMinimumRescheduleNotice } from "../reschedule/isWithinMinimumRescheduleNotice";
 
-const translator = short();
+const translator = createTranslator();
 
 type IsFixedAwareUserWithCredentials = Omit<IsFixedAwareUser, "credentials"> & {
   credentials: CredentialForCalendarService[];

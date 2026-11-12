@@ -46,7 +46,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     });
 
-    const q = queue({ results: [] });
+    const q = new queue({ results: [] });
     if (todayBookings.length > 0) {
       todayBookings.forEach((booking) =>
         q.push(() => {

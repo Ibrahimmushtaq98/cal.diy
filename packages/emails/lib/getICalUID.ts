@@ -1,4 +1,4 @@
-import short from "short-uuid";
+import { createTranslator } from "short-uuid";
 import { v4 as uuidv4 } from "uuid";
 
 import { APP_NAME } from "@calcom/lib/constants";
@@ -29,7 +29,7 @@ const getICalUID = ({
 
   if (uid) return `${uid}@${APP_NAME}`;
 
-  const translator = short();
+  const translator = createTranslator();
 
   uid = translator.fromUUID(uuidv4());
   return `${uid}${attendeeId ? `${attendeeId}` : ""}@${APP_NAME}`;

@@ -6,7 +6,6 @@ import { Prisma } from "@calcom/prisma/client";
 import type { CreationSource } from "@calcom/prisma/enums";
 import { BookingStatus } from "@calcom/prisma/enums";
 import type { CalendarEvent } from "@calcom/types/Calendar";
-import type short from "short-uuid";
 import type { TgetBookingDataSchema } from "../getBookingDataSchema";
 import type { AwaitedBookingData, EventTypeId } from "./getBookingData";
 import type { NewBookingEventType } from "./getEventTypesFromDB";
@@ -17,7 +16,7 @@ import type { PaymentAppData, Tracking } from "./types";
 type ReqBodyWithEnd = TgetBookingDataSchema & { end: string };
 
 type CreateBookingParams = {
-  uid: short.SUUID;
+  uid: string;
   rescheduledBy: string | undefined;
   reqBody: {
     user: ReqBodyWithEnd["user"];

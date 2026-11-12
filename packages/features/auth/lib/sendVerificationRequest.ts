@@ -8,7 +8,7 @@ import path from "node:path";
 import { APP_NAME, WEBAPP_URL } from "@calcom/lib/constants";
 import { serverConfig } from "@calcom/lib/serverConfig";
 
-const transporter = nodemailer.createTransport<TransportOptions>({
+const transporter = nodemailer.createTransport({
   ...(serverConfig.transport as TransportOptions),
 } as TransportOptions);
 

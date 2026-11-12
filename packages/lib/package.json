@@ -26,10 +26,10 @@
     "jimp": "0.16.1",
     "lingo.dev": "0.117.14",
     "rrule": "2.8.1",
-    "sharp": "0.33.5",
+    "sharp": "0.35.5",
     "tsdav": "2.0.3",
     "tslog": "4.11.0",
-    "uuid": "8.3.2"
+    "uuid": "14.0.3"
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.5",

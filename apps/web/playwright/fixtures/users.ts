@@ -12,7 +12,7 @@ import type { Schedule } from "@calcom/types/schedule";
 import type { Browser, Page, WorkerInfo } from "@playwright/test";
 import { expect } from "@playwright/test";
 import { hashSync as hash } from "bcryptjs";
-import { uuid } from "short-uuid";
+import { v4 as uuid } from "uuid";
 import { v4 } from "uuid";
 import { selectFirstAvailableTimeSlotNextMonth, teamEventSlug, teamEventTitle } from "../lib/testUtils";
 import type { createEmailsFixture } from "./emails";

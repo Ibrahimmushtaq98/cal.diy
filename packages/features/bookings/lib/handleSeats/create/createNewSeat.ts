@@ -9,7 +9,7 @@ import prisma from "@calcom/prisma";
 import type { Prisma, PrismaClient } from "@calcom/prisma/client";
 import { BookingStatus } from "@calcom/prisma/enums";
 import { cloneDeep } from "lodash";
-import { uuid } from "short-uuid";
+import { v4 as uuid } from "uuid";
 import { findBookingQuery } from "../../handleNewBooking/findBookingQuery";
 import type { IEventTypePaymentCredentialType } from "../../handleNewBooking/types";
 import type { HandleSeatsResultBooking, NewSeatedBookingObject, SeatedBooking } from "../types";

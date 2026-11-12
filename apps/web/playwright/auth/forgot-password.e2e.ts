@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-import { uuid } from "short-uuid";
+import { v4 as uuid } from "uuid";
 
 import { verifyPassword } from "@calcom/features/auth/lib/verifyPassword";
 import prisma from "@calcom/prisma";
@@ -10,7 +10,7 @@ test.describe.configure({ mode: "parallel" });
 
 test.afterEach(({ users }) => users.deleteAll());
 
-test.describe("Forgot password", async () => {
+test.describe("Forgot password", () => {
   test("Can reset forgotten password", async ({ page, users }) => {
     const user = await users.create();
 
