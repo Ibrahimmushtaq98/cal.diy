@@ -2,8 +2,10 @@ import { withReporting } from "@calcom/lib/sentryWrapper";
 import type { PrismaClient } from "@calcom/prisma";
 import type { Booking, Prisma } from "@calcom/prisma/client";
 import { BookingStatus, RRTimestampBasis } from "@calcom/prisma/enums";
+import { isSqlServer } from "@calcom/prisma/provider/types";
 import { bookingDetailsSelect, bookingMinimalSelect } from "@calcom/prisma/selects/booking";
 import { credentialForCalendarServiceSelect } from "@calcom/prisma/selects/credential";
+import { getTotalBookingDurationSqlServer } from "./BookingRepository.sqlserver";
 import type {
   BookingUpdateData,
   BookingWhereInput,
@@ -1429,6 +1431,10 @@ export class BookingRepository implements IBookingRepository {
     endDate: Date;
     rescheduleUid?: string;
   }) {
+    if (isSqlServer()) {
+      return getTotalBookingDurationSqlServer(this.prismaClient, { eventId, startDate, endDate, rescheduleUid });
+    }
+
     let totalBookingTime;
 
     if (rescheduleUid) {

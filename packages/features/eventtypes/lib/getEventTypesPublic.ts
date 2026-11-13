@@ -3,7 +3,9 @@ import { markdownToSafeHTML } from "@calcom/lib/markdownToSafeHTML";
 import prisma from "@calcom/prisma";
 import type { Prisma } from "@calcom/prisma/client";
 import type { baseEventTypeSelect } from "@calcom/prisma/selects";
+import { isSqlServer } from "@calcom/prisma/provider/types";
 import { EventTypeMetaDataSchema } from "@calcom/prisma/zod-utils";
+import { getEventTypesWithHiddenSqlServer } from "./getEventTypesPublic.sqlserver";
 
 const log = logger.getSubLogger({ prefix: ["getEventTypesPublic"] });
 
@@ -30,7 +32,9 @@ type RawEventType = BaseEventType & {
 };
 
 const getEventTypesWithHiddenFromDB = async (userId: number) => {
-  const eventTypes = await prisma.$queryRaw<RawEventType[]>`
+  const eventTypes = isSqlServer()
+    ? await getEventTypesWithHiddenSqlServer<RawEventType>(prisma, userId)
+    : await prisma.$queryRaw<RawEventType[]>`
     SELECT data."id", data."title", data."description", data."length", data."schedulingType"::text,
       data."recurringEvent", data."slug", data."hidden", data."price", data."currency",
       data."lockTimeZoneToggleOnBookingPage", data."lockedTimeZone", data."requiresConfirmation", data."requiresBookerEmailVerification",

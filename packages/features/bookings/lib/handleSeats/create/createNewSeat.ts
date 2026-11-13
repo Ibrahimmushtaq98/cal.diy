@@ -8,6 +8,7 @@ import { HttpError } from "@calcom/lib/http-error";
 import prisma from "@calcom/prisma";
 import type { Prisma, PrismaClient } from "@calcom/prisma/client";
 import { BookingStatus } from "@calcom/prisma/enums";
+import { isSqlServer } from "@calcom/prisma/provider/types";
 import { cloneDeep } from "lodash";
 import { v4 as uuid } from "uuid";
 import { findBookingQuery } from "../../handleNewBooking/findBookingQuery";
@@ -44,7 +45,12 @@ export async function addSeatToBooking(input: AddSeatInput, prismaClient: Prisma
   return prismaClient.$transaction(async (tx) => {
     // Lock the booking row with FOR UPDATE to prevent concurrent modifications
     // This ensures only one transaction can read and modify seat count at a time
-    await tx.$queryRaw`SELECT id FROM "Booking" WHERE uid = ${input.bookingUid} FOR UPDATE`;
+    if (isSqlServer()) {
+      // T-SQL has no FOR UPDATE; an update lock held to the end of the transaction does the same
+      await tx.$queryRaw`SELECT id FROM "Booking" WITH (UPDLOCK, ROWLOCK) WHERE uid = ${input.bookingUid}`;
+    } else {
+      await tx.$queryRaw`SELECT id FROM "Booking" WHERE uid = ${input.bookingUid} FOR UPDATE`;
+    }
 
     // Fresh read inside transaction to get the current seat count
     const freshBooking = await tx.booking.findUnique({

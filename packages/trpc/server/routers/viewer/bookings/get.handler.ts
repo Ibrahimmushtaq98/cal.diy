@@ -11,6 +11,7 @@ import type { PrismaClient } from "@calcom/prisma";
 import type { Booking } from "@calcom/prisma/client";
 import { Prisma } from "@calcom/prisma/client";
 import { BookingStatus, MembershipRole, SchedulingType } from "@calcom/prisma/enums";
+import { isSqlServer } from "@calcom/prisma/provider/types";
 import { EventTypeMetaDataSchema } from "@calcom/prisma/zod-utils";
 import { TRPCError } from "@trpc/server";
 import type { Kysely, SelectQueryBuilder } from "kysely";
@@ -536,7 +537,8 @@ export async function getBookings({
                   .cast<SchedulingType | null>(
                     eb
                       .case()
-                      .when("EventType.schedulingType", "=", "roundRobin")
+                      // SQL Server stores enum key names; the other values only differ in case, which its collation ignores
+                      .when("EventType.schedulingType", "=", isSqlServer() ? ("ROUND_ROBIN" as "roundRobin") : "roundRobin")
                       .then(SchedulingType.ROUND_ROBIN)
                       .when("EventType.schedulingType", "=", "collective")
                       .then(SchedulingType.COLLECTIVE)
@@ -881,13 +883,13 @@ async function getEventTypeIdsFromTeamIdsFilter(prisma: PrismaClient, teamIds?: 
 
   const result = await prisma.$queryRaw<{ id: number }[]>`
     SELECT "child"."id"
-    FROM "public"."EventType" AS "parent"
-    LEFT JOIN "public"."EventType" "child" ON ("parent"."id") = ("child"."parentId")
-    WHERE "parent"."id" IN (SELECT "id" FROM "public"."EventType" WHERE "teamId" IN (${Prisma.join(teamIds)}))
+    FROM "EventType" AS "parent"
+    LEFT JOIN "EventType" "child" ON ("parent"."id") = ("child"."parentId")
+    WHERE "parent"."id" IN (SELECT "id" FROM "EventType" WHERE "teamId" IN (${Prisma.join(teamIds)}))
       AND "child"."id" IS NOT NULL
     UNION
     SELECT "parent"."id"
-    FROM "public"."EventType" AS "parent"
+    FROM "EventType" AS "parent"
     WHERE "parent"."teamId" IN (${Prisma.join(teamIds)})
   `;
 

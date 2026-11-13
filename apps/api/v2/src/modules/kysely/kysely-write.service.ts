@@ -1,9 +1,13 @@
 import type { OnModuleDestroy } from "@nestjs/common";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { Kysely, ParseJSONResultsPlugin, PostgresDialect, DeduplicateJoinsPlugin } from "kysely";
-import { Pool } from "pg";
+import type { Kysely } from "kysely";
 
+// Postgres or SQL Server, as DATABASE_PROVIDER selects. API v2 shares this client setup with the web app
+// rather than copying it, so these two imports are allowed here.
+// biome-ignore lint/style/noRestrictedImports: same Kysely client and DB types as the web app
+import { createKysely } from "@calcom/kysely/create";
+// biome-ignore lint/style/noRestrictedImports: same Kysely client and DB types as the web app
 import type { DB } from "@calcom/kysely/types";
 
 @Injectable()
@@ -14,16 +18,7 @@ export class KyselyWriteService implements OnModuleDestroy {
 
   constructor(readonly configService: ConfigService) {
     const dbUrl = configService.get("db.writeUrl", { infer: true });
-    const pool = new Pool({ connectionString: dbUrl });
-
-    // 3. Create the Dialect, passing the configured pool instance
-    const dialect = new PostgresDialect({
-      pool: pool, // Use the pool instance created above
-    });
-    this.kysely = new Kysely<DB>({
-      dialect,
-      plugins: [new ParseJSONResultsPlugin(), new DeduplicateJoinsPlugin()],
-    });
+    this.kysely = createKysely(dbUrl);
   }
 
   async onModuleDestroy() {

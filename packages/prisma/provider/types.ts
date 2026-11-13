@@ -28,3 +28,8 @@ export function getConfiguredDatabaseProvider(value = process.env.DATABASE_PROVI
   if (v === "sqlserver" || v === "mssql") return "sqlserver";
   throw new Error(`DATABASE_PROVIDER must be "postgresql" or "sqlserver", got "${value}"`);
 }
+
+/** True when DATABASE_PROVIDER selects SQL Server. Raw SQL written for Postgres checks this to pick its T-SQL version. */
+export function isSqlServer(): boolean {
+  return getConfiguredDatabaseProvider() === "sqlserver";
+}

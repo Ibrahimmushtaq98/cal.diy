@@ -7,6 +7,7 @@ import { getUserAvatarUrl } from "@calcom/lib/getAvatarUrl";
 import type { PrismaClient } from "@calcom/prisma";
 import { prisma as defaultPrisma } from "@calcom/prisma";
 import type { Prisma } from "@calcom/prisma/client";
+import { isSqlServer } from "@calcom/prisma/provider/types";
 import type { TimeUnit, WebhookTriggerEvents } from "@calcom/prisma/enums";
 import { MembershipRole, UserPermissionRole } from "@calcom/prisma/enums";
 import type { Webhook, WebhookGroup, WebhookSubscriber } from "../dto/types";
@@ -18,6 +19,7 @@ import type {
 } from "../interface/IWebhookRepository";
 import { parseWebhookVersion } from "../interface/IWebhookRepository";
 import type { GetSubscribersOptions } from "./types";
+import { getSubscribersRawSqlServer } from "./WebhookRepository.sqlserver";
 
 class PermissionCheckService {
   constructor(_prisma?: unknown) {}
@@ -131,7 +133,9 @@ export class WebhookRepository implements IWebhookRepository {
 
     // IMPORTANT: Explicit type casts (::int, ::text) are required for nullable params
     // PostgreSQL can't infer types for NULL values without explicit casts
-    const results = await this.prisma.$queryRaw<WebhookQueryResult[]>`
+    const results = isSqlServer()
+      ? await getSubscribersRawSqlServer<WebhookQueryResult>(this.prisma, params)
+      : await this.prisma.$queryRaw<WebhookQueryResult[]>`
       -- Platform webhooks (highest priority)
       SELECT 
         id, "subscriberUrl", "payloadTemplate", "appId", secret, time, "timeUnit", "eventTriggers", version,

@@ -1,8 +1,12 @@
-import { PrismaClient } from "@calcom/prisma/client";
+import type { PrismaClient } from "@calcom/prisma/client";
 import { Injectable, Logger, OnModuleDestroy, OnModuleInit } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { PrismaPg } from "@prisma/adapter-pg";
-import { Pool } from "pg";
+// The client and driver for DATABASE_PROVIDER (postgresql by default, or sqlserver)
+import {
+  createAdapter,
+  PrismaClient as ProviderPrismaClient,
+  withProviderExtensions,
+} from "@calcom/prisma/provider/selected";
 
 const DB_MAX_POOL_CONNECTION = 5;
 
@@ -18,7 +22,7 @@ export interface PrismaServiceOptions {
 export class PrismaWriteService implements OnModuleInit, OnModuleDestroy {
   private logger = new Logger("PrismaWriteService");
   public prisma!: PrismaClient;
-  private pool!: Pool;
+  private closeAdapter?: () => Promise<void>;
 
   constructor(configService?: ConfigService) {
     if (configService) {
@@ -51,19 +55,14 @@ export class PrismaWriteService implements OnModuleInit, OnModuleDestroy {
         maxWriteConnections = 1;
       }
 
-      this.pool = new Pool({
-        connectionString: dbUrl,
-        max: maxWriteConnections,
-        idleTimeoutMillis: 300000,
+      const { adapter, close } = createAdapter(dbUrl ?? "", {
+        pool: { max: maxWriteConnections, idleTimeoutMillis: 300000 },
       });
-
-      const adapter = new PrismaPg(this.pool);
-      this.prisma = new PrismaClient({ adapter });
+      this.closeAdapter = close;
+      this.prisma = withProviderExtensions(new ProviderPrismaClient({ adapter }));
     } else {
-      const adapter = new PrismaPg({ connectionString: dbUrl });
-      this.prisma = new PrismaClient({
-        adapter,
-      });
+      const { adapter } = createAdapter(dbUrl ?? "");
+      this.prisma = withProviderExtensions(new ProviderPrismaClient({ adapter }));
     }
   }
 
@@ -81,7 +80,7 @@ export class PrismaWriteService implements OnModuleInit, OnModuleDestroy {
   async onModuleDestroy(): Promise<void> {
     try {
       if (this.prisma) await this.prisma.$disconnect();
-      if (this.pool) await this.pool.end();
+      if (this.closeAdapter) await this.closeAdapter();
     } catch (error) {
       this.logger.error("Error disconnecting from write database", error);
     }

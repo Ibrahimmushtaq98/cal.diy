@@ -3,6 +3,8 @@ import type { PrismaClient } from "@calcom/prisma/client";
 import { Prisma } from "@calcom/prisma/client";
 import { captureException } from "@sentry/nextjs";
 import type { FeatureId } from "../config";
+import { isSqlServer } from "@calcom/prisma/provider/types";
+import { userBelongsToTeamWithFeatureNonHierarchicalSqlServer, userBelongsToTeamWithFeatureSqlServer } from "../sqlserver-queries";
 
 export interface IUserFeatureRepository {
   findByUserIdAndFeatureId(userId: number, featureId: FeatureId): Promise<UserFeaturesDto | null>;
@@ -205,6 +207,7 @@ export class PrismaUserFeatureRepository implements IUserFeatureRepository {
 
   private async checkIfUserBelongsToTeamWithFeature(userId: number, slug: string): Promise<boolean> {
     try {
+      if (isSqlServer()) return userBelongsToTeamWithFeatureSqlServer(this.prisma, userId, slug);
       const query = Prisma.sql`
         WITH RECURSIVE TeamHierarchy AS (
           -- Start with teams the user belongs to
@@ -248,6 +251,7 @@ export class PrismaUserFeatureRepository implements IUserFeatureRepository {
     slug: string
   ): Promise<boolean> {
     try {
+      if (isSqlServer()) return userBelongsToTeamWithFeatureNonHierarchicalSqlServer(this.prisma, userId, slug);
       const query = Prisma.sql`
         SELECT 1
         FROM "Team" t

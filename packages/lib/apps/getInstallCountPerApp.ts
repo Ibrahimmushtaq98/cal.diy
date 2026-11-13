@@ -8,7 +8,7 @@ const computeInstallCountsFromDB = async (): Promise<Record<string, number>> => 
     await prisma.$queryRaw`
     SELECT
       c."appId",
-      COUNT(*)::integer AS "installCount"
+      CAST(COUNT(*) AS integer) AS "installCount"
     FROM
       "Credential" c
     WHERE

@@ -3,6 +3,8 @@ import type { PrismaClient } from "@calcom/prisma/client";
 import { Prisma } from "@calcom/prisma/client";
 import { captureException } from "@sentry/nextjs";
 import type { FeatureId, TeamFeatures } from "../config";
+import { isSqlServer } from "@calcom/prisma/provider/types";
+import { teamOrAncestorHasFeatureSqlServer } from "../sqlserver-queries";
 
 export interface ITeamFeatureRepository {
   findByTeamIdAndFeatureId(teamId: number, featureId: FeatureId): Promise<TeamFeaturesDto | null>;
@@ -184,6 +186,7 @@ export class PrismaTeamFeatureRepository implements ITeamFeatureRepository {
       });
       if (teamFeature) return teamFeature.enabled;
 
+      if (isSqlServer()) return teamOrAncestorHasFeatureSqlServer(this.prisma, teamId, featureId);
       const query = Prisma.sql`
         WITH RECURSIVE TeamHierarchy AS (
           SELECT id, "parentId",

@@ -5,6 +5,8 @@ import { Prisma } from "@calcom/prisma/client";
 
 import type { AppFlags, FeatureId, TeamFeatures } from "./config";
 import type { IFeaturesRepository } from "./features.repository.interface";
+import { isSqlServer } from "@calcom/prisma/provider/types";
+import { teamOrAncestorHasFeatureSqlServer, userBelongsToTeamWithFeatureNonHierarchicalSqlServer, userBelongsToTeamWithFeatureSqlServer } from "./sqlserver-queries";
 
 interface CacheOptions {
   ttl: number; // time in ms
@@ -205,6 +207,7 @@ export class FeaturesRepository implements IFeaturesRepository {
    */
   private async checkIfUserBelongsToTeamWithFeature(userId: number, slug: string) {
     try {
+      if (isSqlServer()) return userBelongsToTeamWithFeatureSqlServer(this.prismaClient, userId, slug);
       const query = Prisma.sql`
         WITH RECURSIVE TeamHierarchy AS (
           -- Start with teams the user belongs to
@@ -255,6 +258,7 @@ export class FeaturesRepository implements IFeaturesRepository {
    */
   private async checkIfUserBelongsToTeamWithFeatureNonHierarchical(userId: number, slug: string) {
     try {
+      if (isSqlServer()) return userBelongsToTeamWithFeatureNonHierarchicalSqlServer(this.prismaClient, userId, slug);
       const query = Prisma.sql`
         SELECT 1
         FROM "Team" t
@@ -409,6 +413,7 @@ export class FeaturesRepository implements IFeaturesRepository {
       });
       if (teamFeature) return teamFeature.enabled;
 
+      if (isSqlServer()) return teamOrAncestorHasFeatureSqlServer(this.prismaClient, teamId, featureId);
       const query = Prisma.sql`
         WITH RECURSIVE TeamHierarchy AS (
           -- Start with the initial team

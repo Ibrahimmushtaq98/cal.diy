@@ -307,11 +307,11 @@ export class UserRepository {
         u."email" AS "matchedEmail",
         u."requiresBookerEmailVerification"
       FROM
-        "public"."users" AS u
+        "users" AS u
       WHERE
         u."email" IN (${emailListSql})
         AND u."emailVerified" IS NOT NULL
-        AND u."locked" = FALSE
+        AND u."locked" = ${false}
       UNION
       SELECT
         u."id",
@@ -319,13 +319,13 @@ export class UserRepository {
         t0."email" AS "matchedEmail",
         u."requiresBookerEmailVerification"
       FROM
-        "public"."users" AS u
-      INNER JOIN "public"."SecondaryEmail" AS t0
+        "users" AS u
+      INNER JOIN "SecondaryEmail" AS t0
         ON t0."userId" = u."id"
       WHERE
         t0."email" IN (${emailListSql})
         AND t0."emailVerified" IS NOT NULL
-        AND u."locked" = FALSE
+        AND u."locked" = ${false}
     `);
   }
 
