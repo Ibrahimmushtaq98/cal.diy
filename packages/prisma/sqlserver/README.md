@@ -45,6 +45,11 @@ Data differences from Postgres:
 - **Unique keys on nullable columns** are filtered indexes (`WHERE col IS NOT NULL`), so any number of rows
   can leave them empty, as on Postgres.
 
+**API v2** (`apps/api/v2`) creates its Prisma and Kysely clients through the same switch, but it has only been
+run on Postgres. Its booking logic comes from the `@calcom/platform-libraries` bundle, which bundles its own
+`@calcom/prisma`; building that for SQL Server (likely adding `@prisma/adapter-mssql`, `tedious` and `kysely`
+to its Vite externals) is untested.
+
 Not supported on SQL Server (the extension throws `SqlServerUnsupportedError` where it can tell):
 list `push` updates, Json path filters (`path`, `array_contains`, ...), and `createMany({ skipDuplicates })`
 (the flag is dropped, so duplicates fail).
