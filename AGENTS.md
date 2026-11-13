@@ -133,7 +133,7 @@ packages/lib/                # Shared utilities
 
 - **Framework**: Next.js 13+ (App Router in some areas)
 - **Language**: TypeScript (strict)
-- **Database**: PostgreSQL with Prisma ORM
+- **Database**: PostgreSQL with Prisma ORM, or SQL Server with `DATABASE_PROVIDER=sqlserver` (Labourly fork; see `packages/prisma/sqlserver/README.md`)
 - **API**: tRPC for type-safe APIs
 - **Auth**: NextAuth.js
 - **Styling**: Tailwind CSS
@@ -328,6 +328,7 @@ These were tried during the November 2026 updates (patch/minor first, then the m
 - **tRPC 11 stable.** The superjson transformer goes on each `httpLink`/`httpBatchLink`; `createTRPCNext` still needs it too for SSR.
 - **Prisma 7.** Connection URLs and the seed command live in `packages/prisma/prisma.config.ts`, which also loads the root `.env`. `prismock` is patched (`.yarn/patches`) to import `@prisma/client/runtime/client`.
 - **vitest 5 / Vite 8.** `vi.mock` must be top-level, `.resolves`/`.rejects` must be awaited, and Oxc only lowers our legacy decorators because `vitest.config.mts` sets `oxc.decorator.legacy`.
+- **SQL Server (Labourly fork).** `DATABASE_PROVIDER=sqlserver` runs the app on SQL Server; unset means Postgres. `schema.prisma` stays the source of truth: after changing it run `yarn workspace @calcom/prisma sqlserver:schema`, and `node sqlserver/new-migration.mjs <name>` for the SQL Server migration. New raw SQL must work on both databases (portable SQL, or a `*.sqlserver.ts` version picked with `isSqlServer()`), and gets listed in `packages/prisma/sqlserver/raw-sql.test.ts`. Use `@calcom/kysely/helpers`, not `kysely/helpers/postgres`. Details in `packages/prisma/sqlserver/README.md`.
 - **Sentry 11.** Every `Sentry.init` sets `dataCollection` to keep cookies, user fields and HTTP bodies off (Sentry 11 collects them by default).
 
 ### React 19
